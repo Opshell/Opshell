@@ -54,3 +54,8 @@ define('CACHEPREFIX', function_exists('opcache_reset') ? 'opcache_' : (function_
 if (function_exists(CACHEPREFIX . 'reset')) {
     call_user_func(CACHEPREFIX . 'reset');
 }
+
+
+// Autoload
+require_once(ROOT_PATH . '/vendor/autoload.php');
+require_once(CORE_PATH . '/autoload.php'); 
