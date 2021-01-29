@@ -27,13 +27,6 @@ if (!empty($_SERVER['HTTPS'])) {
     $_SERVER['HTTPS'] = false;
 }
 
-// CLI 識別
-if (empty($_SERVER['REQUEST_URI'])) {
-    define('IS_CLI', true);
-} else {
-    define('IS_CLI', false);
-}
-
 $host = $_SERVER['SERVER_NAME'];
 
 // HTTP
@@ -58,4 +51,7 @@ if (function_exists(CACHEPREFIX . 'reset')) {
 
 // Autoload
 require_once(ROOT_PATH . '/vendor/autoload.php');
-require_once(CORE_PATH . '/autoload.php'); 
+
+require_once(CORE_PATH . '/config.php'); // 組態載入
+require_once(CORE_PATH . '/common.php'); // 框架載入
+

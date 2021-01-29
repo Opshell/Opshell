@@ -27,3 +27,17 @@ function my__autoload($class_name){
 
 spl_autoload_register('my__autoload');
 
+
+
+
+// DB 初始化
+use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as DB;
+
+$DB = new DB;
+// 創建連結
+$DB->addConnection($database);
+// 設定全域靜態可訪問
+$DB->setAsGlobal();
+// 啟動Eloquent
+$DB->bootEloquent();

@@ -48,3 +48,10 @@ if ($route['path'] != '/') {
 
 // 導向
 require_once(ROOT_PATH .'/'. $route['file']);
+
+
+function include_path($Path){
+    $BasePath = dirname(dirname(__FILE__));
+    $PathSplit = explode('/', $Path);
+    return implode(DIRECTORY_SEPARATOR, array_merge(array($BasePath), $PathSplit));
+}
