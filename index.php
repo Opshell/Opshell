@@ -46,6 +46,7 @@ if ($route['path'] != '/') {
     }
 }
 
+
 // 導向
 require_once(ROOT_PATH .'/'. $route['file']);
 

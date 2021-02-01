@@ -48,10 +48,30 @@ if (function_exists(CACHEPREFIX . 'reset')) {
     call_user_func(CACHEPREFIX . 'reset');
 }
 
-
 // Autoload
 require_once(ROOT_PATH . '/vendor/autoload.php');
 
 require_once(CORE_PATH . '/config.php'); // 組態載入
-require_once(CORE_PATH . '/common.php'); // 框架載入
+require_once(CORE_PATH . '/common.php'); // 框架&常用function載入
+
+
+// 宣告本機或線上模式
+if (getip() == "127.0.0.1" || getip() == "unknown") {
+    $develop_mode = "Development";
+} else {
+    $develop_mode = "Production";
+}
+
+
+// DB 初始化
+use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as DB;
+
+$DB = new DB;
+// 創建連結
+$DB->addConnection($database[$develop_mode]);
+// 設定全域靜態可訪問
+$DB->setAsGlobal();
+// 啟動Eloquent
+$DB->bootEloquent();
 
