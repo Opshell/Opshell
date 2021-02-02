@@ -14,3 +14,7 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+
+是老爸的  檔案開頭  大寫
+其他  走駝峰模式 開頭小寫
