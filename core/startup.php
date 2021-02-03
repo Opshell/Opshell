@@ -52,7 +52,13 @@ if (function_exists(CACHEPREFIX . 'reset')) {
 require_once(ROOT_PATH . '/vendor/autoload.php');
 
 require_once(CORE_PATH . '/config.php'); // 組態載入
-require_once(CORE_PATH . '/common.php'); // 框架&常用function載入
+require_once(CORE_PATH . '/system/common.php'); // autoload註冊 框架&常用function載入
+
+
+// 回應
+$Response = new ResponseSystem();
+$Response->addHeader('Content-Type: text/html; charset=UTF-8'); // 預設回傳 header
+
 
 
 // 宣告本機或線上模式
