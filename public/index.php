@@ -8,9 +8,6 @@ $route = ($_GET['route'])?? "home";
 define('DIR_CONTROLLER', __DIR__. '/controller/'); // 控制器
 define('DIR_TEMPLATE', __DIR__. '/template/'); //樣板
 
-
-include_once(DIR_CONTROLLER . 'Controller.php');
-
 $classFile = DIR_CONTROLLER . $route . 'Controller.php';
 $className = $route.'Controller';
 

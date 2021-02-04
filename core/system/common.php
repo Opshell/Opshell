@@ -9,12 +9,10 @@ function my__autoload($class_name){
         $file = ROOT_PATH . '/core/repositories/' . $class_name . '.class.php';
     } else if (substr($class_name, -5) == 'Model') {
         $file = ROOT_PATH . '/core/models/' . $class_name . '.class.php';
-    } else if (substr($class_name, -6) == 'System') {
-        $file = ROOT_PATH . '/core/system/' . $class_name . '.php';
     }
 
     if ($file == '' || !file_exists($file)) {
-        $file = ROOT_PATH . '/core/' . $class_name . '.class.php';
+        $file = ROOT_PATH . '/core/system/' . $class_name . '.php';
         if (!file_exists($file)) {
             $file = ROOT_PATH . '/core/class/' . $class_name . '.class.php';
             if (!file_exists($file)) {

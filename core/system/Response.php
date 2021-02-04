@@ -1,5 +1,5 @@
 <?php
-class ResponseSystem {
+class Response {
 	private $headers = array();
 	private $output;
 
