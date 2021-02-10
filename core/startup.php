@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\DB;
+
 /** 整個網站的環境檢查=>全域變數設定=>網站基本設定
  * const VERSION 0.1
  */
@@ -37,9 +40,13 @@ define('DOMAIN_URL', (($_SERVER['HTTPS']) ? 'https' : 'http') . ':' . HTTP_BASE)
 
 // path
 define('ROOT_PATH', dirname(dirname(__FILE__)));
-define('CORE_PATH', ROOT_PATH . '/core');
-define('CONTROLLER_PATH', CORE_PATH . '/controller/'); // 控制器
+define('CORE_PATH', ROOT_PATH . '/core'); // 核心系統路徑
+define('FRAMEWORK_PATH', ROOT_PATH . '/framework'); // 框架路徑
 
+define('CONTROLLER_PATH', FRAMEWORK_PATH . '/controller/'); // 控制器
+define('SERVICE_PATH', FRAMEWORK_PATH . '/service/'); // 服務
+define('REPOSITORY_PATH', FRAMEWORK_PATH . '/repository/'); // 資料庫
+define('MODEL_PATH', FRAMEWORK_PATH . '/model/'); // 資料庫關聯
 
 //start session
 if (empty(session_id())) session_start();
@@ -55,7 +62,6 @@ require_once(ROOT_PATH . '/vendor/autoload.php');
 require_once(CORE_PATH . '/config.php'); // 組態載入
 require_once(CORE_PATH . '/system/common.php'); // autoload註冊 框架&常用function載入
 
-
 // 宣告本機或線上模式
 if (getip() == "127.0.0.1" || getip() == "unknown") {
     $develop_mode = "Development";
@@ -63,21 +69,8 @@ if (getip() == "127.0.0.1" || getip() == "unknown") {
     $develop_mode = "Production";
 }
 
-
-// DB 初始化
-use Illuminate\Container\Container;
-use Illuminate\Database\Capsule\Manager as DB;
-
-$DB = new DB;
-// 創建連結
-$DB->addConnection($database[$develop_mode]);
-// 設定全域靜態可訪問
-$DB->setAsGlobal();
-// 啟動Eloquent
-$DB->bootEloquent();
-
+class_alias(require_once(CORE_PATH . '/system/EloquentDB.php'), 'DB'); // DB設定檔引用並指定別名
 
 // 回應
 $Response = new Response();
 $Response->addHeader('Content-Type: text/html; charset=UTF-8'); // 預設回傳格式
-

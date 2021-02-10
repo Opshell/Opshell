@@ -1,7 +1,7 @@
 <?php
 
 // Database
-$database = array(
+$config['database'] = array(
     'Development' => array(
         'driver' => 'mysql',
         'host' => 'localhost',

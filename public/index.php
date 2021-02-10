@@ -15,6 +15,7 @@ if(file_exists($classFile)){ // 導向 controller
     // include_once($classFile);
 
     $page = new $className;
+
     $Response->setOutput($page->index());
 }
 

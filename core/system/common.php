@@ -3,16 +3,18 @@
 function my__autoload($class_name){
     $file = '';
 
+    // framework 加載
     if (substr($class_name, -10) == 'Controller') {
-        $file = ROOT_PATH . '/core/controller/' . $class_name . '.php';
+        $file = CONTROLLER_PATH . $class_name . '.php';
     } else if (substr($class_name, -7) == 'Service') {
-        $file = ROOT_PATH . '/core/services/' . $class_name . '.php';
+        $file = SERVICE_PATH . $class_name . '.php';
     } else if (substr($class_name, -10) == 'Repository') {
-        $file = ROOT_PATH . '/core/repositories/' . $class_name . '.class.php';
+        $file = REPOSITORY_PATH . $class_name . '.php';
     } else if (substr($class_name, -5) == 'Model') {
-        $file = ROOT_PATH . '/core/models/' . $class_name . '.class.php';
+        $file = MODEL_PATH . $class_name . '.php';
     }
 
+    // 核心加載
     if ($file == '' || !file_exists($file)) {
         $file = ROOT_PATH . '/core/system/' . $class_name . '.php';
         if (!file_exists($file)) {
