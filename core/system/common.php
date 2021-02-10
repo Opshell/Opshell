@@ -3,8 +3,10 @@
 function my__autoload($class_name){
     $file = '';
 
-    if (substr($class_name, -7) == 'Service') {
-        $file = ROOT_PATH . '/core/services/' . $class_name . '.class.php';
+    if (substr($class_name, -10) == 'Controller') {
+        $file = ROOT_PATH . '/core/controller/' . $class_name . '.php';
+    } else if (substr($class_name, -7) == 'Service') {
+        $file = ROOT_PATH . '/core/services/' . $class_name . '.php';
     } else if (substr($class_name, -10) == 'Repository') {
         $file = ROOT_PATH . '/core/repositories/' . $class_name . '.class.php';
     } else if (substr($class_name, -5) == 'Model') {

@@ -1,7 +1,7 @@
 <?php
 class homeController extends Controller
 {
-    private $_path = 'home';
+    private $_tplPath = 'home';
 
     public function __construct(){
 
@@ -10,10 +10,12 @@ class homeController extends Controller
     public function index(){
         $this->data['text'] = "渲染內容文字";
 
-
+        $this->components = array(
+            'header'
+        );
 
         // 輸出
-        $this->template = $this->_path;
+        $this->template = $this->_tplPath;
         return $this->render();
     }
 }

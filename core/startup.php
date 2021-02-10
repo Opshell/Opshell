@@ -38,6 +38,8 @@ define('DOMAIN_URL', (($_SERVER['HTTPS']) ? 'https' : 'http') . ':' . HTTP_BASE)
 // path
 define('ROOT_PATH', dirname(dirname(__FILE__)));
 define('CORE_PATH', ROOT_PATH . '/core');
+define('CONTROLLER_PATH', CORE_PATH . '/controller/'); // 控制器
+
 
 //start session
 if (empty(session_id())) session_start();
