@@ -1,27 +1,42 @@
 <?php
-// use Illuminate\Database\Capsule\Manager as DB; // 引用
+use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) 使用
 
-class Repository
+class Repository extends Eloquent
 {
+    protected $builder = Null;
     protected $table = '';
-    public function __construct(){}
+    protected $wheres = [];
+    protected $orders = [];
+    
+    public function __construct(){
+        $this->builder = Repository::table($this->table);
+        $this->setWhere($this->wheres);
+        $this->setOrder($this->orders);
 
-    public function getList(){
-        $table = DB::table($this->table)
-            ->get();
-        
-
-        return $table;
-
-        $SQL = "SELECT * FROM `" . $this->table . "` WHERE `is_show` = 1 ORDER BY `sort` ASC, `id` DESC";
-        return $this->webdb->getListClass($SQL, $this->modelName);
     }
 
-    public function getInfo($id)
-    {
-        $SQL = "SELECT * FROM `" . $this->table . "` WHERE `is_show` = 1 AND `id` = :id";
-        $rtn = $this->webdb->getValueClass($SQL, $this->modelName, array('id' => $id));
+    public function setWhere($wheres = []){
+        foreach ($wheres as $k => $v) {
+            $v['relation'] = empty($v['relation']) ? '=' : $v['relation'];
+            $this->builder->where($v['key'], $v['relation'], $v['value']);
+        }
+    }
 
-        return ($rtn === false) ? null : $rtn;
+    public function setOrder($orders = []){
+        foreach ($orders as $k => $v) {
+            $this->builder->orderBy($v['key'], $v['value']);
+        }
+    }
+    
+    public function getList(){
+        $builder = $this->builder->get();
+        
+        return $builder;
+    }
+
+    public function getInfo($id){
+        $builder = $this->builder->find($id);
+
+        return $builder;
     }
 }

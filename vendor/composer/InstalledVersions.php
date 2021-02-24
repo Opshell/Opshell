@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '5b1e24bf25e611a01a002727318f98bfcacee934',
+    'reference' => '09569de07f43e83e837732a150b3e7cfbe4af56e',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '5b1e24bf25e611a01a002727318f98bfcacee934',
+      'reference' => '09569de07f43e83e837732a150b3e7cfbe4af56e',
     ),
     'doctrine/lexer' => 
     array (
