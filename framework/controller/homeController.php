@@ -5,17 +5,13 @@ class homeController extends Controller
     private $newsService = null;
 
     public function __construct(){
-        $this->newsService = new newsService;
+        $this->newsService = newsService::getInstance();
     }
 
     public function index(){
         $this->data['text'] = "渲染內容文字";
 
-        print_r($this->newsService->getList());exit;
-
         $this->data['newsList'] = $this->newsService->getList();
-
-
 
         // 組件載入
         $this->components = array(

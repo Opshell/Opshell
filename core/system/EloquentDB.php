@@ -11,4 +11,4 @@ $DB->setAsGlobal();
 // 啟動Eloquent
 $DB->bootEloquent();
 
-return 'Illuminate\Database\Capsule\Manager'; // 主要由外部替物件重新指定你喜歡的別名
+// return 'Illuminate\Database\Capsule\Manager'; // 主要由外部替物件重新指定你喜歡的別名

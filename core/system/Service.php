@@ -1,17 +1,14 @@
 <?php
 class Service
 {
-    protected static $_instance = null;
     protected $Repository = null;
 
-    public static function getInstance(){
-        if (self::$_instance === null) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
+    use ClassInstanceTrait{
+        ClassInstanceTrait::__construct as private __tConstruct;
     }
-
-    public function __construct(){}
+    public function __construct(){
+        $this->__tConstruct();
+    }
 
     // 取得列表資料
     public function getList(){

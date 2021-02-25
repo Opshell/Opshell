@@ -47,6 +47,8 @@ define('CONTROLLER_PATH', FRAMEWORK_PATH . '/controller/'); // 控制器
 define('SERVICE_PATH', FRAMEWORK_PATH . '/service/'); // 服務
 define('REPOSITORY_PATH', FRAMEWORK_PATH . '/repository/'); // 資料庫
 define('MODEL_PATH', FRAMEWORK_PATH . '/model/'); // 資料庫關聯
+define('TRAIT_PATH', FRAMEWORK_PATH . '/trait/'); // 特徵關聯
+
 
 //start session
 if (empty(session_id())) session_start();
@@ -69,7 +71,10 @@ if (getip() == "127.0.0.1" || getip() == "unknown") {
     $develop_mode = "Production";
 }
 
-class_alias(require_once(CORE_PATH . '/system/EloquentDB.php'), 'DB'); // DB設定檔引用並指定別名
+require_once(CORE_PATH . '/system/EloquentDB.php');
+// class_alias(require_once(CORE_PATH . '/system/EloquentDB.php'), 'DB'); // DB設定檔引用並指定別名
+require_once(CORE_PATH . '/system/classInstanceTrait.php'); // ClassInstanceTrait 引用
+
 
 // 回應
 $Response = new Response();
