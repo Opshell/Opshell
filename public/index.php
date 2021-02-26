@@ -5,7 +5,7 @@ echo  '<br/>';
 
 // 定義 route
 $route = ($_GET['route'])?? "home";
-define('DIR_TEMPLATE', __DIR__. '/template/'); //樣板
+define('DIR_TEMPLATE', __DIR__. '/view/template/'); //樣板
 
 $classFile = CONTROLLER_PATH . $route . 'Controller.php';
 $className = $route.'Controller';

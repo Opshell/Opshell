@@ -34,6 +34,7 @@ spl_autoload_register('my__autoload');
 
 
 // 常用function 宣告
+
 function getip(){
     global $_SERVER;
     if (getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
@@ -49,4 +50,3 @@ function getip(){
 
     return (count($onlineipmatches) > 0) ? $onlineipmatches[0] : 'unknown';
 }
-

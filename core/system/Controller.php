@@ -45,6 +45,17 @@ class Controller{
         }
     }
 
+    /** 輸出Json
+     * @return json
+     */
+    protected function json(){
+        $this->json['message'] = 'success';
+        $this->json['result'] = $this->data;
+
+        // JSON_UNESCAPED_UNICODE不編碼中文
+        return json_encode($this->json, JSON_UNESCAPED_UNICODE); 
+    }
+
     /** 其他部件載入
      * @param {$control} string 控制器相對路徑 EX: 'common/header'
      * @return {$component->index()} html component

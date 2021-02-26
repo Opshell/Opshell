@@ -8,9 +8,9 @@ class homeController extends Controller
         $this->newsService = newsService::getInstance();
     }
 
-    public function index(){
-        $this->data['text'] = "渲染內容文字";
 
+    public function index($outType='render'){
+        $this->data['text'] = "渲染內容文字";
         $this->data['newsList'] = $this->newsService->getList();
 
         // 組件載入
@@ -20,8 +20,12 @@ class homeController extends Controller
         );
 
         // 輸出
-        $this->template = $this->_tplPath;
-        return $this->render();
+        if($outType == 'render'){ // 頁面輸出
+            $this->template = $this->_tplPath;
+            return $this->render();
+        }else{ // JSON 輸出
+            return $this->json();
+        }
     }
 }
 ?>
