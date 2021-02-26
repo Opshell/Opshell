@@ -5,44 +5,25 @@ use Illuminate\Database\Capsule\Manager as DB; // DB 使用 主要為了執行�
 class Repository extends Eloquent
 {
     // Eloquent 設定
-    protected $table = '';
-    protected $primaryKey = 'id';
-    public $timestamps = false;
-
     protected $builder = Null;
-    protected $wheres = [];
-    protected $orders = [];
+    protected $table = ''; // 連結的資料表
+    protected $primaryKey = 'id'; // 主Key
+    public $timestamps = false; // 是否託管更新，"Eloquent的功能 "
 
     use ClassInstanceTrait {
         ClassInstanceTrait::__construct as private __tConstruct;
     }
     public function __construct(){
-        $this->__tConstruct();
-
         $this->builder = $this;
-        $this->setWhere($this->wheres);
-        $this->setOrder($this->orders);
+
+        $this->__tConstruct();
     }
 
-    public function setWhere($wheres = []){
-        foreach ($wheres as $k => $v) {
-            $v['relation'] = empty($v['relation']) ? '=' : $v['relation'];
-            $this->builder = $this->builder->where($v['key'], $v['relation'], $v['value']);
-        }
-    }
-
-    public function setOrder($orders = []){
-        foreach ($orders as $k => $v) {
-            $this->builder = $this->builder->orderBy($v['key'], $v['value']);
-        }
-    }
-    
     public function getList(){
         return $this->builder
             ->get()
         ->toArray();
     }
-
     public function getInfo($id){
         return $this->builder
             ->find($id)

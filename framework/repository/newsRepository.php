@@ -4,15 +4,26 @@ class newsRepository extends Repository
     public function construct()
     {
         $this->table = '_web_news';
-        $this->wheres = [
-            [
-                'key' => 'is_show',
-                'value' => 1
-            ]
-        ];
-
         $this->creatTable($this->creatTableSQL());
     }
+
+    public function getList(){
+        $cid = !empty($_GET['cid'])? $_GET['cid'] : 0;
+
+        if (!empty($cid)) {
+            $this->builder = $this->builder->where('category_id', $cid);
+        }
+
+        $list = $this->builder
+            ->where('is_show', 1)
+            ->orderBy('sort')
+            ->get()
+        ->toArray();
+            
+        return $list;
+    }
+
+
 
     // 生成資料表
     public function creatTableSQL(){

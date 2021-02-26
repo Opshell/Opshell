@@ -15,7 +15,8 @@ class homeController extends Controller
 
         // 組件載入
         $this->components = array(
-            'header'
+            'header',
+            'footer',
         );
 
         // 輸出

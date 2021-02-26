@@ -45,7 +45,6 @@ class Controller{
         }
     }
 
-
     /** 其他部件載入
      * @param {$control} string 控制器相對路徑 EX: 'common/header'
      * @return {$component->index()} html component

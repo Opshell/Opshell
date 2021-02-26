@@ -13,12 +13,14 @@
     <header>
         <h2>最新消息</h2>
     </header>
-<?php foreach ($newsList as $k => $v) {?>
-    <section>
-        <header>
-            <h3><?php echo $v['title'];?></h3>
-        </header>
-        <p><?php echo $v['content']; ?></p>
-    </section>
-<?php }?>
+    <?php foreach ($newsList as $k => $v) { ?>
+        <section>
+            <header>
+                <h3><?php echo $v['title']; ?></h3>
+            </header>
+            <p><?php echo $v['content']; ?></p>
+        </section>
+    <?php } ?>
 </article>
+
+<?php echo $footer ?>
