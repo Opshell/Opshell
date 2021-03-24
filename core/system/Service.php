@@ -1,5 +1,5 @@
 <?php
-class Service
+abstract class Service
 {
     protected $Repository = null;
 
@@ -9,6 +9,8 @@ class Service
     public function __construct(){
         $this->__tConstruct();
     }
+    // 抽象方法 只要繼承Service 就需要有construct;
+    abstract public function construct();
 
     // 取得列表資料
     public function getList(){

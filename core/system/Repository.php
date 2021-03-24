@@ -2,7 +2,7 @@
 use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) 使用
 use Illuminate\Database\Capsule\Manager as DB; // DB 使用 主要為了執行原生SQL
 
-class Repository extends Eloquent
+abstract class Repository extends Eloquent
 {
     // Eloquent 設定
     protected $builder = Null;
@@ -18,6 +18,8 @@ class Repository extends Eloquent
 
         $this->__tConstruct();
     }
+    // 抽象方法 只要繼承Service 就需要有construct;
+    abstract public function construct();
 
     public function getList(){
         return $this->builder
