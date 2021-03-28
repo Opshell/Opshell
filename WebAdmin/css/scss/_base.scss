@@ -1,0 +1,200 @@
+//@extend class
+
+
+html{
+    overflow:-moz-scrollbars-vertical;
+    @extend %pm0;
+}
+body{
+    background:$colorBack;
+    visibility:visible;
+    @extend %baseFont;
+    @extend %pm0;
+    &.fixed{overflow:hidden;}
+}
+
+.sh_sans { font-family: $sh_sans; }//思源黑體
+.sh_serif { font-family: $sh_serif; }//思源宋體
+
+
+// 表單相關
+form{
+    font-size: $fzBase;
+    @extend %pm0;
+    }
+    label{
+        display: inline-flex;
+        align-items: center;
+        margin-right: 12px;
+        cursor:pointer;
+    }
+    input{
+        &:-webkit-autofill {-webkit-box-shadow: 0 0 0 30px #fcfcfc inset;}
+        -webkit-autofill:unset;
+        font-size: $fzBase;
+        @extend %pm0;
+        &:focus{outline:0;}
+        &[type='text']{
+            padding:0px 5px;
+            vertical-align:top;
+            border:1px solid rgba(216, 216, 216, .8);
+        }
+        &[type='password']{@extend input[type='text'];}
+        &[type="radio"]{
+            margin-right: 5px;
+            cursor:pointer;
+            vertical-align:middle;
+        }
+        &[type="checkbox"]{@extend input[type='radio'];}
+        &[type=number]::-webkit-inner-spin-button, 
+         [type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        &[type=number]{-moz-appearance: textfield;}
+        &.hid{display: none;}
+    }
+    select{
+        @extend input[type='radio'];
+        /*移除箭頭樣式*/
+        appearance:none;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        /*IE隱藏箭頭樣式*/
+        &::-ms-expand { display: none;}
+
+        /*改變右邊箭頭樣式*/
+        background: #fff url("../images/selectArrow.png")no-repeat calc(100% - 15px) center;
+
+        @include setSize(100%, 34px);
+        padding: 2px;
+        padding-right:40px;
+        border: 0px;
+        margin: 0;
+        outline: none;
+        font-size: $fzBase;
+        color: #333;
+    }
+    textarea{
+        padding:5px;
+        border:1px solid rgba(216, 216, 216, .8);
+        box-sizing:border-box;
+        resize:none;
+        font-size: $fzBase;
+}
+
+a{
+    cursor: pointer;
+    color:inherit;
+    font-size:inherit;
+    text-decoration:none;
+    @extend %baseFont;
+}
+.sprite{
+    fill: $colorMain;
+    vertical-align: top;
+    @include setSize(100%, 100%);
+    @extend %pm0;
+    transition: .3s ease-in-out;
+}
+h1,h2,h3,h4,h5,h6,p{margin: 0;}
+
+//font AWESOME
+.font-button{
+    .far,
+    .fas{
+        color: #666;
+        transition: .08s $cubic-FiSo;
+    }
+
+    &:hover{
+        .far,
+        .fas{ color: $colorMain; }
+    }
+} 
+
+//other
+.zero-size{font-size: 0px;letter-spacing: 0px;word-spacing: 0px;}
+.required{color: $colorMain;margin: 0 0 0 8px;}
+.red{color: #ff0016;}
+.space{display:inline-block;width: 7px;}
+.clear{clear:both;height:0px;line-height:0px;font-size:0px;overflow:hidden;}
+.ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hide{display:none;}
+
+//Animate
+@keyframes menushow{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+@keyframes visitsLoad{
+    0%{transform:translate3d(-100%,0,0);}
+    30%{transform:translate3d(-70%,0,0);}
+    80%{ transform:translate3d(-20%,0,0);}
+    95%{transform:translate3d(-5%,0,0);}
+    100%{ transform:translate3d(0%,0,0);}
+}
+@keyframes visitsShow{
+    0%{opacity: 0;transform: translate3d(0,45px,0);}
+    100%{opacity: 1;transform: translate3d(0,0,0);}
+}
+
+
+
+// basic element
+.rowBox{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding-left: 50px;
+    * { margin: 0 5px; }
+}
+
+.Btn{
+    background: #f5f5f5;
+    padding: 3px 8px;
+    border: 1px solid rgba(60, 60, 60, .1);
+    border-radius: 3px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .15);
+    transition: .08s $cubic-FiSo;
+    &:hover{ background: #fff; }
+    &:active{ 
+        background: #ccc;
+        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .15) inset,
+                    1px 1px 1px 0 rgba(255, 255, 255, .35); 
+    }
+}
+
+.titleBtn{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background: #ccc;
+    @include setSize(40px, 40px);
+    padding: 8px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: .2s $cubic-FiSo;
+    overflow: hidden;
+
+    .text{
+        width: 0;
+        white-space: nowrap;
+    }
+    &:hover{ width: 150px; }
+}
+
+.table{
+    border-top: 1px solid #c8dae8;
+    border-right: 1px solid #c8dae8;
+    border-left: 1px solid #c8dae8;
+}
+.input{ width: 100%; }
+.textarea { @include setSize(100%, 100px); }
+.searchBar{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
