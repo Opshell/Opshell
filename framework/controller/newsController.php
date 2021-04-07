@@ -1,4 +1,7 @@
 <?php
+namespace Controller;
+use Core\Controller;
+
 class newsController extends Controller
 {
     private $_path = 'news';

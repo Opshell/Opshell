@@ -26,6 +26,11 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
             'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\Translation\\' => 30,
+            'Service\\' => 8,
+        ),
+        'R' => 
+        array (
+            'Reposotory\\' => 11,
         ),
         'E' => 
         array (
@@ -34,6 +39,11 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 22,
+        ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+            'Controller\\' => 11,
         ),
     );
 
@@ -66,6 +76,14 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
+        'Service\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/framework/service',
+        ),
+        'Reposotory\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/framework/reposotory',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -73,6 +91,14 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
         'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core/system',
+        ),
+        'Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/framework/controller',
         ),
     );
 

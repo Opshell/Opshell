@@ -1,13 +1,15 @@
 <?php
-class homeController extends Controller
-{
+namespace Controller;
+use Core\Controller;
+use Service\newsService;
+
+class homeController extends Controller{
     private $_tplPath = 'home';
     private $newsService = null;
 
     public function __construct(){
         $this->newsService = newsService::getInstance();
     }
-
 
     public function index($outType='render'){
         $this->data['text'] = "渲染內容文字";

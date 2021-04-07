@@ -1,4 +1,7 @@
 <?php
+namespace Repository;
+use Core\Repository;
+
 class newsRepository extends Repository
 {
     public function construct()

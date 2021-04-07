@@ -1,4 +1,7 @@
 <?php
+namespace Controller;
+use Core\Controller;
+
 class footerController extends Controller
 {
     private $_tplPath = 'footer';

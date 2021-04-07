@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 trait ClassInstanceTrait {
     private $constructMethodName = 'construct'; // 子體建構子名稱
     protected static $instance = null;

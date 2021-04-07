@@ -1,4 +1,8 @@
 <?php
+namespace Service;
+use Core\Service;
+use Repository\newsRepository;
+
 class newsService extends Service
 {
     public function construct(){

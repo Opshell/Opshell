@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) 使用
 use Illuminate\Database\Capsule\Manager as DB; // DB 使用 主要為了執行原生SQL
 

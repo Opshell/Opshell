@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 class Response {
 	private $headers = array();
 	private $output;

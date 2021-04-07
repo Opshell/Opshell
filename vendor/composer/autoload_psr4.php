@@ -13,7 +13,11 @@ return array(
     'Symfony\\Polyfill\\Iconv\\' => array($vendorDir . '/symfony/polyfill-iconv'),
     'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
+    'Service\\' => array($baseDir . '/framework/service'),
+    'Reposotory\\' => array($baseDir . '/framework/reposotory'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
+    'Core\\' => array($baseDir . '/core/system'),
+    'Controller\\' => array($baseDir . '/framework/controller'),
     '' => array($vendorDir . '/nesbot/carbon/src'),
 );

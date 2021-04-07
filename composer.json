@@ -2,5 +2,16 @@
     "require": {
         "swiftmailer/swiftmailer": "^6.2",
         "illuminate/database": "~4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/system",
+            "Service\\": "framework/service",
+            "Controller\\": "framework/controller",
+            "Reposotory\\": "framework/reposotory"
+        }
+    },
+    "require-dev": {
+        "composer/composer": "^2.0"
     }
 }

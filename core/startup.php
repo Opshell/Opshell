@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Capsule\Manager as DB;
+use Core\Response;
+
 
 /** 整個網站的環境檢查=>全域變數設定=>網站基本設定
  * const VERSION 0.1
@@ -62,7 +65,7 @@ if (function_exists(CACHEPREFIX . 'reset')) {
 // Autoload
 require_once(ROOT_PATH . '/vendor/autoload.php');
 require_once(CORE_PATH . '/config.php'); // 組態載入
-require_once(CORE_PATH . '/system/common.php'); // autoload註冊 框架&常用function載入
+require_once(CORE_PATH . '/common.php'); // 框架&常用function載入
 
 // 宣告本機或線上模式
 if (getip() == "127.0.0.1" || getip() == "unknown") {
@@ -71,8 +74,20 @@ if (getip() == "127.0.0.1" || getip() == "unknown") {
     $develop_mode = "Production";
 }
 
-require_once(CORE_PATH . '/system/EloquentDB.php');
-// class_alias(require_once(CORE_PATH . '/system/EloquentDB.php'), 'DB'); // DB設定檔引用並指定別名
+
+
+// DB 初始化
+$DB = new DB;
+// 建立連線
+$DB->addConnection($config['database'][$develop_mode]);
+// 設定全域靜態可訪問
+$DB->setAsGlobal();
+// 啟動Eloquent
+$DB->bootEloquent();
+
+
+
+
 require_once(CORE_PATH . '/system/classInstanceTrait.php'); // ClassInstanceTrait 引用
 
 

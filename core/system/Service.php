@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 abstract class Service
 {
     protected $Repository = null;

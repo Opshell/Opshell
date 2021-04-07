@@ -1,4 +1,7 @@
 <?php
+namespace Controller;
+use Core\Controller;
+
 class headerController extends Controller
 {
     private $_tplPath = 'header';

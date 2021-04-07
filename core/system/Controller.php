@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 class Controller{
     protected $langs;
     protected $template;
