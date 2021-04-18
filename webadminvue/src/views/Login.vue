@@ -55,6 +55,7 @@ export default {
 
             if (username !== "" && password !== "") {
                 this.loginForm.token = token;
+                this.$store.commit("Signin");
             } else {
                 alert("帳號密碼不能為空");
             }

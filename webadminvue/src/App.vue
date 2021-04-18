@@ -1,9 +1,11 @@
 
 
 <template>
-    <div id="nav">
+    <div v-if="singIn" id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
+
+        <elBtn @click="logout" v-text="登出"/>
     </div>
 
     <router-view></router-view>
@@ -15,9 +17,18 @@ export default {
     name: "App",
     components: {},
     data: function(){
-        return {
-
+        return {}
+    },
+    mounted: function(){
+        console.log(singIn);
+    },
+    method:{
+        logout: function(){
+            this.$store.commit("Signin");
         }
+    },
+    computed: {
+        singIn: state => state.Signing,
     }
 };
 </script>
