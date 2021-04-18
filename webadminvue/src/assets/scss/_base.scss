@@ -28,34 +28,8 @@ form{
         margin-right: 12px;
         cursor:pointer;
     }
-    input{
-        &:-webkit-autofill {-webkit-box-shadow: 0 0 0 30px #fcfcfc inset;}
-        -webkit-autofill:unset;
-        font-size: $fzBase;
-        @extend %pm0;
-        &:focus{outline:0;}
-        &[type='text']{
-            padding:0px 5px;
-            vertical-align:top;
-            border:1px solid rgba(216, 216, 216, .8);
-        }
-        &[type='password']{@extend input[type='text'];}
-        &[type="radio"]{
-            margin-right: 5px;
-            cursor:pointer;
-            vertical-align:middle;
-        }
-        &[type="checkbox"]{@extend input[type='radio'];}
-        &[type=number]::-webkit-inner-spin-button, 
-         [type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
-        }
-        &[type=number]{-moz-appearance: textfield;}
-        &.hid{display: none;}
-    }
     select{
-        @extend input[type='radio'];
+        // @extend input[type='radio'];
         /*移除箭頭樣式*/
         appearance:none;
         -moz-appearance:none;
@@ -64,7 +38,7 @@ form{
         &::-ms-expand { display: none;}
 
         /*改變右邊箭頭樣式*/
-        background: #fff url("../images/selectArrow.png")no-repeat calc(100% - 15px) center;
+        // background: #fff url("../images/selectArrow.png")no-repeat calc(100% - 15px) center;
 
         @include setSize(100%, 34px);
         padding: 2px;
