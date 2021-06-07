@@ -1,35 +1,18 @@
 <template>
-    <a class="Btn" href=""></a>
+    <a class="Btn" role="button" :title="title"></a>
 </template>
 
 <script>
 export default {
     name: "elBtn",
     props: {
-        type: {
-            defualt: "text",
-        },
-        name: {},
-        value: {},
-        placeholder: {},
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
+        title:{
+            type: String,
+            default: "",
+        }
     },
     data: function () {
-        return {
-            rawValue: "",
-        };
-    },
-    mounted: function () {
-        let vm = this;
-        vm.rawValue = vm.value;
-    },
-    watch: {
-        rawValue: function (v) {
-            this.$emit("input", v);
-        },
+        return {};
     },
 };
 </script>

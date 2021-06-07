@@ -46,8 +46,11 @@
     "rules": {}
   },
   "prettier": {
+    "printWidth": 200,
     "trailingComma": "es5",
-    "tabWidth": 4
+    "tabWidth": 4,
+    "quotes": true,
+    "vueIndentScriptAndStyle": true
   },
   "browserslist": [
     "> 1%",

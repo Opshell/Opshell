@@ -30,7 +30,7 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
         ),
         'R' => 
         array (
-            'Reposotory\\' => 11,
+            'Repository\\' => 11,
         ),
         'E' => 
         array (
@@ -80,9 +80,9 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
         array (
             0 => __DIR__ . '/../..' . '/framework/service',
         ),
-        'Reposotory\\' => 
+        'Repository\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/framework/reposotory',
+            0 => __DIR__ . '/../..' . '/framework/repository',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -136,7 +136,6 @@ class ComposerStaticInit3bb1ebd99607493a9e3a39b4ae8a0047
     );
 
     public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     );
 

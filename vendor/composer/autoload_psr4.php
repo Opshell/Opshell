@@ -14,7 +14,7 @@ return array(
     'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Service\\' => array($baseDir . '/framework/service'),
-    'Reposotory\\' => array($baseDir . '/framework/reposotory'),
+    'Repository\\' => array($baseDir . '/framework/repository'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
     'Core\\' => array($baseDir . '/core/system'),

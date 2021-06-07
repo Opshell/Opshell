@@ -1,10 +1,12 @@
 <template>
-<div class="loginBlock">
-    <article>
-        <section>
-            <elImg src="/image/Opshell-5x.phg" alt="Logo"/>
-            <h1>Opsehll 管理後台</h1>
+    <article class="loginBlock">
+        <section class="logoBlock">
+            <div class="logoBox">
+                <img class="logo" src="../assets/images/Opshell-5x.png" alt="Vue logo" />
+            </div>
+            <h1 class="title">Opsehll 管理後台</h1>
         </section>
+
         <form>
             <elInput
                 v-model="loginForm.username"
@@ -25,75 +27,113 @@
             </div>
         </form>
     </article>
-</div>
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import elInput from "../components/el-input.vue";
-import elBtn from "../components/el-button.vue";
+    import Cookies from "js-cookie";
+    import { mapState } from "vuex";
 
-export default {
-    data() {
-        return {
-            loginForm: {
-                username: "",
-                password: "",
-                token: "",
+    // import elImg from "../components/el-img.vue";
+    import elBtn from "../components/el-button.vue";
+    import elInput from "../components/el-input.vue";
+
+    export default {
+        data() {
+            return {
+                loginForm: {
+                    username: "Opshell",
+                    password: "1",
+                    verification: "test",
+                },
+            };
+        },
+        components: {
+            // elImg,
+            elBtn,
+            elInput,
+        },
+        methods: {
+            handleLogin() {
+                const verification = "test";
+                const username = this.loginForm.username;
+                const password = this.loginForm.password;
+
+                if (username !== "" && password !== "") { // 登入成功
+                    let store = this.$store;
+                    this.loginForm.verification = verification;
+
+                    store.commit("Signin");
+                    store.commit("SetUser", this.loginForm);
+
+                    const redirect = (store.state.redirect == "" || store.state.redirect == undefined)? "Dashboard" : store.state.redirect;
+                    this.$router.push({ name: redirect });
+
+                    // Cookies.set("login", JSON.stringify(this.loginForm), {
+                    //     expires: 1,
+                    // });
+
+                    // if (Cookies.get("login") && this.loginForm.verification) {
+                    //     this.$router.push({ name: "Dashboard" });
+                    // }
+                } else { // 登入失敗
+                    alert("帳號密碼不能為空");
+                }
             },
-        };
-    },
-    components: { 
-        elInput, 
-        elBtn
-    },
-    methods: {
-        handleLogin() {
-            const token = "asdsadsafASFadfsaf";
-            let username = this.loginForm.username;
-            let password = this.loginForm.password;
-
-            if (username !== "" && password !== "") {
-                this.loginForm.token = token;
-                this.$store.commit("Signin");
-            } else {
-                alert("帳號密碼不能為空");
-            }
-
-            Cookies.set("login", JSON.stringify(this.loginForm), {
-                expires: 1,
-            });
-            console.log(this.loginForm);
-            if (Cookies.get("login") && this.loginForm.token) {
-                this.$router.push({ name: "Dashboard" });
-            }
+            removeCookie() {
+                Cookies.remove("login");
+            },
         },
-        removeCookie() {
-            Cookies.remove("login");
-        },
-    },
-};
+        computed: mapState([// 批量載入vuex state
+            'isLogin',
+            'isLoading',
+            'userData',
+        ]),
+    };
 </script>
 
 <style scoped lang="scss">
-.loginBlock{
-    display:flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 250px;
-    padding: 20px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    box-shadow: 0 0 20px 1px rgba(0,0,0,.08);
-    .input{
-        margin: 0 0 10px;
-    }
-    .btnBox{
+    .loginBlock {
         display: flex;
-        justify-content: center;
-        .Btn + .Btn{
-            margin: 0 0 0 10px;
+        flex-direction: column;
+        background: #eee;
+        width: 100%;
+        max-width: 250px;
+        padding: 20px;
+        border-radius: 8px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, .08);
+
+        color: $colorMain;
+
+        .logoBlock{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 15px;
+            .logoBox{
+                background: #eee;
+                @include setSize(90px, 90px);
+                padding: 10px;
+                border: 5px solid #f3f3f3;
+                border-radius: 50%;
+                box-sizing: border-box;
+
+                overflow: hidden;
+                box-shadow: $bascShadow,
+                            $bascShadow-in;
+            }
+            .logo{ width: 100%; }
+            .title{color: #000;}
+        }
+
+        .input { margin: 0 0 10px; }
+        .btnBox {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 0;
+            .Btn + .Btn { margin: 0 0 0 10px; }
         }
     }
-}
 </style>

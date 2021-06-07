@@ -1,7 +1,10 @@
-$colorBack: #fff;
-$colorBase: #333;
-$colorMain: #011F35; // 主色
-$colorSubs: #cede5a; // 輔色
+$colorBack: #2c3e50;
+$colorBack2: #334e69;
+$colorBase: #eee;
+
+$colorMain: #2c3e50; // 主色
+$colorSubs: #F8B62B; // 輔色
+
 $colorCont: #666;    // 輔色2
 
 $colorErro: #BC2837;
@@ -12,6 +15,9 @@ $colorInfo: #32abea;
 $colorFB  : #3b5998;
 $colorLINE: #00BA01;
 $colorTWIT: #1DA1F2;
+
+$bascShadow: 0 0 1px 0 rgba(0, 0, 0, .15);
+$bascShadow-in: 0 0 1px 0 rgba(0, 0, 0, .15) inset;
 
 $fzBase:15px;
 $fzTitle:16px;
@@ -156,6 +162,7 @@ $rwd-320: 320px;
 
 
 @import 'base';
+@import 'vueTransition';
 
 .noJS > div,
 .noJS > ul{display:none;}

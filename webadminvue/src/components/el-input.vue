@@ -1,13 +1,20 @@
 <template>
-<input
-    v-if="disabled"
-    :type="type"
-    :name="name"
-    v-model="rawValue"
-    class="input"
-    disabled="disabled"
-/>
-<input v-else :type="type" :name="name" v-model="rawValue" class="input" />
+    <input
+        v-if="disabled"
+        :type="type"
+        :name="name"
+        :placeholder="placeholder"
+        v-model="rawValue"
+        class="input"
+        disabled="disabled"
+    />
+    <input v-else 
+        :type="type" 
+        :name="name" 
+        v-model="rawValue" 
+        :placeholder="placeholder" 
+        class="input" 
+    />
 </template>
 
 <script>
@@ -20,7 +27,10 @@ export default {
         },
         name: {},
         value: {},
-        placeholder: {},
+        placeholder: {
+            type: String,
+            default: "",
+        },
         disabled: {
             type: Boolean,
             default: false,
@@ -51,9 +61,8 @@ input {
     @extend %baseFont;
     -webkit-autofill: unset;
 
-    &:focus {
-        outline: 0;
-    }
+    &:focus { outline: 0; }
+    &::placeholder {color: #ccc;}
 
     &[type="text"],
     &[type="password"] {
@@ -69,16 +78,13 @@ input {
         vertical-align: middle;
     }
 
+    &[type="number"] { -moz-appearance: textfield; }
     &[type="number"]::-webkit-inner-spin-button,
     [type="number"]::-webkit-outer-spin-button {
         margin: 0;
         -webkit-appearance: none;
     }
-    &[type="number"] {
-        -moz-appearance: textfield;
-    }
-    &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 30px #fcfcfc inset;
-    }
+    
+    &:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fcfcfc inset; }
 }
 </style>

@@ -28,6 +28,38 @@ form{
         margin-right: 12px;
         cursor:pointer;
     }
+    input {
+        &:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fcfcfc inset; }
+        -webkit-autofill:unset;
+        font-size: $fzBase;
+        @extend %pm0;
+
+        &:focus { outline: 0; }
+        &::placeholder {color: #ccc;}
+
+        &[type='text'],
+        &[type='password'] {
+            padding: 0px 5px;
+            vertical-align: top;
+            border: 1px solid rgba(216, 216, 216, .8);
+        }
+
+        &[type="radio"], 
+        &[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        &[type=number] { -moz-appearance: textfield; }
+        &[type=number]::-webkit-inner-spin-button,
+        [type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &.hid { display: none; }
+    }
     select{
         // @extend input[type='radio'];
         /*移除箭頭樣式*/
@@ -125,18 +157,23 @@ h1,h2,h3,h4,h5,h6,p{margin: 0;}
 }
 
 .Btn{
-    background: #f5f5f5;
-    padding: 3px 8px;
+    background: $colorMain;
+    width: 100%;
+    padding: 8px 15px;
     border: 1px solid rgba(60, 60, 60, .1);
-    border-radius: 3px;
+    border-radius: 1px;
     box-sizing: border-box;
-    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .15);
-    transition: .08s $cubic-FiSo;
-    &:hover{ background: #fff; }
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15);
+    color: $colorBase;
+
+    transition: .15s $cubic-FiSo;
+    &:hover { color: $colorSubs; }
     &:active{ 
-        background: #ccc;
-        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .15) inset,
-                    1px 1px 1px 0 rgba(255, 255, 255, .35); 
+        background: $colorSubs;
+        color: $colorBase;
+        box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15) inset,
+                    0 0 1px 0 rgba(255, 255, 255, .35); 
+        transition: .08s $cubic-FiSo;
     }
 }
 

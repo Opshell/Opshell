@@ -8,7 +8,7 @@
             "Core\\": "core/system",
             "Service\\": "framework/service",
             "Controller\\": "framework/controller",
-            "Reposotory\\": "framework/reposotory"
+            "Repository\\": "framework/repository"
         }
     },
     "require-dev": {
