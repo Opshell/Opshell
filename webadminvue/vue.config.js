@@ -5,7 +5,7 @@
 // }else if (model == 'dev') {
 //     host = 'http://localhost:8090'
 // }
-let host = 'http://www.opshell/WebAdmin/api/';
+let host = 'http://opshell//WebAdmin/api/';
 // let host = 'http://127.0.0.1/opshell/WebAdmin/api/';
 
 module.exports = {

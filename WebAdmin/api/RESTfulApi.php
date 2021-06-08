@@ -1,7 +1,8 @@
 <?php 
+    // use Controller\newsController;
     // use Service\newsService;
     // use Repository\newsRepository;
-    use Controller\newsController;
+    // use Controller\newsController;
     
     // 核心啟動
     require_once(dirname(dirname(dirname(__FILE__))) . '/core/startup.php');
@@ -10,9 +11,7 @@
     $action = ($_GET['action'])?? ""; // 動作
     $id = ($_GET['id'])?? "";
 
-    $newsControoler = new newsController();
-
-
+    // $newsController = new newsController();
 
     $result = [
         'status' => 'Error',
@@ -20,16 +19,14 @@
         'data' => [],
         'redirect' => '/',
     ];
-
+    
     if (!empty($route) && !empty($action)) {
-        $classFile = CONTROLLER_PATH . $route . 'Controller.php';
-        $className = $route . 'Controller';
-
+        $className = 'Controller\\' .$route . 'Controller';
         $result['data'] = $className;
         $result['message'] = 'Class is not exists.';
 
-        if (file_exists($classFile)) {
-            $class = $newsControoler;
+        if (class_exists($className)) {
+            $class = new $className();
 
             switch ($action) {
                 case 'list':

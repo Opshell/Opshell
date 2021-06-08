@@ -1,30 +1,27 @@
 <template>
     <div class="News">
         <h1>Here show the news list.</h1>
-
-        <elTable :value="list">
-            
-        </elTable>
+        <elTable :value="list"></elTable>
     </div>
 </template>
 
 <script>
     import { mapState } from "vuex";
-    import elTable from "../components/el-gridTable.vue"
+    import elTable from "../components/el-gridTable.vue";
 
     export default {
         data() {
             return {
-                list: {}
+                list: {},
             };
         },
         components: {
             elTable,
         },
-        mounted(){
-            fetch('/mapi/?route=news&action=list')
+        mounted() {
+            fetch('/mapi/?route=news&action=list') // /mapi/news/list/2
                 .then(res => res.json())
-                .then((data) => {
+                .then(data => {
                     data = JSON.parse(data);
                     if(!data.error){
                         this.list = data.result;
@@ -42,5 +39,5 @@
 </script>
 
 <style scoped lang="scss">
-  
+
 </style>
