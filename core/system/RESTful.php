@@ -49,108 +49,76 @@ class RESTful {
     private $headers = array();
     private $output;
 
+    /** 後端強制跳轉
+     * @param STRING $url
+     */
+    public function redirect($url){
+        header('Location: ' . $url);
+        exit;
+    }
+
+    /** 設定header
+     * @param STRING $header
+     */
     public function addHeader($header){
         $this->headers[] = $header;
     }
 
-    /**
-     * 
+    /** 設定HttpStatusCode
+     * @param STRING $header
      */
-    public function setHttpHeaders($contentType, $statusCode){
-        $statusMessage = ($this->httpStatus[$statusCode]) ?? $this->httpStatus[500];
-
-        http_response_code($statusCode);
-        header($this->httpVersion . " " . $statusCode . " " . $statusMessage);
-        header("Content-Type:" . $contentType);
+    public function setHttpCode($code){
+        // 設定輸出status
+        http_response_code($code);
+        $statusMessage = ($this->httpStatus[$code]) ?? $this->httpStatus[500];
+        $this->addHeader($this->httpVersion . " " . $code . " " . $statusMessage);
     }
-
 
     /** 設定輸出
      *  @param $data 輸出的資料
      *  @param STRING $ContentType 輸出的格式 {html, json, xml}
+     *  @param INT $statusCode 輸出的狀態 $this->statusCode
      *  @param STRING $charset 輸出的編碼
      *  @return $this->outpot
      */
-    public function setOutput($data, $ContentType = 'html', $charset = 'UTF-8'){
-        $temp = "";
-        switch ($ContentType) {
-            case 'html':
-                $temp = 'Content-Type: text/html; charset='. $charset;
-                break;
-            default:
-                $temp = 'Content-Type: application/'. $ContentType .'; charset=' . $charset;
+    public function setOutput($data, $statusCode = 200, $ContentType = 'html', $charset = 'UTF-8'){
+        if(http_response_code() == 200){ // 未設定過 或 設定200 覆寫他的設定
+            $this->setHttpCode($statusCode);
         }
 
-        $this->addHeader($temp); // 預設回傳格式
+        // 設定輸出格式 & 格式化資料
+        if($ContentType == 'html'){
+            $this->addHeader('Accept: text/html');
+            $this->addHeader('Content-Type: text/html; charset=' . $charset);
+        }else if ($ContentType == 'json') {
+            $this->addHeader('Accept: application/json');
+            $this->addHeader('Content-Type: application/json; charset='. $charset);
+
+            $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        }else if($ContentType == 'xml'){
+            $this->addHeader('Accept: application/xml');
+            $this->addHeader('Content-Type: application/xml; charset=' . $charset);
+
+            $xml = new \SimpleXMLElement('<?xml version="1.0"?><site></site>');
+            foreach ($data as $k => $v) {
+                $xml->addChild($k, $v);
+            }
+            $data = $xml->asXML();
+        }
+
+        $this->output = $data;
     }
 
-    
+    // 輸出
     public function output(){
-        if ($this->output) {
-            if (!headers_sent()) {
-                foreach ($this->headers as $header) {
+        if ($this->output) { // 有要輸出的資料
+            if (!headers_sent()) { // 如果後端沒有強制跳轉
+                foreach ($this->headers as $header) { // 就設定輸出header
                     header($header, true);
                 }
             }
 
-            echo $this->output;
+            echo $this->output; // 輸出
         }
     }
-
-
-    /** 輸出設定
-     * @param ARRAY $data
-     */
-    public function getSite($data)
-    {
-        if (empty($data)) {
-            $statusCode = 404;
-            $data = array('error' => 'No sites found!');
-        } else {
-            $statusCode = 200;
-        }
-
-        $requestContentType = $_SERVER['HTTP_ACCEPT'];
-        $this->setHttpHeaders($requestContentType, $statusCode);
-
-        if (strpos($requestContentType, 'application/json') !== false) {
-            $response = $this->encodeJson($data);
-            echo $response;
-        } else if (strpos($requestContentType, 'text/html') !== false) {
-            $response = $this->encodeHtml($data);
-            echo $response;
-        } else if (strpos($requestContentType, 'application/xml') !== false) {
-            $response = $this->encodeXml($data);
-            echo $response;
-        }
-    }
-
-
-    /** 輸出方式 HTML | JSON | XML
-     * 
-     */
-    public function encodeHtml($responseData)
-    {
-        $htmlResponse = "<table border='1'>";
-        foreach ($responseData as $key => $value) {
-            $htmlResponse .= "<tr><td>" . $key . "</td><td>" . $value . "</td></tr>";
-        }
-        $htmlResponse .= "</table>";
-        return $htmlResponse;
-    }
-    public function encodeJson($responseData)
-    {
-        $jsonResponse = json_encode($responseData);
-        return $jsonResponse;
-    }
-    public function encodeXml($responseData)
-    {
-        $xml = new SimpleXMLElement('<?xml version="1.0"?><site></site>');
-        foreach ($responseData as $key => $value) {
-            $xml->addChild($key, $value);
-        }
-        return $xml->asXML();
-    }
-
-
 }

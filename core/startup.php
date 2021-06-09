@@ -2,7 +2,8 @@
 
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Capsule\Manager as DB;
-use Core\Response;
+use Core\RESTful;
+// use Core\Response;
 
 
 /** 整個網站的環境檢查=>全域變數設定=>網站基本設定
@@ -92,5 +93,5 @@ require_once(CORE_PATH . '/system/classInstanceTrait.php'); // ClassInstanceTrai
 
 
 // 回應
-$Response = new Response();
-$Response->addHeader('Content-Type: text/html; charset=UTF-8'); // 預設回傳格式
+$Response = new RESTful();
+// $Response->addHeader('Content-Type: text/html; charset=UTF-8'); // 預設回傳格式
