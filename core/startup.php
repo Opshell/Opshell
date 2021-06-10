@@ -87,11 +87,9 @@ $DB->setAsGlobal();
 $DB->bootEloquent();
 
 
+// ClassInstanceTrait 引用
+require_once(CORE_PATH . '/system/classInstanceTrait.php'); 
 
-
-require_once(CORE_PATH . '/system/classInstanceTrait.php'); // ClassInstanceTrait 引用
-
-
-// 回應
+// New 輸出核心
 $Response = new RESTful();
 // $Response->addHeader('Content-Type: text/html; charset=UTF-8'); // 預設回傳格式
