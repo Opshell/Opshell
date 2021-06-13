@@ -1,5 +1,7 @@
-<?php 
-echo "Hello world!<br/><br/>";
+<?php
+// echo "Hello world!<br/><br/>";
+// echo $_SERVER['REQUEST_URI'] . '<br><br>';
+
 
 // 核心啟動
 require_once(dirname(__FILE__) . '/core/startup.php');
@@ -7,14 +9,16 @@ require_once(dirname(__FILE__) . '/core/startup.php');
 // 前後台路由導向
 $defPATH = 'public'; // 預設導向(前台)
 $appPATH = array('WebAdmin', 'api'); // 後台或更多其他可探索資料夾
+$indexFile = 'router.php';
 
 $route = array();
 foreach ($appPATH as $v) {
     $dir = '/' . $v . '/';
-    if (stristr($_SERVER['REQUEST_URI'], $dir) && is_file(ROOT_PATH . $v . '/index.php')) { // 開放探索 && 檔案存在
+    if (stristr($_SERVER['REQUEST_URI'], $dir) && is_file(ROOT_PATH .'/'. $v . '/router.php')) { // 開放探索 && 檔案存在
         $route = array(
             'path' => str_replace($dir, '/', $_SERVER['REQUEST_URI']),
-            'file' => $v . '/index.php'
+            'file' => $v . '/' . $indexFile
+            // 'file' => $v . '/index.php'
         );
         break;
     }
@@ -24,7 +28,7 @@ foreach ($appPATH as $v) {
 if (empty($route)) {
     $route = array(
         'path' => $_SERVER['REQUEST_URI'],
-        'file' => $defPATH . '/index.php'
+        'file' => $defPATH . '/'. $indexFile
     );
 }
 
@@ -46,10 +50,8 @@ if ($route['path'] != '/') {
     }
 }
 
-
-// 導向
+// 導入目標route
 require_once(ROOT_PATH .'/'. $route['file']);
-
 
 function include_path($Path){
     $BasePath = dirname(dirname(__FILE__));

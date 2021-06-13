@@ -76,5 +76,12 @@ class Controller{
             exit();
         }
     }
+
+    /**
+     * @param STRING $action 動作
+     */
+    protected function api($action){
+        return Null;
+    }
 }
 ?>

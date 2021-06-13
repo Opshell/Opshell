@@ -1,6 +1,12 @@
 # open rewrite
-Options +FollowSymlinks
-RewriteEngine on
+# Options +FollowSymLinks
+# RewriteEngine on
+Options +SymLinksIfOwnerMatch 
+RewriteEngine On 
 
-RewriteRule ^mapi/([a-z][A-Z][0-9])/list/$   RESTfulApi.php?route=$1&action=list [nc,qsa]
-RewriteRule ^mapi/([a-z][A-Z][0-9])/info/([0-9]+)/$   RESTfulApi.php?route=$1&action=info&id=$2 [nc,qsa]
+RewriteCond %{HTTP_HOST} ^opshell$ [nc]
+RewriteRule ^$ http://www.opshell/index.php [L,R=301]
+
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule ^ index.php [L]

@@ -19,12 +19,11 @@
             elTable,
         },
         mounted() {
-            fetch('/mapi/?route=news&action=list') // /mapi/news/list/2
+            fetch('/api/news/list') // /mapi/news/list/2
                 .then(res => res.json())
                 .then(data => {
-                    data = JSON.parse(data);
-                    if(!data.error){
-                        this.list = data.result;
+                    if(data.status == "Success"){
+                        this.list = data.data;
                     }
                 });
         },

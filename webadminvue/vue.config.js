@@ -5,23 +5,24 @@
 // }else if (model == 'dev') {
 //     host = 'http://localhost:8090'
 // }
-let host = 'http://opshell//WebAdmin/api/';
+let host = 'http://www.opshell/api/';
 // let host = 'http://127.0.0.1/opshell/WebAdmin/api/';
 
 module.exports = {
     publicPath:
         process.env.NODE_ENV === "production" ? "/webadmin/" : "/webadminvue/", // cli 根目錄
     outputDir: "../WebAdmin/", // 輸出 目錄
-    indexPath: "index.php", // 輸出 index
+    // indexPath: "index.php", // 輸出 index
+    indexPath: "router.php", // 輸出 index
     devServer: { // 代理伺服器
         port: 1024,
         proxy: {
-            '/mapi': {
+            '/api': {
                 target: host, // 本機串接
                 ws: true, // 代理的WebSockets
                 changeOrigin: true, // 允許websockets跨域
                 pathRewrite: {
-                    '^/mapi': ''
+                    '^/api': ''
                 }
             },
             '/ukapi': { // UBike範例
