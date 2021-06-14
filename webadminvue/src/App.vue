@@ -44,6 +44,8 @@
 </template>
 
 <script>
+    import axios from "axios";
+    
     import { mapState } from 'vuex';
     import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";

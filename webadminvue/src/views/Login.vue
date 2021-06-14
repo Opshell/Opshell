@@ -42,7 +42,7 @@
             return {
                 loginForm: {
                     username: "Opshell",
-                    password: "1",
+                    password: "pass",
                     verification: "test",
                 },
             };
@@ -62,22 +62,45 @@
                     let store = this.$store;
                     this.loginForm.verification = verification;
 
-                    store.commit("Signin");
-                    store.commit("SetUser", this.loginForm);
+                    this.authenticate(username, password)
+                    .then(auth => {
+                        if(auth.status){
+                            localStorage.setItem('token', auth.data);
+                            store.commit("Signin");
+                            store.commit("SetUser", this.loginForm);
 
-                    const redirect = (store.state.redirect == "" || store.state.redirect == undefined)? "Dashboard" : store.state.redirect;
-                    this.$router.push({ name: redirect });
-
-                    // Cookies.set("login", JSON.stringify(this.loginForm), {
-                    //     expires: 1,
-                    // });
-
-                    // if (Cookies.get("login") && this.loginForm.verification) {
-                    //     this.$router.push({ name: "Dashboard" });
-                    // }
+                            const redirect = (store.state.redirect == "" || store.state.redirect == undefined)? "Dashboard" : store.state.redirect;
+                            this.$router.push({ name: redirect });
+                        }else{
+                            console.log(auth.msg);
+                        }
+                    });
                 } else { // 登入失敗
                     alert("帳號密碼不能為空");
                 }
+            },
+            authenticate: async function(email, password) {
+                return await fetch('/api/backEndAuth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password }),
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if(result.status == "Success"){
+                        return {
+                            status: true,
+                            msg: '登入成功',
+                            data: result.data
+                        }
+                    }else{
+                        return {
+                            status: false,
+                            msg: result.message,
+                            data: result.data
+                        }
+                    }
+                })
+                .catch(() => {return false;});
             },
             removeCookie() {
                 Cookies.remove("login");

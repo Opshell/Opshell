@@ -1,20 +1,24 @@
 <?php
-    use Controller\newsController;
-
     // echo "You want me give something to you? <br/><br/>";
 
     // $subject = $_SERVER['REQUEST_URI']; //   "/api1/aaasd/bbb/";
     // $pattern = '/^\/([^\/]{1,})\/([^\/]*)\/([^\/]*)\//';
     // preg_match($pattern, $subject, $matches);
 
-    // RESTful 網址解析
-    $PathSplit = explode('/', $_GET['route']);
-    $route = ($PathSplit[0])?? "";  // class
-    $action = ($PathSplit[1])?? ""; // 動作
-    $id = ($PathSplit[2])?? 0;      // id
-
+    // use 載入
+    include_once(dirname(__FILE__). '/useControllers.php');
     // 核心啟動
     require_once(dirname(dirname(__FILE__)) . '/core/startup.php');
+
+    // RESTful 網址解析
+    $PathSplit = explode('/', $_GET['route']);
+    $route = ($PathSplit[0]) ?? "";  // class
+    $action = ($PathSplit[1]) ?? ""; // 動作
+    $id = ($PathSplit[2]) ?? 0;      // id
+
+
+    // 輸入資料XSS清理
+    $post = $_POST;
 
     // 預設輸出
     $httpStatusCode = 0;
@@ -53,7 +57,7 @@
             $result['data'] = $action;
             $result['message'] = 'Method is not exists.';
 
-            $data = $class->api($action);
+            $data = $class->api($action, $post);
             if(!empty($data)){
                 $httpStatusCode = 200;
                 $result['status'] = 'Success';

@@ -79,8 +79,9 @@ class Controller{
 
     /**
      * @param STRING $action 動作
+     * @param ARRAY $data 輸入資料 
      */
-    protected function api($action){
+    protected function api($action, $data){
         return Null;
     }
 }

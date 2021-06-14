@@ -19,7 +19,7 @@ class newsController extends Controller
         return $this->render();
     }
 
-    public function api($action){
+    public function api($action, $data){
         // $this->data = $this->newsService->getList();
 
         // return $this->json();
