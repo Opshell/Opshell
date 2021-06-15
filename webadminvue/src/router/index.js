@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import axios from "axios";
 import store from "../store";
 import Home from "../views/Home.vue";
 // import Cookies from "js-cookie";
@@ -28,23 +29,25 @@ const routes = [
         meta: { requireAuth: true },
     },
 
-    { // Home
+    {
+        // Home
         name: "Home",
         path: "/",
         component: Home,
         meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
     },
-    { // About
+    {
+        // About
         name: "About",
         path: "/about",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ "../views/About.vue"),
+        component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
         meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
     },
-    { // 未定義網址 => 404
+    {
+        // 未定義網址 => 404
         name: "PageNotFound",
         path: "/:pathMatch(.*)*",
         component: () => import("../views/PageNotFound.vue"),
@@ -59,29 +62,42 @@ const router = createRouter({
 // 在 login 頁面還不能完全做到攔截不正確登入訊息，我們必須在router.js做更進一步處理
 router.beforeEach(async (to, from) => {
     // 看看 to 和 from 兩個 arguments 會吐回什麼訊息
-    console.log("to: ", to);
-    console.log("from: ", from);
+    // console.log("to: ", to);
+    // console.log("from: ", from);
 
     store.commit("setRedirect", from.name);
 
     // 目的路由在meta上是否有設置requireAuth: true
     if (to.meta.requireAuth) {
-        // 獲取Cookies當中的login資訊並取得token
-        // const info = Cookies.get("login");
+
         const isLogin = store.state.isLogin;
 
         if (isLogin) {
-            // const token = JSON.parse(info).token;
-            const userDate = store.state.userData;
-            
-            // 如果token不為空，且確實有這個欄位則讓路由變更
-            if (userDate.name == "" || userDate.name === undefined) {
-                // 未通過則導回login頁面
+            // const userDate = store.state.userData;
+            const token = localStorage.getItem("token");
+            axios({
+                url: "/api/auth/verify",
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            }).then(res => {
+                if (res.status == 200) {
+                    if (res.data.status == "Success") {
+                        localStorage.setItem("token", res.data.data);
+                        store.commit("setRedirect", "");
+                    } else {
+                        localStorage.setItem("token", "");
+                        return { name: "Login" };
+                    }
+                } else {
+                    localStorage.setItem("token", "");
+                    return { name: "Login" };
+                }
+            }).catch(() => {
+                localStorage.setItem("token", "");
                 return { name: "Login" };
-            } else {
-                store.commit("setRedirect", "");
-            }
+            });
         } else {
+            localStorage.setItem("token", "");
             return { name: "Login" };
         }
     }

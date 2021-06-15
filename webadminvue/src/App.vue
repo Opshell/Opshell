@@ -1,15 +1,15 @@
 <template>
-    <div class="app" :class="{login: isLogin}">
+    <div class="app" :class="{ login: isLogin }">
         <div class="popupBlock"></div>
 
         <div class="featuresBlock">
             <!-- <transition name="blackHole" mode="out-in"> -->
-                <Account v-if="isLogin"></Account>
-                <Login v-else></Login>
+            <Account v-if="isLogin"></Account>
+            <Login v-else></Login>
             <!-- </transition> -->
 
             <!-- <transition name="blackHole" mode="out-in"> -->
-                <Nav v-if="isLogin"></Nav>
+            <Nav v-if="isLogin"></Nav>
             <!-- </transition> -->
         </div>
 
@@ -17,12 +17,9 @@
             <header class="headerBlock">
                 <h1 class="breadcrumbs">
                     <transition-group name="verbatim">
-                    <span
-                        v-for="item in pageData.title"
-                        v-bind:key="item"
-                    >
-                        {{ item }}
-                    </span>
+                        <span v-for="(item, i) in pageData.title" v-bind:key="i">
+                            {{ item }}
+                        </span>
                     </transition-group>
                 </h1>
                 <div class="btnBox"></div>
@@ -44,9 +41,7 @@
 </template>
 
 <script>
-    import axios from "axios";
-    
-    import { mapState } from 'vuex';
+    import { mapState } from "vuex";
     import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";
 
@@ -74,13 +69,13 @@
             // },
         },
         computed: mapState([
-            'isLogin',
-            'isLoading',
-            'userData',
-            'pageData',
+            "isLogin",
+            "isLoading",
+            "userData",
+            "pageData",
             // isLogin(){ // 取得共用狀態(是否登入)
             //     return this.$store.state.isLogin;
-            // }, 
+            // },
         ]),
     };
 </script>
@@ -98,41 +93,43 @@
         text-align: center;
         color: #eee;
     }
-    .app{
+    .app {
         display: flex;
         align-items: center;
         @include setSize(100%, 100vh);
 
-        &.login{
-            .featuresBlock{ width: 200px; }
-            .viewBlock{
+        &.login {
+            .featuresBlock {
+                width: 200px;
+            }
+            .viewBlock {
                 @include setSize(100%, 100%);
                 padding: 0 15px;
             }
         }
     }
 
-    .featuresBlock{
+    .featuresBlock {
         flex-shrink: 0;
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         background: $colorBack2;
         @include setSize(100%, 100%);
 
-        transition: .15s $cubic-FiSo;
+        transition: 0.15s $cubic-FiSo;
     }
-    .viewBlock{
+    .viewBlock {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         @include setSize();
         box-sizing: border-box;
 
-        transition: .3s $cubic-FiSo .08s;
+        transition: 0.3s $cubic-FiSo 0.08s;
         overflow: hidden;
-        .headerBlock{
+        .headerBlock {
             flex-shrink: 0;
             display: flex;
             align-items: flex-end;
@@ -143,12 +140,12 @@
             box-sizing: border-box;
             border-radius: 0 0 15px 15px;
             margin: 0 0 15px;
-            .breadcrumbs{
+            .breadcrumbs {
                 font-weight: normal;
                 font-size: 24px;
             }
         }
-        .contentBlock{
+        .contentBlock {
             flex: 1;
             background: $colorBack2;
             padding: 20px;
@@ -156,14 +153,16 @@
             box-shadow: $bascShadow;
             overflow: hidden;
         }
-        .footerBlock{
+        .footerBlock {
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 10px;
             @include setSize(100%, 50px);
-            .text + .text{margin: 0 0 0 20px;}
+            .text + .text {
+                margin: 0 0 0 20px;
+            }
         }
     }
 </style>

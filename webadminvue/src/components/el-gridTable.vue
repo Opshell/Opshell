@@ -1,6 +1,6 @@
 <template>
     <div class="gridBlock" role="table">
-        <template v-for="item in list" >
+        <template v-for="item in list">
             <div class="gridBox" v-for="(val, key) in item" :key="val" :class="key">
                 <span class="key">{{ key }}</span>
                 <span class="value">{{ val }}</span>
@@ -10,33 +10,33 @@
 </template>
 
 <script>
-    export default { 
+    export default {
         name: "elGridTable",
         props: {
             value: {},
         },
         data: function () {
             return {
-                list: {}
+                list: {},
             };
         },
         mounted() {
             this.list = JSON.parse(JSON.stringify(this.value));
         },
-        watch:{
-            value:{
-                handler :function(v){
+        watch: {
+            value: {
+                handler: function (v) {
                     this.list = JSON.parse(JSON.stringify(v));
                 },
                 deep: true,
-            }
-        }
+            },
+        },
     };
 </script>
 
 <style scoped lang="scss">
-    .gridBlock{
-        .gridBox{
+    .gridBlock {
+        .gridBox {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -44,13 +44,10 @@
         }
     }
 
-    .gridBox{
-        .title{
-
+    .gridBox {
+        .title {
         }
-        .value{
-
+        .value {
         }
     }
-
 </style>

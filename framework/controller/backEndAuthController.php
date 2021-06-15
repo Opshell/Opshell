@@ -24,7 +24,6 @@ class backEndAuthController extends Controller
         switch ($action) {
             case 'login':
                 $data = $this->backEndLogin($inputData);
-
                 break;
             default:
                 # code...
@@ -40,12 +39,16 @@ class backEndAuthController extends Controller
         $user = 'Opshell';
         $pass = 'pass';
 
+        $userParams = [
+            'uid' => 1,
+            'user'=> $user,
+            'auth' => 0
+        ];
 
+        $JWT = jwtCreat($userParams);
+        return $JWT;
 
-
-
-
-        return 'sjhnRr3yF21ah_E65c9fl';
+        $signKey = 'sjhnRr3yF21ah_E65c9fl';
     }
 }
 ?>

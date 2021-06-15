@@ -6,7 +6,7 @@
 
         <div class="btnBox">
             <h2 class="text">{{ userData.name }}</h2>
-            <elBtn @click="logout" text="" title="登出"/>
+            <elBtn @click="logout" text="" title="登出" />
         </div>
     </article>
 </template>
@@ -31,10 +31,11 @@
                 this.$router.push({ name: "Login" });
             },
         },
-        computed: mapState([// 批量載入vuex state
-            'isLogin',
-            'isLoading',
-            'userData',
+        computed: mapState([
+            // 批量載入vuex state
+            "isLogin",
+            "isLoading",
+            "userData",
         ]),
     };
 </script>
@@ -49,10 +50,10 @@
         border-bottom: 5px solid $colorBack;
         box-sizing: border-box;
         margin: 0 auto;
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, .08);
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.08);
 
         color: $colorMain;
-        .logoBox{
+        .logoBox {
             background: #eee;
             @include setSize(90px, 90px);
             padding: 10px;
@@ -61,19 +62,22 @@
             box-sizing: border-box;
             margin: 0 0 10px;
             overflow: hidden;
-            box-shadow: $bascShadow,
-                        $bascShadow-in;
+            box-shadow: $bascShadow, $bascShadow-in;
 
-            .logo{ width: 100%; }
+            .logo {
+                width: 100%;
+            }
         }
 
         .btnBox {
             display: flex;
             justify-content: center;
             align-items: center;
-            
-            .text{ color: #000; }
-            .Btn{
+
+            .text {
+                color: #000;
+            }
+            .Btn {
                 flex-grow: 0;
                 @include setSize(20px, 20px);
                 padding: 0;

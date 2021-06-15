@@ -24,4 +24,12 @@ $config['database'] = array(
     )
 );
 
+
+// JWT 設定
+$config['jwtHeader'] = [  // JWT header
+    "typ" => "JWT",   //使用的type
+    "alg" => "HS256"  //使用的加密演算法
+];
+$config['jwtKeys'] = "eZ^w|m4|n].4Kw~"; // JWT簽章金鑰
+
 ?>

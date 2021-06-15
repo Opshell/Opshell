@@ -8,8 +8,7 @@ trait ClassInstanceTrait {
     /** 執行子體建構子
      *  ClassInstance constructor.
      */
-    protected function __construct()
-    {
+    protected function __construct(){
         if (method_exists(static::class, $this->constructMethodName)) {
             call_user_func(array(
                 $this,
@@ -21,8 +20,7 @@ trait ClassInstanceTrait {
     /** 實例獲取
      * @return static::$instance
      */
-    public static function getInstance()
-    {
+    public static function getInstance(){
         if (static::$instance === null) {
             static::$instance = new static();
         }

@@ -9,24 +9,25 @@
 
     export default {
         data() {
-            return { };
+            return {};
         },
-        components: { },
-        methods: { },
+        components: {},
+        methods: {},
         computed: {
-            ...mapState([// 批量載入vuex state
-                'userData',
-                'pageData',
+            ...mapState([
+                // 批量載入vuex state
+                "userData",
+                "pageData",
             ]),
-            newsId(){
+            newsId() {
                 return this.$route.params.newsId;
             },
-        }
+        },
     };
 </script>
 
 <style scoped lang="scss">
-    .text{
+    .text {
         color: #eee;
         font-size: 36px;
     }

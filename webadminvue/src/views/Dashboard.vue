@@ -9,21 +9,23 @@
 
     export default {
         data() {
-            return { };
+            return {};
         },
-        components: { },
-        mounted(){
-            fetch('/mapi')
-                .then(res => res.json())
-                .then(data => console.log(data));
+        components: {},
+        mounted() {
+            // const token = localStorage.getItem("token");
+            // this.axios({
+            //     url: "/api/dashboard/info",
+            //     method: "GET",
+            //     headers: { "Authorization": `Bearer ${token}` }
+            // }).then(res => console.log(res));
         },
-        methods: { },
-        computed: mapState([// 批量載入vuex state
+        methods: {},
+        computed: mapState([
+            // 批量載入vuex state
             "userData",
         ]),
     };
 </script>
 
-<style scoped lang="scss">
-  
-</style>
+<style scoped lang="scss"></style>

@@ -8,18 +8,18 @@
         </section>
 
         <form>
-            <elInput
-                v-model="loginForm.username"
-                placeholder="Username"
+            <elInput 
+                v-model="loginForm.username" 
+                placeholder="Username" 
             />
-            <elInput
-                v-model="loginForm.password"
-                type="password"
-                placeholder="Password"
+            <elInput 
+                v-model="loginForm.password" 
+                type="password" 
+                placeholder="Password" 
             />
-            <elInput
-                v-model="loginForm.verification"
-                placeholder="verification"
+            <elInput 
+                v-model="loginForm.verification" 
+                placeholder="verification" 
             />
             <div class="btnBox">
                 <elBtn @click="handleLogin" text="登入" />
@@ -58,58 +58,63 @@
                 const username = this.loginForm.username;
                 const password = this.loginForm.password;
 
-                if (username !== "" && password !== "") { // 登入成功
+                if (username !== "" && password !== "") {
+                    // 登入成功
                     let store = this.$store;
                     this.loginForm.verification = verification;
 
-                    this.authenticate(username, password)
-                    .then(auth => {
-                        if(auth.status){
-                            localStorage.setItem('token', auth.data);
+                    this.authenticate(username, password).then((auth) => {
+                        if (auth.status) {
+                            localStorage.setItem("token", auth.data);
                             store.commit("Signin");
                             store.commit("SetUser", this.loginForm);
 
-                            const redirect = (store.state.redirect == "" || store.state.redirect == undefined)? "Dashboard" : store.state.redirect;
+                            const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Dashboard" : store.state.redirect;
                             this.$router.push({ name: redirect });
-                        }else{
+                        } else {
                             console.log(auth.msg);
                         }
                     });
-                } else { // 登入失敗
+                } else {
+                    // 登入失敗
                     alert("帳號密碼不能為空");
                 }
             },
-            authenticate: async function(email, password) {
-                return await fetch('/api/backEndAuth/login', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password }),
+            authenticate: async function (email, password) {
+                return await this.axios({
+                    url:"/api/backEndAuth/login",
+                    method: "POST",
+                    data: { email, password },
+                    // headers: { 'Content-Type': 'application/json' },
                 })
-                .then(res => res.json())
-                .then(result => {
-                    if(result.status == "Success"){
+                .then((result) => {
+                    if (result.status == 200) {
                         return {
                             status: true,
-                            msg: '登入成功',
-                            data: result.data
-                        }
-                    }else{
+                            msg: "登入成功",
+                            data: result.data.data,
+                        };
+                    } else {
                         return {
                             status: false,
-                            msg: result.message,
-                            data: result.data
-                        }
+                            msg: result.data.message,
+                            data: result.data.data,
+                        };
                     }
                 })
-                .catch(() => {return false;});
+                .catch(() => {
+                    return false;
+                });
             },
             removeCookie() {
                 Cookies.remove("login");
             },
         },
-        computed: mapState([// 批量載入vuex state
-            'isLogin',
-            'isLoading',
-            'userData',
+        computed: mapState([
+            // 批量載入vuex state
+            "isLogin",
+            "isLoading",
+            "userData",
         ]),
     };
 </script>
@@ -125,17 +130,16 @@
         border-radius: 8px;
         box-sizing: border-box;
         margin: 0 auto;
-        box-shadow: 0 0 20px 1px rgba(0, 0, 0, .08);
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.08);
 
         color: $colorMain;
-
-        .logoBlock{
+        .logoBlock {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 0 0 15px;
-            .logoBox{
+            .logoBox {
                 background: #eee;
                 @include setSize(90px, 90px);
                 padding: 10px;
@@ -144,11 +148,10 @@
                 box-sizing: border-box;
 
                 overflow: hidden;
-                box-shadow: $bascShadow,
-                            $bascShadow-in;
+                box-shadow: $bascShadow, $bascShadow-in;
             }
-            .logo{ width: 100%; }
-            .title{color: #000;}
+            .logo { width: 100%; }
+            .title { color: #000; }
         }
 
         .input { margin: 0 0 10px; }

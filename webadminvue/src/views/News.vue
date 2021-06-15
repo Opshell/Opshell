@@ -19,24 +19,23 @@
             elTable,
         },
         mounted() {
-            fetch('/api/news/list') // /mapi/news/list/2
-                .then(res => res.json())
-                .then(data => {
-                    if(data.status == "Success"){
+            fetch("/api/news/list") // /mapi/news/list/2
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.status == "Success") {
                         this.list = data.data;
                     }
                 });
         },
-        methods: { },
+        methods: {},
         computed: {
-            ...mapState([// 批量載入vuex state
-                'userData',
-                'pageData',
+            ...mapState([
+                // 批量載入vuex state
+                "userData",
+                "pageData",
             ]),
-        }
+        },
     };
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
