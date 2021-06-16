@@ -1,14 +1,14 @@
 <?php
 namespace Controller;
 use Core\Controller;
-use Service\backEndAuthService;
+use Service\backEndService;
 
-class backEndAuthController extends Controller
+class backEndController extends Controller
 {
     private $_path = '';
 
     public function __construct(){
-        $this->backEndAuthService = backEndAuthService::getInstance();
+        $this->backEndService = backEndService::getInstance();
     }
 
     public function index(){

@@ -2,6 +2,7 @@
 
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Database\Schema as Schema;
 use Core\RESTful;
 // use Core\Response;
 

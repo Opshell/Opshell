@@ -82,7 +82,7 @@
             },
             authenticate: async function (email, password) {
                 return await this.axios({
-                    url:"/api/backEndAuth/login",
+                    url:"/api/backEnd/login",
                     method: "POST",
                     data: { email, password },
                     // headers: { 'Content-Type': 'application/json' },

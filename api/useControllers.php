@@ -1,4 +1,4 @@
 <?php
 
-use Controller\backEndAuthController;
+use Controller\backEndController;
 use Controller\newsController;
