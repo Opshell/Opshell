@@ -40,8 +40,12 @@ abstract class Repository extends Eloquent
     /** 生成資料表
      * @param String $SQL 
      */
-    public function creatTable($SQL = ""){
-        DB::statement($SQL);
+    public function creatTable($creatSQL = "", $repIntoSQL = ""){
+        DB::statement($creatSQL);
+
+        if(!empty($repIntoSQL)){
+            DB::insert($repIntoSQL);
+        }
     }
 
     /** 建立資料表 || 更新資料表欄位
