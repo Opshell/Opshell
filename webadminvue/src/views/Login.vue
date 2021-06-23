@@ -23,14 +23,15 @@
             />
             <div class="btnBox">
                 <elBtn @click="handleLogin" text="登入" />
-                <elBtn @click="removeCookie" text="忘記密碼" />
+                <elBtn text="忘記密碼" />
             </div>
         </form>
     </article>
 </template>
 
 <script>
-    import Cookies from "js-cookie";
+    // import Cookies from "js-cookie";
+    import { Base64 } from "js-base64";
     import { mapState } from "vuex";
 
     // import elImg from "../components/el-img.vue";
@@ -65,9 +66,13 @@
 
                     this.authenticate(username, password).then((auth) => {
                         if (auth.status) {
-                            localStorage.setItem("token", auth.data);
+                            localStorage.setItem("token", auth.data); // 紀錄token
+
+                            let data = auth.data.split('.'); // 解析使用者資料
+                            data = JSON.parse(Base64.decode(data[1])); 
+
                             store.commit("Signin");
-                            store.commit("SetUser", this.loginForm);
+                            store.commit("SetUser", data); // 記錄使用者資料
 
                             const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Dashboard" : store.state.redirect;
                             this.$router.push({ name: redirect });
@@ -80,20 +85,28 @@
                     alert("帳號密碼不能為空");
                 }
             },
-            authenticate: async function (email, password) {
+            authenticate: async function (username, password) {
                 return await this.axios({
                     url:"/api/backEnd/login",
                     method: "POST",
-                    data: { email, password },
+                    data: { username, password },
                     // headers: { 'Content-Type': 'application/json' },
                 })
                 .then((result) => {
                     if (result.status == 200) {
-                        return {
-                            status: true,
-                            msg: "登入成功",
-                            data: result.data.data,
-                        };
+                        if(result.data.status == 'Success'){
+                            return {
+                                status: true,
+                                msg: "登入成功",
+                                data: result.data.data,
+                            };
+                        }else{
+                            return {
+                                status: false,
+                                msg: result.data.message,
+                                data: result.data.data,
+                            };
+                        }
                     } else {
                         return {
                             status: false,
@@ -105,10 +118,7 @@
                 .catch(() => {
                     return false;
                 });
-            },
-            removeCookie() {
-                Cookies.remove("login");
-            },
+            }
         },
         computed: mapState([
             // 批量載入vuex state

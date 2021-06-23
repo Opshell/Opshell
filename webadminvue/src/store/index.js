@@ -36,8 +36,9 @@ export default createStore({
         },
         SetUser(state, userData) {
             // 記錄登入者資訊
-            state.userData.name = userData.username;
-            state.userData.auth = 0;
+            state.userData.user = userData.user;
+            state.userData.name = userData.name;
+            state.userData.auth = userData.auth;
         },
         setRedirect(state, redirect) {
             // 導向紀錄

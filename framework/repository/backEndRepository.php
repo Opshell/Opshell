@@ -4,8 +4,7 @@ use Core\Repository;
 
 class backEndRepository extends Repository
 {
-    public function construct()
-    {
+    public function construct(){
         $this->table = '_web_backEnd';
         $this->creatTableSQL();
     }
@@ -25,6 +24,41 @@ class backEndRepository extends Repository
             
         return $list;
     }
+
+    /** 取得後台會員資料
+     * @param String $user
+     * @return stdClass userData
+     */
+    public function getBackEndUser($user){
+        return $this->getBuilder('_sys_admin')
+            ->where('user', $user)
+        ->first();
+    }
+
+    /** 取得後台群組權限
+     * @param Int $gid
+     */
+    public function getGroupAuth($gid){
+        return $this->getBuilder('_sys_group')
+            ->where('id', $gid)
+        ->first();
+    }
+
+    /** 取得後台SideMenu
+     * @param Int $authLevel
+     * @param Int $parent // 階層
+     */
+    public function getSideMenu($authLevel, $parent){
+        return $this->getBuilder('_sys_section')
+            ->select('id', 'parent_id', 'title', 'hide_sub', 'link')
+            ->where('auth_view', '>=', $authLevel)
+            ->where('parent_id', $parent)
+            ->orderBy('sort')
+            ->orderBy('id', 'desc')
+        ->get();
+    }
+
+
 
     // 生成資料表
     public function creatTableSQL(){

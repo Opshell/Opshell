@@ -37,9 +37,11 @@
 
     // 權限檢查
     $auth = ($headers['authorization'])?? false;
+    $user = Null;
     if($auth){ 
         $auth = jwtVerify($auth); 
         $newToken = jwtCreat($auth['payload']);
+        $user = $auth['payload'];
     }
 
     if($auth || $action == 'login'){
@@ -71,12 +73,14 @@
                     $result['data'] = $action;
                     $result['message'] = 'Method is not exists.';
 
-                    $data = $class->api($action, $post);
+                    $data = $class->api($action, $post, $user);
                     if (!empty($data)) {
                         $httpStatusCode = 200;
-                        $result['status'] = 'Success';
-                        $result['message'] = 'Get data success.';
-                        $result['data'] = $data;
+                        $result['message'] = $data->message;
+                        if($data->status){
+                            $result['status'] = 'Success';
+                            $result['data'] = $data->data;
+                        }
                     }
                 }
             }

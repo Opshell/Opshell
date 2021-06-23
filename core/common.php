@@ -1,6 +1,6 @@
 <?php
 
-//自動加載類
+
 // 常用function 宣告
 function getip(){
     global $_SERVER;
@@ -82,4 +82,22 @@ if (!function_exists('getallheaders')) {
         }
         return $headers;
     }
+}
+
+/** 隨機生成N碼亂數
+ * @param Int $length = 12 // 碼數
+ * @param String $characters = 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ // 可使用字元
+ * @return String
+ */
+function randomStr($length = 12, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-+/*.^&|[]<>(){}@#%?!'){
+    if (!is_int($length) || $length < 0) {
+        return false;
+    }
+    $characters_length = strlen($characters) - 1;
+    $string = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $string .= $characters[mt_rand(0, $characters_length)];
+    }
+    return $string;
 }

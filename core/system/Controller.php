@@ -7,13 +7,13 @@ class Controller{
     protected $error;
     protected $ajax = false;
     protected $components = array();
-    protected $data = array();
-    protected $json = array(
-        'error' => false,
+    protected $data = [];
+    protected $result = [
+        'status' => false,
         'message' => '',
         'redirect' => '',
-        'result' => array()
-    );
+        'data' => []
+    ];
     public $output;
     public function __construct(){}
 
@@ -78,10 +78,11 @@ class Controller{
     }
 
     /**
-     * @param STRING $action 動作
-     * @param ARRAY $data 輸入資料 
+     * @param String $action 動作
+     * @param Array $data 輸入資料 
+     * @param Array $user 使用者資料(從JWT解析出來的)
      */
-    protected function api($action, $data){
+    protected function api($action, $data, $user){
         return Null;
     }
 }

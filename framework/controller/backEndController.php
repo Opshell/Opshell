@@ -20,35 +20,20 @@ class backEndController extends Controller
 
     
 
-    public function api($action, $inputData){
+    public function api($action, $inputData, $user){
         switch ($action) {
-            case 'login':
-                $data = $this->backEndLogin($inputData);
+            case 'login': // 後檯登入
+                $data = $this->backEndService->backEndLogin($inputData);
+                break;
+            case 'sidemenu': // 取得列表
+                $data = $this->backEndService->getSideMenu($user['auth']);
                 break;
             default:
                 # code...
                 break;
         }
 
-
         return $data;
-    }
-
-    // 後台登入
-    private function backEndLogin($inputData){
-        $user = 'Opshell';
-        $pass = 'pass';
-
-        $userParams = [
-            'uid' => 1,
-            'user'=> $user,
-            'auth' => 0
-        ];
-
-        $JWT = jwtCreat($userParams);
-        return $JWT;
-
-        $signKey = 'sjhnRr3yF21ah_E65c9fl';
     }
 }
 ?>

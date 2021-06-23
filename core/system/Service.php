@@ -4,6 +4,12 @@ namespace Core;
 abstract class Service
 {
     protected $Repository = null;
+    protected $result = [
+        'status' => false,
+        'message' => 'Incomplete parameters.',
+        'redirect' => '',
+        'data' => []
+    ];
 
     use ClassInstanceTrait{
         ClassInstanceTrait::__construct as private __tConstruct;

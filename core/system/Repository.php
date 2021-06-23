@@ -20,11 +20,19 @@ abstract class Repository extends Eloquent
     }
     public function __construct(){
         $this->builder = $this;
-
         $this->__tConstruct();
     }
     // 抽象方法 只要繼承Service 就需要有construct;
     abstract public function construct();
+
+    /** 建立builder
+     * @param String $table 資料庫名稱
+     * @return Eloquent/Builder
+     */
+    public function getBuilder($table){
+        $this->builder->setTable($table);
+        return $this->builder;
+    }
 
     public function getList(){
         return $this->builder

@@ -9,7 +9,7 @@
             <!-- </transition> -->
 
             <!-- <transition name="blackHole" mode="out-in"> -->
-            <Nav v-if="isLogin"></Nav>
+            <SideMenu v-if="isLogin"></SideMenu>
             <!-- </transition> -->
         </div>
 
@@ -44,15 +44,15 @@
     import { mapState } from "vuex";
     import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";
-
-    import Nav from "./views/block/nav.vue";
+    import SideMenu from "./views/block/_sideMenu.vue";
+    
     // import elBtn from "./components/el-button.vue";
 
     // @ is an alias to /src
     export default {
         name: "App",
         components: {
-            Nav,
+            SideMenu,
             Login,
             Account,
         },

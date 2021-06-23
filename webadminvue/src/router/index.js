@@ -28,7 +28,6 @@ const routes = [
         component: () => import("../views/NewsInfo.vue"),
         meta: { requireAuth: true },
     },
-
     {
         // Home
         name: "Home",
