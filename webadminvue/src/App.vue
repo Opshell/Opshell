@@ -14,16 +14,7 @@
         </div>
 
         <div v-if="isLogin" class="viewBlock">
-            <header class="headerBlock">
-                <h1 class="breadcrumbs">
-                    <transition-group name="verbatim">
-                        <span v-for="(item, i) in pageData.title" v-bind:key="i">
-                            {{ item }}
-                        </span>
-                    </transition-group>
-                </h1>
-                <div class="btnBox"></div>
-            </header>
+            <Header class="headerBlock"></Header>
 
             <section class="contentBlock">
                 <router-view v-slot="{ Component }">
@@ -45,6 +36,7 @@
     import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
+    import Header from "./views/block/_header.vue";
     
     // import elBtn from "./components/el-button.vue";
 
@@ -53,6 +45,7 @@
         name: "App",
         components: {
             SideMenu,
+            Header,
             Login,
             Account,
         },
@@ -84,7 +77,7 @@
     #app {
         display: flex;
         align-items: center;
-        background: #2c3e50;
+        background: $colorBack;
         @include setSize(100%, 100vh);
 
         font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -100,12 +93,10 @@
 
         &.login {
             .featuresBlock {
-                width: 200px;
+                width: 25%;
+                max-width: 300px;
             }
-            .viewBlock {
-                @include setSize(100%, 100%);
-                padding: 0 15px;
-            }
+            .viewBlock { @include setSize(100%, 100%); }
         }
     }
 
@@ -129,27 +120,11 @@
 
         transition: 0.3s $cubic-FiSo 0.08s;
         overflow: hidden;
-        .headerBlock {
-            flex-shrink: 0;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            background: $colorBack2;
-            @include setSize(100%, 80px);
-            padding: 10px 20px 20px;
-            box-sizing: border-box;
-            border-radius: 0 0 15px 15px;
-            margin: 0 0 15px;
-            .breadcrumbs {
-                font-weight: normal;
-                font-size: 24px;
-            }
-        }
+        
         .contentBlock {
             flex: 1;
-            background: $colorBack2;
+            background: #1b1b1b;
             padding: 20px;
-            border-radius: 15px;
             box-shadow: $bascShadow;
             overflow: hidden;
         }
@@ -158,6 +133,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #282828;
             font-size: 10px;
             @include setSize(100%, 50px);
             .text + .text {
