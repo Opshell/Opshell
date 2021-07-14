@@ -6,7 +6,7 @@
 
         <div class="btnBox">
             <h2 class="text">{{ userData.name }}</h2>
-            <elBtn @click="logout" text="" title="登出" />
+            <elBtn @click="logout" text="" title="登出" icon="icon-sign-out" />
         </div>
     </article>
 </template>
@@ -55,12 +55,12 @@
         color: $colorMain;
         .logoBox {
             background: #eee;
-            @include setSize(90px, 90px);
+            @include setSize(120px, 120px);
             padding: 10px;
             border: 5px solid #f3f3f3;
             border-radius: 50%;
             box-sizing: border-box;
-            margin: 0 0 10px;
+            margin: 10px 10px 25px;
             overflow: hidden;
             box-shadow: $bascShadow, $bascShadow-in;
 
@@ -75,14 +75,11 @@
             align-items: center;
 
             .text {
-                color: #000;
+                color: #fff;
             }
             .Btn {
+                @include setSize(40px, 40px);
                 flex-grow: 0;
-                @include setSize(20px, 20px);
-                padding: 0;
-                border: 3px solid $colorSubs;
-                border-radius: 50%;
                 margin: 0 0 0 10px;
             }
         }
