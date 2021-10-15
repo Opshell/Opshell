@@ -1,15 +1,16 @@
 <template>
     <div class="Btn" role="button" :title="title">
-        <svg v-if="icon != ''" class="sprite"> 
-            <use :xlink:href="'/sprite.svg#' + icon"/> 
-        </svg>
+        <elSvgIcon v-if="icon != ''" class="svgIcon" :name="icon"/>
         <span v-if="text != ''" class="text">{{ text }}</span>
     </div>
 </template>
 
 <script>
+    import elSvgIcon from "@/components/el-svgIcon.vue";
+
     export default {
         name: "elBtn",
+        components: { elSvgIcon },
         props: {
             title: {
                 type: String,
@@ -39,13 +40,13 @@
         padding: 10px; 
         color: #fff;
         cursor: pointer;
-        .sprite{
-            vertical-align: top;
-            fill: #fff;
+        .svgIcon{
+            fill: currentColor;
             @include setSize(100%, 100%);
             @extend %pm0;
             min-width: 12px;
             min-height: 12px;
+            overflow: hidden;
             transition: .3s ease-in-out;
             + .text{
                 margin: 0 0 0 15px; 
@@ -53,7 +54,7 @@
         }
 
         &:hover{
-            .sprite{
+            .svgIcon{
                 fill: $colorSubs;
             }
             color: $colorSubs;

@@ -50,22 +50,44 @@ class backEndService extends Service
 
         return (object)$this->result;
     }
-    
+
     /** 取得後台側邊Menu
-     * @param Array $user
+     * @param Int $auth
+     * @param Int $pid
      */
-    public function getSideMenu($auth = 3){
+    public function getSideMenu($auth = 3, $pid = 0){
         // 取最外層
         $this->result['status'] = true;
         $this->result['message'] = 'Getting success.';
-        $this->result['data'] = $this->Repository->getSideMenu($auth, 0)
+        $this->result['data'] = $this->Repository->getSideMenu($auth, $pid)
         ->map(function($e) use($auth){
-            $child = $this->Repository->getSideMenu($auth, $e->id);
-            $e->child = (!$child->isEmpty())? $child->toArray() : [];
+            $child = $this->getSideMenuRecursive($auth, $e->id);
+
+            if(!empty($child)){
+                $e->child = $child;
+            }
 
             return $e;
         })->toArray();
 
         return (object)$this->result;
+    }
+
+    /** Menu 遞迴
+     * @param Int $auth
+     * @param Int $pid
+     * @return Array $child
+     */
+    public function getSideMenuRecursive($auth = 3, $pid = 0){
+        return $this->Repository->getSideMenu($auth, $pid)
+        ->map(function ($e) use ($auth) {
+            $child = $this->getSideMenuRecursive($auth, $e->id);
+
+            if (!empty($child)) {
+                $e->child = $child;
+            }
+
+            return $e;
+        })->toArray();
     }
 }

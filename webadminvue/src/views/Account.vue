@@ -6,7 +6,7 @@
 
         <div class="btnBox">
             <h2 class="text">{{ userData.name }}</h2>
-            <elBtn @click="logout" text="" title="登出" icon="icon-sign-out" />
+            <elBtn @click="logout" text="" title="登出" icon="sign-out" />
         </div>
     </article>
 </template>

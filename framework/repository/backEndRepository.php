@@ -50,7 +50,7 @@ class backEndRepository extends Repository
      */
     public function getSideMenu($authLevel, $parent){
         return $this->getBuilder('_sys_section')
-            ->select('id', 'parent_id', 'title', 'hide_sub', 'link')
+            ->select('id', 'parent_id', 'title', 'icon', 'hide_sub', 'link')
             ->where('auth_view', '>=', $authLevel)
             ->where('parent_id', $parent)
             ->orderBy('sort')

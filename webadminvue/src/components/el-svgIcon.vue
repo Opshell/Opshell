@@ -1,5 +1,5 @@
 <template>
-    <svg class="svgIcon">
+    <svg>
         <use :xlink:href="`#${name}`" />
     </svg>
 </template>
@@ -17,10 +17,4 @@
     };
 </script>
 
-<style scoped lang="scss">
-    .svgIcon {
-        @include setSize(100%, 100%);
-        fill: currentColor !important;
-        overflow: hidden;
-    }
-</style>
+<style scoped lang="scss"></style>
