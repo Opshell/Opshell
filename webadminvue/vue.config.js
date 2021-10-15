@@ -18,7 +18,7 @@ module.exports = {
     indexPath: "router.php", // 輸出 index
     devServer: {
         // 代理伺服器
-        port: 1024,
+        port: 1025,
         proxy: {
             "/api": {
                 target: host, // 本機串接

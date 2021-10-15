@@ -96,13 +96,7 @@ a{
     text-decoration:none;
     @extend %baseFont;
 }
-.sprite{
-    fill: $colorMain;
-    vertical-align: top;
-    @include setSize(100%, 100%);
-    @extend %pm0;
-    transition: .3s ease-in-out;
-}
+
 h1,h2,h3,h4,h5,h6,p{margin: 0;}
 
 //font AWESOME
