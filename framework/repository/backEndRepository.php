@@ -142,5 +142,14 @@ class backEndRepository extends Repository
                 (4, 1, '網站設定', '_sys_config', '', '', 0, 0, 1, '/api/config/info', 3, 1),
                 (5, 1, '功能表單', '_sys_section', '', '', 0, 0, 1, '/api/section/info', 4, 1);";
         // $this->creatTable($creatSQL, $repInsertSQL);
+
+        // 預設Icon
+        $creatSQL = "CREATE TABLE IF NOT EXISTS `_sys_icon` (
+                `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '流水號',
+                `icon_name` varchar(255) NOT NULL DEFAULT 'config' COMMENT 'icon名稱',
+                PRIMARY KEY (`id`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci 
+                COMMENT='網站Icon';";
+        // $this->creatTable($creatSQL);
     }
 }

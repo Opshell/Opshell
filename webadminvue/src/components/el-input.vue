@@ -1,6 +1,5 @@
 <template>
-    <input v-if="disabled" :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input" disabled="disabled" />
-    <input v-else :type="type" :name="name" v-model="rawValue" :placeholder="placeholder" class="input" />
+    <input :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input" :disabled="disabled" />
 </template>
 
 <script>
@@ -11,8 +10,14 @@
                 type: String,
                 default: "text",
             },
-            name: {},
-            value: {},
+            name: {
+                type: String,
+                default: "",
+            },
+            value: {
+                type: String,
+                default: "",
+            },
             placeholder: {
                 type: String,
                 default: "",

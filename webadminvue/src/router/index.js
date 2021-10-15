@@ -17,6 +17,12 @@ const routes = [
         meta: { requireAuth: true },
     },
     {
+        name: "IconList",
+        path: "/iconList",
+        component: () => import("../views/IconList.vue"),
+        meta: { requireAuth: true },
+    },
+    {
         name: "News",
         path: "/news",
         component: () => import("../views/News.vue"),
@@ -68,7 +74,6 @@ router.beforeEach(async (to, from) => {
 
     // 目的路由在meta上是否有設置requireAuth: true
     if (to.meta.requireAuth) {
-
         const isLogin = store.state.isLogin;
 
         if (isLogin) {
@@ -77,24 +82,26 @@ router.beforeEach(async (to, from) => {
             axios({
                 url: "/api/auth/verify",
                 method: "GET",
-                headers: { "Authorization": `Bearer ${token}` }
-            }).then(res => {
-                if (res.status == 200) {
-                    if (res.data.status == "Success") {
-                        localStorage.setItem("token", res.data.data);
-                        store.commit("setRedirect", "");
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((res) => {
+                    if (res.status == 200) {
+                        if (res.data.status == "Success") {
+                            localStorage.setItem("token", res.data.data);
+                            store.commit("setRedirect", "");
+                        } else {
+                            localStorage.setItem("token", "");
+                            return { name: "Login" };
+                        }
                     } else {
                         localStorage.setItem("token", "");
                         return { name: "Login" };
                     }
-                } else {
+                })
+                .catch(() => {
                     localStorage.setItem("token", "");
                     return { name: "Login" };
-                }
-            }).catch(() => {
-                localStorage.setItem("token", "");
-                return { name: "Login" };
-            });
+                });
         } else {
             localStorage.setItem("token", "");
             return { name: "Login" };

@@ -62,7 +62,7 @@
             color: #fff;
             line-height: 0.8;
         }
-        .CRUDBox{
+        .CRUDBox {
             display: flex;
             min-width: 20%;
         }

@@ -5,8 +5,11 @@
 // }else if (model == 'dev') {
 //     host = 'http://localhost:8090'
 // }
-let host = "http://www.opshell/api/";
+
 // let host = 'http://127.0.0.1/opshell/WebAdmin/api/';
+
+const path = require("path");
+const host = "http://www.opshell/api/";
 
 module.exports = {
     publicPath: process.env.NODE_ENV === "production" ? "/webadmin/" : "/webadminvue/", // cli 根目錄
@@ -44,5 +47,31 @@ module.exports = {
                 prependData: `@import "@/assets/scss/stylesheet.scss";`, // 全域 Component 引用 基礎SCSS
             },
         },
+    },
+    chainWebpack: (config) => {
+        const dir = path.resolve(__dirname, "src/assets/icons"); // 路徑
+
+        config.module.rules.delete("svg"); // 刪除預設的svg配置
+        config.module
+            .rule("svg-sprite-loader")
+            .test(/\.svg$/) // 符合正則 副檔名為SVG的檔案
+            .include.add(dir).end() // 包含的資料夾 exclude 則是不包含的資料夾
+            .use("svg-sprite-loader")
+            .loader("svg-sprite-loader")
+            .options({ symbolId: "[name]" })
+            .end();
+
+        // const svgRule = config.module.rule("svg");
+        //     svgRule.uses.clear();
+        //     svgRule
+        //     .use("svg-sprite-loader")
+        //     .loader("svg-sprite-loader")
+        //     .options({
+        //         symbolId: "icon-[name]",
+        //         include: [dir]
+        //     });
+
+        // 修改 images-loader 配置 => 排除icon資料夾
+        config.module.rule("images").exclude.add(dir).end();
     },
 };

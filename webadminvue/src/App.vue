@@ -37,7 +37,7 @@
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
     import Header from "./views/block/_header.vue";
-    
+
     // import elBtn from "./components/el-button.vue";
 
     // @ is an alias to /src
@@ -96,7 +96,9 @@
                 width: 25%;
                 max-width: 300px;
             }
-            .viewBlock { @include setSize(100%, 100%); }
+            .viewBlock {
+                @include setSize(100%, 100%);
+            }
         }
     }
 
@@ -120,7 +122,7 @@
 
         transition: 0.3s $cubic-FiSo 0.08s;
         overflow: hidden;
-        
+
         .contentBlock {
             flex: 1;
             background: #1b1b1b;

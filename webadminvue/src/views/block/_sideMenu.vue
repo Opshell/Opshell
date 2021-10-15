@@ -7,22 +7,22 @@
         <router-link class="link" to="/newsinfo/testparam1">News-1</router-link> -->
 
         <template v-for="(item, i) in list">
-            <div v-if="item.child.length > 0" 
-                class="link" 
-                :class="{box: item.child.length > 0, open: !item.hide_sub}" 
-                :key="'i'+item.id"
-                :style="{height: item.height+'px'}"
-                @click="openChild(i, item.child.length)" 
+            <div
+                v-if="item.child.length > 0"
+                class="link"
+                :class="{ box: item.child.length > 0, open: !item.hide_sub }"
+                :key="'i' + item.id"
+                :style="{ height: item.height + 'px' }"
+                @click="openChild(i, item.child.length)"
             >
                 <span class="title">{{ item.title }}</span>
                 <div class="childBox">
-                    <router-link v-for="(child, ci) in item.child" class="link" :to="child.link" :key="'c'+ci">{{ child.title }}</router-link>
+                    <router-link v-for="(child, ci) in item.child" class="link" :to="child.link" :key="'c' + ci">{{ child.title }}</router-link>
                 </div>
             </div>
 
-            <router-link v-else class="link" :to="item.link" :key="'i'+item.id">{{ item.title }}</router-link>
+            <router-link v-else class="link" :to="item.link" :key="'i' + item.id">{{ item.title }}</router-link>
         </template>
-
     </transition-group>
 </template>
 
@@ -34,42 +34,42 @@
         components: {},
         data: function () {
             return {
-                list: {}
+                list: {},
             };
         },
         mounted: function () {
             const token = localStorage.getItem("token");
             this.axios({
-                url:"/api/backEnd/sidemenu",
+                url: "/api/backEnd/sidemenu",
                 method: "GET",
                 data: {},
-                headers: { "Authorization": `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
             })
-            .then((result) => {
-                if (result.status == 200) {
-                    this.list = result.data.data;
-                } else {
-                    return {
-                        status: false,
-                        msg: result.data.message,
-                        data: result.data.data,
-                    };
-                }
-            })
-            .catch(() => {
-                return false;
-            });
+                .then((result) => {
+                    if (result.status == 200) {
+                        this.list = result.data.data;
+                    } else {
+                        return {
+                            status: false,
+                            msg: result.data.message,
+                            data: result.data.data,
+                        };
+                    }
+                })
+                .catch(() => {
+                    return false;
+                });
         },
         methods: {
-            openChild: function(i, length){
+            openChild: function (i, length) {
                 this.list[i].hide_sub = !this.list[i].hide_sub;
-                if(this.list[i].hide_sub){
+                if (this.list[i].hide_sub) {
                     this.list[i].height = 40;
-                }else{
+                } else {
                     this.list[i].height = 40 * (length + 1);
                 }
                 console.log(this.list[i].height);
-            }
+            },
         },
         computed: mapState(["isLogin", "isLoading", "userData"]),
     };
@@ -98,20 +98,22 @@
             font-weight: bold;
             z-index: 1;
             overflow: hidden;
-            &.box{
+            &.box {
                 justify-content: flex-start;
-                transition:  .3s $cubic-FiSo;
-                &.open{ height: auto; }
+                transition: 0.3s $cubic-FiSo;
+                &.open {
+                    height: auto;
+                }
             }
-            
-            .title{
+
+            .title {
                 flex-shrink: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 height: 40px;
             }
-            .childBox{
+            .childBox {
                 background: #333;
             }
 
