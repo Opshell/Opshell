@@ -12,8 +12,9 @@
                 <span class="text">{{ item.title }}</span>
                 <elSvgIcon class="icon" name="square-plus" />
             </div>
-            <div class="linkBox" :style="{ 'height': item.height + 'px' }">
-                <elTreeItem :menu="item.child" :depth="depth+1" />
+            <!-- <div class="linkBox" :style="{ 'height': item.height + 'px' }"> -->
+            <div class="linkBox" :style="{ 'height': boxHeight + 'px' }">
+                <elTreeItem :menu="item.child" :depth="depth+1" @calc-height="calcHeight"/>
             </div>
         </div>
         <router-link 
@@ -45,6 +46,7 @@
         data: function () {
             return {
                 list: {},
+                boxHeight: 0
             };
         },
         mounted() {
@@ -54,22 +56,25 @@
             openChild: function (i, length) {
                 this.list[i].hide_sub = !this.list[i].hide_sub;
                 if (this.list[i].hide_sub) {
-                    if(this.depth > 1){
-                        this.$emit("minusHeight", this.list[i].height);
-                    }
-                    this.list[i].height = 0;
+                //     // if(this.depth > 1){
+                        console.log(this.boxHeight);
+                        this.$emit("calcHeight", -this.boxHeight);
+                //     // }
+                //     this.list[i].height = 0;
+                    this.boxHeight = 0;
                 } else {
-                    this.list[i].height = 40 * length;
-                    if(this.depth > 1){
-                        this.$emit("plusHeight", this.list[i].height);
-                    }
+                //     this.list[i].height = 40 * length;
+                //     // if(this.depth > 1){
+                        console.log(this.boxHeight);
+                        this.$emit("calcHeight", this.boxHeight);
+                //     // }
+                    this.boxHeight = 40 * length;
                 }
             },
-            minusHeight: function (){
-
-            },
-            plusHeight: function (){
-
+            calcHeight: function (height){
+                console.log(this.boxHeight); 
+                console.log(height); 
+                this.boxHeight = this.boxHeight + height;
             }
         },
         watch: {

@@ -8,9 +8,9 @@
         </section>
 
         <form>
-            <elInput v-model="loginForm.username" placeholder="Username" :disabled="true" />
+            <elInput v-model="loginForm.username" placeholder="Username" />
             <elInput v-model="loginForm.password" type="password" placeholder="Password" />
-            <elInput v-model="loginForm.verification" placeholder="verification" />
+            <elInput v-model="loginForm.verification" placeholder="verification" :disabled="true" />
             <div class="btnBox">
                 <elBtn @click="handleLogin" text="登入" />
                 <elBtn text="忘記密碼" />

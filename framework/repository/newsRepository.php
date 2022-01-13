@@ -10,7 +10,7 @@ class newsRepository extends Repository
         $this->creatTable($this->creatTableSQL());
     }
 
-    public function getList(){
+    public function getList($cid){
         $cid = ($_GET['cid'])?? 0;
 
         if (!empty($cid)) {

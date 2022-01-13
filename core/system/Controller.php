@@ -6,7 +6,7 @@ class Controller{
     protected $template;
     protected $error;
     protected $ajax = false;
-    protected $components = array();
+    protected $components = [];
     protected $data = [];
     protected $result = [
         'status' => false,
