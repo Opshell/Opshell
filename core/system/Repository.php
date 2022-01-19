@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
 
 use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) 使用
@@ -7,8 +8,7 @@ use Illuminate\Database\Capsule\Manager as DB; // DB 使用 主要為了執行�
 // use Illuminate\Database\Schema\Blueprint;
 // use Illuminate\Support\Facades\Schema;
 
-abstract class Repository extends Eloquent
-{
+abstract class Repository extends Eloquent {
     // Eloquent 設定
     protected $builder = Null;
     protected $table = ''; // 連結的資料表
@@ -18,7 +18,7 @@ abstract class Repository extends Eloquent
     use ClassInstanceTrait {
         ClassInstanceTrait::__construct as private __tConstruct;
     }
-    public function __construct(){
+    public function __construct() {
         $this->builder = $this;
         $this->__tConstruct();
     }
@@ -29,29 +29,29 @@ abstract class Repository extends Eloquent
      * @param String $table 資料庫名稱
      * @return Eloquent/Builder
      */
-    public function getBuilder($table){
+    public function getBuilder($table) {
         $this->builder->setTable($table);
         return $this->builder;
     }
 
-    public function getList(){
+    public function getList() {
         return $this->builder
             ->get()
-        ->toArray();
+            ->toArray();
     }
-    public function getInfo($id){
+    public function getInfo($id) {
         return $this->builder
             ->find($id)
-        ->toArray();
+            ->toArray();
     }
 
     /** 生成資料表
-     * @param String $SQL 
+     * @param String $SQL
      */
-    public function creatTable($creatSQL = "", $repIntoSQL = ""){
+    public function creatTable($creatSQL = "", $repIntoSQL = "") {
         DB::statement($creatSQL);
 
-        if(!empty($repIntoSQL)){
+        if (!empty($repIntoSQL)) {
             DB::insert($repIntoSQL);
         }
     }
@@ -59,11 +59,11 @@ abstract class Repository extends Eloquent
     /** 建立資料表 || 更新資料表欄位
      * @param String $tableName // 資料表名稱
      */
-    public function creupTable($tableName){
+    public function creupTable($tableName) {
         // if (!Schema::hasTable($tableName)) {
-            // Schema::create($tableName, function (Blueprint $table) {
-            //     $table->increments('id');
-            // });
+        // Schema::create($tableName, function (Blueprint $table) {
+        //     $table->increments('id');
+        // });
         // } else {
         //     Schema::table($tableName, function ($table) {
         //         $table->string('email');
