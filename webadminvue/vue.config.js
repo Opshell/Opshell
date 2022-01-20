@@ -16,6 +16,7 @@ module.exports = {
     outputDir: "../WebAdmin/", // 輸出 目錄
     // indexPath: "index.php", // 輸出 index
     indexPath: "router.php", // 輸出 index
+    runtimeCompiler: true, // [HMR] Waiting for update signal from WDS...
     devServer: {
         // 代理伺服器
         port: 1025,

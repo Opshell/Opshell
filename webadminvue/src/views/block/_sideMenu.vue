@@ -1,6 +1,6 @@
 <template>
     <nav class="sideMenu">
-        <elTreeItem :menu="list" />
+        <elTreeItem :menu="list" :child_count="list.length" />
     </nav>
 </template>
 
@@ -27,7 +27,6 @@
             })
                 .then((result) => {
                     if (result.status == 200) {
-                        console.log(result.data.data);
                         this.list = result.data.data;
                     } else {
                         return {
@@ -52,7 +51,7 @@
         flex-direction: column;
         background: $colorBack2;
         @include setSize(100%, 100%);
-        padding: 00;
+        padding: 0;
         box-sizing: border-box;
     }
 </style>

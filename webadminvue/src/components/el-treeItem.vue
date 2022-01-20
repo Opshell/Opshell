@@ -6,15 +6,21 @@
         >
             <div class="link"
                 :style="{ 'padding-left': depth * 1.5 + 'em' }"
-                @click="openChild(i, item.child.length)"
+                @click="openChild(i)"
             >
                 <elSvgIcon class="icon" name="folder" />
                 <span class="text">{{ item.title }}</span>
                 <elSvgIcon v-if="item.hide_sub" class="icon" name="square-plus" />
                 <elSvgIcon v-else class="icon" name="square-minus" />
             </div>
-            <div class="linkBox" :style="{ 'height': boxHeight + 'px' }">
-                <elTreeItem :menu="item.child" :depth="depth+1" @calc-height="calcHeight"/>
+            <div class="linkBox" :style="{ 'height': boxHeight + 'px'}">
+                <elTreeItem
+                    :menu="item.child"
+                    :depth="depth+1"
+                    :hide_sub="(item.hide_sub)? true : false"
+                    :child_count="item.child.length"
+                    @calc-height="calcHeight"
+                />
             </div>
         </div>
         <router-link
@@ -36,60 +42,71 @@
     export default {
         name: "elTreeItem",
         components: { elSvgIcon },
+        emits: [ "calcHeight" ],
         props: {
-            menu: {},
-            depth: {
+            menu: {}, //
+            depth: { // 計算後推用
+                type: Number,
+                default: 0
+            },
+            hide_sub:{ // 是否收闔
+                type: Boolean,
+                default: true
+            },
+            child_count:{ // 子層數量
                 type: Number,
                 default: 0
             }
         },
-        // emits: [ 'calcHeight' ],
         data: function () {
             return {
                 list: {},
-                boxHeight: 0
+                optionHeight: 40,
+                boxHeight: 0,
             };
         },
         mounted() {
             this.list = this.menu;
         },
         methods: {
-            openChild: function (i, length) {
-                this.list[i].hide_sub = !this.list[i].hide_sub; // hide_sub == 1 的時候  是收闔的
-                if (this.list[i].hide_sub) { // 收闔
-                    this.$emit("calcHeight", -this.boxHeight);
-                    this.boxHeight = 0;
-
-                    this.rcsCloseChild(this.list);
-                } else { // 打開
-                    this.boxHeight = 40 * length;
-                    this.$emit("calcHeight", this.boxHeight);
+            openChild: function (i) {
+                this.list[i].hide_sub = !this.list[i].hide_sub; // hide_sub == 1 的時候，是收闔的
+            },
+            calcHeight: function (boxh) {
+                this.boxHeight += boxh;
+                if(this.depth != 0){
+                    this.$emit("calcHeight", boxh);
                 }
             },
-            calcHeight: function (height) {
-                this.boxHeight = this.boxHeight + Number(height);
-            },
+            /** 遞迴關閉下層選單
+             * @param {list} Array // 要檢查的Array
+             */
             rcsCloseChild: function (list) {
                 let ths = this;
                 list.forEach(function(el){
                     if(el.child != undefined){
-                        el.hide_sub == 1;
+                        el.hide_sub = true;
                         ths.rcsCloseChild(el.child);
                     }
                 });
             }
         },
+        computed: {
+            // bh() {
+            //     return `height: ${(!this.hide_sub)? this.child_count * 40 : 0}px`;
+            // }
+        },
         watch: {
             menu: {
                 handler: function (v) {
                     this.list = v;
-                    console.log(this.list);
-                    this.list.forEach(el => {
-                        if (el.child != undefined) {
-                            console.log(el.child.hide_sub);
-                            // el.child.hide_sub = 0;
-                        }
-                    });
+                },
+                deep: true,
+            },
+            hide_sub: {
+                handler: function (v) {
+                    if(v){ this.rcsCloseChild(this.list); }
+                    this.$emit("calcHeight", (!v)? this.child_count * this.optionHeight : -this.child_count * this.optionHeight);
                 },
                 deep: true,
             }
