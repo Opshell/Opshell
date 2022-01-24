@@ -6,9 +6,10 @@
     "autoload": {
         "psr-4": {
             "Core\\": "core/system",
-            "Service\\": "framework/service",
             "Controller\\": "framework/controller",
-            "Repository\\": "framework/repository"
+            "Service\\": "framework/service",
+            "Repository\\": "framework/repository",
+            "Model\\": "framework/model"
         }
     },
     "require-dev": {

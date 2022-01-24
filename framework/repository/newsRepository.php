@@ -1,16 +1,16 @@
 <?php
 namespace Repository;
 use Core\Repository;
+use Model\News;
 
 class newsRepository extends Repository
 {
-    public function construct()
-    {
-        $this->table = '_web_news';
-        $this->creatTable($this->creatTableSQL());
+    public function construct() {
+        $this->builder = News::query();
+        $this->creatTable($this->createSQL());
     }
 
-    public function getList($cid){
+    public function getList($cid) {
         $cid = ($_GET['cid'])?? 0;
 
         if (!empty($cid)) {
@@ -22,15 +22,13 @@ class newsRepository extends Repository
             ->orderBy('sort')
             ->get()
         ->toArray();
-            
+
         return $list;
     }
 
-
-
     // 生成資料表
-    public function creatTableSQL(){
-        $SQL = "CREATE TABLE IF NOT EXISTS `" . $this->table . "` (
+    public function createSQL(){
+        $SQL = "CREATE TABLE IF NOT EXISTS `".$this->table."` (
                     `id` INT NOT NULL AUTO_INCREMENT ,
                     `unique_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '唯一碼' ,
                     `category_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '最新消息分類' ,
