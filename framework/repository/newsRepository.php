@@ -5,25 +5,16 @@ use Model\News;
 
 class newsRepository extends Repository
 {
-    public function construct() {
-        $this->builder = News::query();
-        $this->creatTable($this->createSQL());
-    }
-
-    public function getList($cid) {
-        $cid = ($_GET['cid'])?? 0;
-
-        if (!empty($cid)) {
-            $this->builder = $this->builder->where('category_id', $cid);
+    private static $_instance = null;
+    public static function getInstance():newsRepository {
+        if( self::$_instance === null ){
+            self::$_instance = new self();
         }
-
-        $list = $this->builder
-            ->where('enable', 1)
-            ->orderBy('sort')
-            ->get()
-        ->toArray();
-
-        return $list;
+        return self::$_instance;
+    }
+    public function construct() {
+        // $this->builder = News::query();
+        // $this->creatTable($this->createSQL());
     }
 
     // 生成資料表

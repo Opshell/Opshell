@@ -20,11 +20,11 @@ trait ClassInstanceTrait {
     /** 實例獲取
      * @return static::$instance
      */
-    public static function getInstance() {
-        if (static::$instance === null) {
-            static::$instance = new static();
-        }
+    // public static function getInstance() {
+    //     if (static::$instance === null) {
+    //         static::$instance = new static();
+    //     }
 
-        return static::$instance;
-    }
+    //     return static::$instance;
+    // }
 }

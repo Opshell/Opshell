@@ -5,20 +5,20 @@
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
-return [
-    'Symfony\\Polyfill\\Php72\\' => [ $vendorDir . '/symfony/polyfill-php72' ],
-    'Symfony\\Polyfill\\Mbstring\\' => [ $vendorDir . '/symfony/polyfill-mbstring' ],
-    'Symfony\\Polyfill\\Intl\\Normalizer\\' => [ $vendorDir . '/symfony/polyfill-intl-normalizer' ],
-    'Symfony\\Polyfill\\Intl\\Idn\\' => [ $vendorDir . '/symfony/polyfill-intl-idn' ],
-    'Symfony\\Polyfill\\Iconv\\' => [ $vendorDir . '/symfony/polyfill-iconv' ],
-    'Symfony\\Contracts\\Translation\\' => [ $vendorDir . '/symfony/translation-contracts' ],
-    'Symfony\\Component\\Translation\\' => [ $vendorDir . '/symfony/translation' ],
-    'Egulias\\EmailValidator\\' => [ $vendorDir . '/egulias/email-validator/src' ],
-    'Doctrine\\Common\\Lexer\\' => [ $vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer' ],
-    '' => [ $vendorDir . '/nesbot/carbon/src' ],
-    'Core\\' => [ $baseDir . '/core/system' ],
-    'Controller\\' => [ $baseDir . '/framework/Controller' ],
-    'Service\\' => [ $baseDir . '/framework/Service' ],
-    'Repository\\' => [ $baseDir . '/framework/Repository' ],
-    'Model\\' => [ $baseDir . '/framework/Model' ],
-];
+return array(
+    'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Intl\\Normalizer\\' => array($vendorDir . '/symfony/polyfill-intl-normalizer'),
+    'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
+    'Symfony\\Polyfill\\Iconv\\' => array($vendorDir . '/symfony/polyfill-iconv'),
+    'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
+    'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
+    'Service\\' => array($baseDir . '/framework/service'),
+    'Repository\\' => array($baseDir . '/framework/repository'),
+    'Model\\' => array($baseDir . '/framework/model'),
+    'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
+    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
+    'Core\\' => array($baseDir . '/core/system'),
+    'Controller\\' => array($baseDir . '/framework/controller'),
+    '' => array($vendorDir . '/nesbot/carbon/src'),
+);

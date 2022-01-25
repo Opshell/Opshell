@@ -6,14 +6,14 @@ use Illuminate\Database\Capsule\Manager as DB; // DB 使用主要為了執行原
 abstract class Repository
 {
     protected $builder = Null;
-
     use ClassInstanceTrait {
         ClassInstanceTrait::__construct as private __tConstruct;
     }
     public function __construct() {
         $this->__tConstruct();
     }
-    // 抽象方法 只要繼承Service 就需要有construct;
+    // 抽象方法 只要繼承Service 就需要有getInstance && construct;
+    abstract public static function getInstance();
     abstract public function construct();
 
     public function getList($cid = '') {
@@ -34,6 +34,14 @@ abstract class Repository
         return $this->builder
             ->find($id)
         ->toArray();
+    }
+
+    /** 建立builder
+     * @param String $table 資料庫名稱
+     * @return Eloquent/Builder
+     */
+    public function getBuilder($table) {
+        return DB::setTable($table);
     }
 
     /** 生成資料表

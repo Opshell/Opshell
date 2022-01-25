@@ -2,9 +2,9 @@
 namespace Model;
 use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) 使用
 
-class News extends Eloquent
+class SysAdmin extends Eloquent
 {
-    protected $table = '_web_news';
+    protected $table = '_sys_admin';
     protected $primaryKey = 'id';
     public $timestamps = true;
 

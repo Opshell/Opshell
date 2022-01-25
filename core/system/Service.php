@@ -17,7 +17,9 @@ abstract class Service
     public function __construct(){
         $this->__tConstruct();
     }
-    // 抽象方法 只要繼承Service 就需要有construct;
+
+    // 抽象方法 只要繼承Service 就需要有getInstance && construct;
+    abstract public static function getInstance();
     abstract public function construct();
 
     // 取得列表資料

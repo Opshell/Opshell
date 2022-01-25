@@ -16,10 +16,10 @@ class homeController extends Controller{
         $this->data['newsList'] = $this->newsService->getList();
 
         // 組件載入
-        $this->components = array(
+        $this->components = [
             'header',
             'footer',
-        );
+        ];
 
         // 輸出
         if($outType == 'render'){ // 頁面輸出

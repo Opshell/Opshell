@@ -17,12 +17,26 @@
     export default {
         data() {
             return {
-                loginForm: {
-                    username: "",
-                    password: "",
-                    verification: "",
-                },
+                iconList: [],
             };
+        },
+        mounted: function () {
+            this.axios({
+                url: "/sprite.svg",
+                method: "GET",
+            }).then((result) => {
+                if (result.status == 200) {
+                    if(result.data != ''){
+                        const regexp = /id="([^"]*)"/g;
+                        let matches = [...result.data.matchAll(regexp)];
+                        matches.forEach(el => {
+                            this.iconList.push(el[1]);
+                        });
+
+                        console.log(this.iconList);
+                    }
+                }
+            });
         },
         components: { elSvgIcon },
         methods: {},

@@ -72,7 +72,7 @@
                             const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Dashboard" : store.state.redirect;
                             this.$router.push({ name: redirect });
                         } else {
-                            console.log(auth.msg);
+                            console.log(auth);
                         }
                     });
                 } else {
@@ -86,22 +86,14 @@
                     method: "POST",
                     data: { username, password },
                     // headers: { 'Content-Type': 'application/json' },
-                })
-                    .then((result) => {
-                        if (result.status == 200) {
-                            if (result.data.status == "Success") {
-                                return {
-                                    status: true,
-                                    msg: "登入成功",
-                                    data: result.data.data,
-                                };
-                            } else {
-                                return {
-                                    status: false,
-                                    msg: result.data.message,
-                                    data: result.data.data,
-                                };
-                            }
+                }).then((result) => {
+                    if (result.status == 200) {
+                        if (result.data.status == "Success") {
+                            return {
+                                status: true,
+                                msg: "登入成功",
+                                data: result.data.data,
+                            };
                         } else {
                             return {
                                 status: false,
@@ -109,10 +101,16 @@
                                 data: result.data.data,
                             };
                         }
-                    })
-                    .catch(() => {
-                        return false;
-                    });
+                    } else {
+                        return {
+                            status: false,
+                            msg: result.data.message,
+                            data: result.data.data,
+                        };
+                    }
+                }).catch(() => {
+                    return false;
+                });
             },
         },
         computed: mapState([

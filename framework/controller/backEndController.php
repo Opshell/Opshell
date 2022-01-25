@@ -1,14 +1,16 @@
 <?php
 namespace Controller;
 use Core\Controller;
-use Service\backEndService;
+use Service\sysAdminService;
+use Service\sysSectionService;
 
 class backEndController extends Controller
 {
     private $_path = '';
 
     public function __construct(){
-        $this->backEndService = backEndService::getInstance();
+        $this->sysAdmin = sysAdminService::getInstance();
+        $this->sysSection = sysSectionService::getInstance();
     }
 
     public function index(){
@@ -18,15 +20,13 @@ class backEndController extends Controller
         return $this->render();
     }
 
-    
-
     public function api($action, $inputData, $user){
         switch ($action) {
             case 'login': // 後檯登入
-                $data = $this->backEndService->backEndLogin($inputData);
+                $data = $this->sysAdmin->sysAdminLogin($inputData);
                 break;
             case 'sidemenu': // 取得列表
-                $data = $this->backEndService->getSideMenu($user['auth']);
+                $data = $this->sysSection->getSideMenu($user['auth']);
                 break;
             default:
                 # code...
