@@ -16,6 +16,4 @@ class newsService extends Service{
     }
 
     public function index(){}
-
-    public function getList(){}
 }

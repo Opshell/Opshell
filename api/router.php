@@ -19,7 +19,7 @@
     // POST 處理 => axios post 過來會是Request Payload格式 需要另外處理
     $_POST =(empty($_POST) && !empty(json_decode(file_get_contents("php://input"), true)))? json_decode(file_get_contents("php://input"), true) : $_POST;
 
-    // 輸入資料XSS清理 
+    // 輸入資料XSS清理
     $post = $_POST;
 
     // http header取得
@@ -38,8 +38,8 @@
     // 權限檢查
     $auth = ($headers['authorization'])?? false;
     $user = Null;
-    if($auth){ 
-        $auth = jwtVerify($auth); 
+    if($auth){
+        $auth = jwtVerify($auth);
         $newToken = jwtCreat($auth['payload']);
         $user = $auth['payload'];
     }

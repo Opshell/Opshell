@@ -8,8 +8,7 @@ class footerController extends Controller
 
     public function __construct(){}
 
-    public function index()
-    {
+    public function index(){
         $this->data['text'] = "渲染頁尾文字";
 
         // 輸出

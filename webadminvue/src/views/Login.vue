@@ -23,6 +23,7 @@
     // import Cookies from "js-cookie";
     import { Base64 } from "js-base64";
     import { mapState } from "vuex";
+    import { getData } from "../composition/getData.js"
 
     // import elImg from "../components/el-img.vue";
     import elBtn from "../components/el-button.vue";
@@ -59,7 +60,11 @@
                     let store = this.$store;
                     this.loginForm.verification = verification;
 
-                    this.authenticate(username, password).then((auth) => {
+                    // this.authenticate(username, password)
+                    getData(
+                        "/api/backEnd/login",
+                        {username, password}
+                    ).then((auth) => {
                         if (auth.status) {
                             localStorage.setItem("token", auth.data); // 紀錄token
 

@@ -21,7 +21,7 @@ class Controller{
      * @return {$this->output} html component
      * @return trigger_error
      */
-    protected function render(){ 
+    protected function render(){
         // 部件載入
         foreach ($this->components as $component) {
             $this->data[basename($component)] = $this->loader($component);
@@ -55,7 +55,7 @@ class Controller{
         $this->json['result'] = $this->data;
 
         // JSON_UNESCAPED_UNICODE不編碼中文
-        return json_encode($this->json, JSON_UNESCAPED_UNICODE); 
+        return json_encode($this->json, JSON_UNESCAPED_UNICODE);
     }
 
     /** 其他部件載入
@@ -79,7 +79,7 @@ class Controller{
 
     /**
      * @param String $action 動作
-     * @param Array $data 輸入資料 
+     * @param Array $data 輸入資料
      * @param Array $user 使用者資料(從JWT解析出來的)
      */
     protected function api($action, $data, $user){
