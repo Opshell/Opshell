@@ -129,6 +129,7 @@
             padding: 20px;
             box-shadow: $bascShadow;
             overflow: hidden;
+            overflow-y: auto;
         }
         .footerBlock {
             flex-shrink: 0;

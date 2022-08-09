@@ -4,7 +4,6 @@
     // $subject = $_SERVER['REQUEST_URI']; //   "/api1/aaasd/bbb/";
     // $pattern = '/^\/([^\/]{1,})\/([^\/]*)\/([^\/]*)\//';
     // preg_match($pattern, $subject, $matches);
-
     // use 載入
     include_once(dirname(__FILE__). '/useControllers.php');
     // // 核心啟動
@@ -17,7 +16,7 @@
     $id = ($PathSplit[2]) ?? 0;      // id
 
     // POST 處理 => axios post 過來會是Request Payload格式 需要另外處理
-    $_POST =(empty($_POST) && !empty(json_decode(file_get_contents("php://input"), true)))? json_decode(file_get_contents("php://input"), true) : $_POST;
+    $_POST=(empty($_POST) && !empty(json_decode(file_get_contents("php://input"), true)))? json_decode(file_get_contents("php://input"), true) : $_POST;
 
     // 輸入資料XSS清理
     $post = $_POST;

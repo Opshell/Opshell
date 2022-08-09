@@ -62,16 +62,6 @@ module.exports = {
             .options({ symbolId: "[name]" })
             .end();
 
-        // const svgRule = config.module.rule("svg");
-        //     svgRule.uses.clear();
-        //     svgRule
-        //     .use("svg-sprite-loader")
-        //     .loader("svg-sprite-loader")
-        //     .options({
-        //         symbolId: "icon-[name]",
-        //         include: [dir]
-        //     });
-
         // 修改 images-loader 配置 => 排除icon資料夾
         config.module.rule("images").exclude.add(dir).end();
     },

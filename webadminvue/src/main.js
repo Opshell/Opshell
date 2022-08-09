@@ -6,6 +6,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import plugin from "./plugin";
+// import { getData } from "./composition/getData"
+
 
 // // webpack 一次性匯入 SVG
 // const requireAll = requireContext => requireContext.keys().map(requireContext);
@@ -17,4 +19,10 @@ import plugin from "./plugin";
 // import svgIcon from "@/components/el-svgIcon";
 // // Vue.component("icon", SvgIcon);
 
-createApp(App).use(VueAxios, axios).use(store).use(router).use(plugin, { imports: [] }).mount("#app");
+createApp(App)
+    .use(VueAxios, axios)
+    // .use(getData)
+    .use(store)
+    .use(router)
+    .use(plugin, { imports: [] })
+    .mount("#app");

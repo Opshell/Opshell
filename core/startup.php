@@ -6,7 +6,6 @@ use Illuminate\Database\Schema as Schema;
 use Core\RESTful;
 // use Core\Response;
 
-
 /** 整個網站的環境檢查=>全域變數設定=>網站基本設定
  * const VERSION 0.1
  */
@@ -38,7 +37,7 @@ if (!empty($_SERVER['HTTPS'])) {
 $host = $_SERVER['SERVER_NAME'];
 
 // HTTP
-define('HTTP_BASE', '//' . $host . '/'); 
+define('HTTP_BASE', '//' . $host . '/');
 define('HTTP_UPLOAD', HTTP_BASE . 'upload/'); // 上傳檔案
 // URL
 define('DOMAIN_URL', (($_SERVER['HTTPS']) ? 'https' : 'http') . ':' . HTTP_BASE);
@@ -89,7 +88,7 @@ $DB->bootEloquent();
 
 
 // ClassInstanceTrait 引用
-require_once(CORE_PATH . '/system/classInstanceTrait.php'); 
+require_once(CORE_PATH . '/system/classInstanceTrait.php');
 
 // New 輸出核心
 $Response = new RESTful();

@@ -1,5 +1,6 @@
-### Hi there 👋
+### Opshell.info
 
+Use node 14.18.0
 <!--
 **Opshell/Opshell** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -26,5 +27,5 @@ Controller => 該頁面的資料統整，資料和view的交互
 Service => 該主題(如會員)會用到的任何商務邏輯(function)
 
 Repository => 藉由操作Model，幫助Service實現各種商務邏輯對應的資料庫操作方法。
-Model => 資料庫存取，使用Eloquent Model (ORM) 
+Model => 資料庫存取，使用Eloquent Model (ORM)
 
