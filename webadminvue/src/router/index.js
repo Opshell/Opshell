@@ -9,39 +9,38 @@ const routes = [
         name: "Login",
         path: "/login",
         component: () => import("../views/Login.vue"),
-    },
-    {
+    }, {
         name: "Dashboard",
         path: "/dashboard",
         component: () => import("../views/Dashboard.vue"),
         meta: { requireAuth: true },
-    },
-    {
+    }, {
         name: "IconList",
         path: "/iconList",
         component: () => import("../views/IconList.vue"),
         meta: { requireAuth: true },
-    },
-    {
+    }, {
         name: "News",
         path: "/news",
         component: () => import("../views/News.vue"),
         meta: { requireAuth: true },
-    },
-    {
+    }, {
+        name: "Section",
+        path: "/section",
+        component: () => import("../views/Section.vue"),
+        meta: { requireAuth: true },
+    }, {
         name: "NewsInfo",
         path: "/newsinfo/:newsId",
         component: () => import("../views/NewsInfo.vue"),
         meta: { requireAuth: true },
-    },
-    {
+    }, {
         // Home
         name: "Home",
         path: "/",
         component: Home,
         meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
-    },
-    {
+    }, {
         // About
         name: "About",
         path: "/about",
@@ -50,8 +49,7 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
         meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
-    },
-    {
+    }, {
         // 未定義網址 => 404
         name: "PageNotFound",
         path: "/:pathMatch(.*)*",

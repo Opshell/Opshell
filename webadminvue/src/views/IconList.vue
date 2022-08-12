@@ -29,12 +29,11 @@
             //     'GET'
             // ).then((result) => {
 
-
-            const spriteSvg = document.getElementById('__SVG_SPRITE_NODE__');
-            // console.log(spriteSvg.children);
-            spriteSvg.children.forEach(svgDom => {
+            let spriteSvg = [...document.getElementById('__SVG_SPRITE_NODE__').children];
+            spriteSvg.forEach(svgDom => {
                 this.iconList.push(svgDom.id);
             });
+
             // this.axios({
             //     url: "/sprite.svg",
             //     method: "GET",

@@ -1,12 +1,18 @@
 <template>
-    <div class="gridBlock" role="table">
-        <template v-for="item in list">
+    <section class="gridBlock" role="table">
+        <header>
+            <div v-for="(title, i) in header" :key="title + '_' + i">
+                {{ title }}
+            </div>
+        </header>
+
+        <template v-for="(item) in list">
             <div class="gridBox" v-for="(val, key) in item" :key="val" :class="key">
                 <span class="key">{{ key }}</span>
                 <span class="value">{{ val }}</span>
             </div>
         </template>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -17,6 +23,7 @@
         },
         data: function () {
             return {
+                header: [],
                 list: {},
             };
         },
