@@ -1,41 +1,47 @@
 <template>
-    <div class="News">
-        <h1>Here show the section list.</h1>
+    <article class="gridBlock">
 
-        <elTable :value="list"></elTable>
-    </div>
+        <header class="gridBar">
+            <div class="td check"><input type="checkbox" name="" id=""></div>
+            <div class="td parent">父層ID</div>
+            <div class="td id">ID</div>
+            <div class="td icon">圖示</div>
+            <div class="td title">名稱</div>
+            <div class="td link">連結</div>
+            <div class="td crud">操作</div>
+        </header>
+
+        <elSectionBar :menu="list" />
+    </article>
 </template>
 
 <script>
     import { mapState } from "vuex";
     import { getData } from "../composition/getData.js"
 
-    import elTable from "../components/el-gridTable.vue";
+    import elSectionBar from "../components/el-sectionBar.vue";
+    // import elTable from "../components/el-gridTable.vue";
 
     export default {
         data() {
             return {
+                header: [],
                 list: {},
                 number: [1, 2, 3]
             };
         },
-        components: {
-            elTable,
-        },
-        mounted() {
-            getData("/api/news/list").then((result) => {
-                console.log(result);
+        components: { elSectionBar  },
+        mounted: function () {
+            const token = localStorage.getItem("token");
+            getData(
+                "/api/section/list",
+                "GET", {},
+                { Authorization: `Bearer ${token}` },
+            ).then((result) => {
+                if (result.status) {
+                    this.list = result.data.data;
+                }
             });
-            // fetch("/api/news/list") // /mapi/news/list/2
-            //     .then((res) => res.json())
-            //     .then((data) => {
-            //         if (data.status == "Success") {
-            //             console.log(data.data);
-            //             this.list = data.data;
-            //             console.log(this.list);
-
-            //         }
-            //     });
         },
         methods: {},
         computed: {
@@ -48,4 +54,56 @@
     };
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+    .gridBlock {
+        display: flex;
+        flex-direction: column;
+        @include setSize(100%, 100%);
+    }
+
+    .gridBar {
+        display: grid;
+        grid-gap: 2px 2px; // 水平 垂直
+        grid-template-areas: "check parent id icon title link crud";
+        grid-template-columns: 40px 100px 60px 65px 1fr 1fr 120px;
+        width: 100%;
+        border-bottom: 2px solid #1b1b1b;
+        // align-items: center;
+        // justify-items: start;
+        .td {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: #333;
+            height: 50px;
+            padding: 6px 10px;
+            box-sizing: border-box;
+            font-size: 18px;
+            color: #bbb;
+            fill: #bbb;
+            transition: .15s $cubic-FiSo;
+        }
+        .check {
+            grid-area: check;
+            justify-content: center;
+        }
+        .parent {grid-area: parent;}
+        .id{grid-area: id;}
+        .icon {grid-area: icon;}
+        .title {grid-area: title;}
+        .link {grid-area: link;}
+        .crud { grid-area: crud; }
+
+        &:hover .td {
+            background: $colorMain;
+            height: 50px;
+            padding: 5px 10px;
+            font-size: 20px;
+            color: #bbb;
+            fill: #bbb;
+        }
+
+        animation: fit-in 0.5s $cubic-FiSo both;
+        @include setDelay('animation-delay', 15, 0.045);
+    }
+</style>

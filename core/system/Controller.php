@@ -82,7 +82,7 @@ class Controller{
      * @param Array $data 輸入資料
      * @param Array $user 使用者資料(從JWT解析出來的)
      */
-    protected function api($action, $data, $user){
+    protected function api($action, $data, $user, $param){
         return Null;
     }
 }

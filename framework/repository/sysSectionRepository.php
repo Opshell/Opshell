@@ -17,6 +17,17 @@ class sysSectionRepository extends Repository
         // $this->creatTableSQL();
     }
 
+    public function getList($cid = 0, $curPage = 1, $pageSize = 10, $select = [],  $lang = 1){
+        if(empty($select)){
+            $list = SysSection::get();
+        } else {
+            $select = implode(', ', $select);
+            $list = SysSection::select($select)->get();
+        }
+
+        return $list;
+    }
+
     /** 取得後台SideMenu
      * @param Int $authLevel
      * @param Int $parent // 階層

@@ -20,7 +20,7 @@ class backEndController extends Controller
         return $this->render();
     }
 
-    public function api($action, $inputData, $user){
+    public function api($action, $inputData, $user, $param){
         switch ($action) {
             case 'login': // 後檯登入
                 $data = $this->sysAdmin->sysAdminLogin($inputData);

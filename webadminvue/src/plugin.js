@@ -22,4 +22,5 @@ const componentPlugin = {
         vue.component(svgIcon.name, svgIcon);
     },
 };
+
 export default componentPlugin;

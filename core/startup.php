@@ -75,8 +75,6 @@ if (getip() == "127.0.0.1" || getip() == "unknown") {
     $develop_mode = "Production";
 }
 
-
-
 // DB 初始化
 $DB = new DB;
 // 建立連線

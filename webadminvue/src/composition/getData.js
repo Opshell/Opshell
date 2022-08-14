@@ -1,14 +1,13 @@
 // import { ref } from 'vue';
 import axios from 'axios';
 
-export const getData = async function (url, data = {}, type = 'POST', header = {}) {
+export const getData = async function (url, type = 'GET', data = {}, header = {}) {
     return await axios({
         url: url,
         method: type,
         data: data,
         headers: header,
     }).then((response) => {
-        console.log(response);
         let result = {
             status: false,
             msg: response.data.message,
@@ -16,13 +15,11 @@ export const getData = async function (url, data = {}, type = 'POST', header = {
         }
 
         if (response.status == 200 && response.data.status == 'Success') {
-                result.status = true;
+            result.status = true;
         }
 
         return result;
-    }).catch(() => {
-        return false;
-    });
+    }).catch(() => false);
 }
 
 export default {

@@ -16,7 +16,14 @@ abstract class Repository
     abstract public static function getInstance();
     abstract public function construct();
 
-    public function getList($cid = '') {
+    /** 取得列表
+     * @param Int $cid // 分類ID
+     * @param Int $curpage // 目前所在頁
+     * @param Int $pageSize // limit 尺寸
+     * @param Int $lang // 語系
+     * @return void
+     */
+    public function getList($cid = 0, $curPage = 1, $pageSize = 10, $select = [], $lang = 1) {
         return $this->builder
             ->where(function ($query) use($cid){
                 if(!empty($cid)){
@@ -26,8 +33,10 @@ abstract class Repository
             ->where('enable', 1)
             ->orderBy('sort')
             ->orderBy('id', 'DESC')
-            ->get()
+            ->paginate($pageSize, ['*'], 'p', $curPage)
         ->toArray();
+        //     ->get()
+        // ->toArray();
     }
 
     public function getInfo($id = '') {

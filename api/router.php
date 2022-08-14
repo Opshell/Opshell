@@ -13,7 +13,8 @@
     $PathSplit = explode('/', $_GET['route']);
     $route = ($PathSplit[0]) ?? "";  // class
     $action = ($PathSplit[1]) ?? ""; // 動作
-    $id = ($PathSplit[2]) ?? 0;      // id
+    $id = ($PathSplit[2]) ?? 0;      // id || p
+    $cid = ($PathSplit[3]) ?? 0;
 
     // POST 處理 => axios post 過來會是Request Payload格式 需要另外處理
     $_POST=(empty($_POST) && !empty(json_decode(file_get_contents("php://input"), true)))? json_decode(file_get_contents("php://input"), true) : $_POST;
@@ -23,7 +24,6 @@
 
     // http header取得
     $headers = getallheaders();
-
 
     // 預設輸出
     $httpStatusCode = 401;
@@ -43,7 +43,7 @@
         $user = $auth['payload'];
     }
 
-    if($auth || $action == 'login'){
+    if(!empty($auth) || $action == 'login'){
         // 參數不完全
         $httpStatusCode = 400;
         $result['data'] = $_GET['route'];
@@ -72,14 +72,21 @@
                     $result['data'] = $action;
                     $result['message'] = 'Method is not exists.';
 
-                    $data = $class->api($action, $post, $user);
-                    if (!empty($data)) {
-                        $httpStatusCode = 200;
-                        $result['message'] = $data->message;
-                        if($data->status){
-                            $result['status'] = 'Success';
-                            $result['data'] = $data->data;
+                    $data = $class->api($action, $post, $user, [$id, $cid]);
+                    if($route == 'backEnd'){
+                        if (!empty($data)) {
+                            $httpStatusCode = 200;
+                            $result['message'] = $data->message;
+                            if ($data->status) {
+                                $result['status'] = 'Success';
+                                $result['data'] = $data->data;
+                            }
                         }
+                    } else {
+                        $httpStatusCode = 200;
+                        $result['status'] = 'Success';
+                        $result['message'] = 'Get date success!';
+                        $result['data'] = $data;
                     }
                 }
             }

@@ -2,7 +2,7 @@
     <template v-for="(item, i) in list" :key="i">
         <div class="linkBlock"
             v-if="item.child"
-            :class="{ box: item.child.length > 0, open: !item.hide_sub }"
+            :class="{ box: item.child.length > 0, open: !item.hide_sub, fitBar: depth==0}"
         >
             <div class="link"
                 :style="{ 'padding-left': depth * 1.5 + 'em' }"
@@ -25,6 +25,7 @@
         </div>
         <router-link
             v-else class="link"
+            :class="{ fitBar: depth == 0 }"
             :to="item.link"
             :key="'i_' + item.id"
             :depth="depth"
@@ -49,11 +50,11 @@
                 type: Number,
                 default: 0
             },
-            hide_sub:{ // 是否收闔
+            hide_sub: { // 是否收闔
                 type: Boolean,
                 default: true
             },
-            child_count:{ // 子層數量
+            child_count: { // 子層數量
                 type: Number,
                 default: 0
             }

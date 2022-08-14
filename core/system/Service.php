@@ -23,8 +23,8 @@ abstract class Service
     abstract public function construct();
 
     // 取得列表資料
-    public function getList(){
-        $list = $this->Repository->getList();
+    public function getList($cid, $curPage, $pageSize, $select, $lang){
+        $list = $this->Repository->getList($cid , $curPage, $pageSize, $select, $lang);
 
         return $list;
     }

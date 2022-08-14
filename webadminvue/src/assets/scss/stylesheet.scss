@@ -93,7 +93,7 @@ $rwd-320: 320px;
     height: $h;
 }
 @mixin setProportion($proportion: 100%, $bs: contain){ // 等比例區塊
-    background-size: $bs; 
+    background-size: $bs;
     &::before{
         content: '';
         display: block;
@@ -113,17 +113,17 @@ $rwd-320: 320px;
     }
 }
 //Delay Animate
-@mixin setDelay($ty, $e, $tv,$btv: 0, $s: 1) {
+@mixin setDelay($ty, $e, $tv, $btv: 0, $s: 1) {
     @for $i from $s through $e {
         &:nth-child(#{$i}){
-            #{$ty}: #{$btv + $i * $tv}s; 
+            #{$ty}: #{$btv + $i * $tv}s;
             @content;
         }
     }
 }
 @mixin setStr($el, $ty, $baseStr, $e, $attcStr: '', $s: 1){
     @for $i from $s through $e {
-        &:nth-child(#{$i})#{$el}{ 
+        &:nth-child(#{$i})#{$el}{
             #{$ty}:#{$baseStr}#{$i}#{$attcStr};
             @content;
         }

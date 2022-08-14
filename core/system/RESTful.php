@@ -46,7 +46,7 @@ class RESTful {
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported'
     ];
-    private $headers = array();
+    private $headers = [];
     private $output;
 
     /** 後端強制跳轉

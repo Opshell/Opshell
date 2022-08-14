@@ -2,7 +2,7 @@
 namespace Core;
 
 class Response {
-	private $headers = array();
+	private $headers = [];
 	private $output;
 
 	public function addHeader($header) {

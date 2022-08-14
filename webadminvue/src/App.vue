@@ -74,6 +74,7 @@
 </script>
 
 <style lang="scss">
+
     #app {
         display: flex;
         align-items: center;
@@ -130,6 +131,19 @@
             box-shadow: $bascShadow;
             overflow: hidden;
             overflow-y: auto;
+
+            /* 卷軸設定 */
+            &::-webkit-scrollbar {
+                background: #999;
+                width: 8px;
+                border-radius: 2px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: $colorMain;
+                border-radius: 5px;
+                border: 0.5px solid rgba(153, 153, 153, 0.5);
+                box-shadow: 0 0 10px 2px #20476e;
+            }
         }
         .footerBlock {
             flex-shrink: 0;

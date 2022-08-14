@@ -62,7 +62,7 @@
 
                     // this.authenticate(username, password)
                     getData(
-                        "/api/backEnd/login",
+                        "/api/backEnd/login", "POST",
                         {username, password}
                     ).then((auth) => {
                         if (auth.status) {

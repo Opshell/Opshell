@@ -150,6 +150,17 @@ h1,h2,h3,h4,h5,h6,p{margin: 0;}
     100%{opacity: 1;transform: translate3d(0,0,0);}
 }
 
+@keyframes fit-in {
+    0% {
+        transform: translate3d(-30px, -15px, 0) rotateX(-45deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(0, 0, 0) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
 
 
 // basic element

@@ -1,5 +1,13 @@
 <template>
-    <input :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input" :disabled="disabled" />
+
+    <label class="labInput" v-if="type == 'checkbox'">
+        <input class="input" type="checkbox" v-model="rawValue">
+        <span class="text">{{ placeholder }}</span>
+    </label>
+    <input v-else-if="type == 'text'" :type="type" :name="name" :placeholder="placeholder" v-model="rawValue"
+        class="input" :disabled="disabled" />
+    <input v-else :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input"
+        :disabled="disabled" />
 </template>
 
 <script>
