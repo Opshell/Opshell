@@ -7,19 +7,28 @@
                 </span>
             </transition-group>
         </h1>
-        <div class="CRUDBox"></div>
+
+        <div class="searchBar"></div>
+
+        <div class="CRUDBox">
+            <elSvgIcon name="disk"></elSvgIcon>
+            <elSvgIcon name="undo"></elSvgIcon>
+            <elSvgIcon name="trash"></elSvgIcon>
+        </div>
     </header>
 </template>
 
 <script>
     import { mapState } from "vuex";
+    import elSvgIcon from "@/components/el-svgIcon.vue";
+
 
     // import elBtn from "./components/el-button.vue";
 
     // @ is an alias to /src
     export default {
         name: "Header",
-        components: {},
+        components: { elSvgIcon },
         data: function () {
             return {};
         },
@@ -39,6 +48,7 @@
 
 <style lang="scss">
     .headerBlock {
+        position: relative;
         flex-shrink: 0;
         display: flex;
         align-items: flex-end;
@@ -63,8 +73,21 @@
             line-height: 0.8;
         }
         .CRUDBox {
+            position: absolute;
+            right: 0;
+            bottom: 0;
             display: flex;
-            min-width: 20%;
+            background: $colorBack;
+            padding: 10px;
+            border-radius: 5px;
+            transform: translate3d(-25px, 50%, 0);
+            z-index: 1;
+            .icon {
+                @include setSize(40px, 40px);
+                + .icon {
+                    margin: 0 0 0 10px;
+                }
+            }
         }
     }
 </style>

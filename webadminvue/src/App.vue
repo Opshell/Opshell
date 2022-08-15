@@ -23,10 +23,8 @@
                     </transition>
                 </router-view>
             </section>
-            <footer class="footerBlock">
-                <span>Copyright © 2021 www.Opshell.info </span>
-                <span>Designed By IRONMAN</span>
-            </footer>
+
+            <Footer class="footerBlock"></Footer>
         </div>
     </div>
 </template>
@@ -37,6 +35,7 @@
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
     import Header from "./views/block/_header.vue";
+    import Footer from "./views/block/_footer.vue";
 
     // import elBtn from "./components/el-button.vue";
 
@@ -46,6 +45,7 @@
         components: {
             SideMenu,
             Header,
+            Footer,
             Login,
             Account,
         },
@@ -74,7 +74,6 @@
 </script>
 
 <style lang="scss">
-
     #app {
         display: flex;
         align-items: center;
@@ -143,18 +142,6 @@
                 border-radius: 5px;
                 border: 0.5px solid rgba(153, 153, 153, 0.5);
                 box-shadow: 0 0 10px 2px #20476e;
-            }
-        }
-        .footerBlock {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #282828;
-            font-size: 10px;
-            @include setSize(100%, 50px);
-            .text + .text {
-                margin: 0 0 0 20px;
             }
         }
     }

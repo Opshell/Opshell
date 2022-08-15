@@ -1,13 +1,13 @@
 <template>
-    <div v-if="href == ''" class="iconBox">
-        <svg class="icon">
+    <div v-if="href == ''" class="icon">
+        <svg class="svg">
             <use :xlink:href="`#${name}`" />
         </svg>
         <span v-if="text != ''" class="text">{{text}}</span>
     </div>
 
-    <router-link v-else class="iconBox" :to="href">
-        <svg class="icon">
+    <router-link v-else class="icon" :to="href">
+        <svg class="svg">
             <use :xlink:href="`#${name}`" />
         </svg>
         <span v-if="text != ''" class="text">{{text}}</span>
@@ -36,7 +36,7 @@
 </script>
 
 <style scoped lang="scss">
-    .iconBox {
+    .icon {
         position: relative;
         display: flex;
         align-items: center;
@@ -45,7 +45,7 @@
         fill: #bbb;
         overflow: hidden;
         transition: .3s $cubic-FiSo;
-        .icon {
+        .svg {
             display: flex;
             align-items: center;
             justify-content: center;

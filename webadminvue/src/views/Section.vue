@@ -85,11 +85,20 @@
         }
         .check {
             grid-area: check;
+            align-items: center;
             justify-content: center;
         }
         .parent {grid-area: parent;}
-        .id{grid-area: id;}
-        .icon {grid-area: icon;}
+        .id{
+            grid-area: id;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon {
+            grid-area: icon;
+            align-items: center;
+            justify-content: center;
+        }
         .title {grid-area: title;}
         .link {grid-area: link;}
         .crud { grid-area: crud; }

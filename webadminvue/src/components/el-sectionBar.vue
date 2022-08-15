@@ -2,7 +2,7 @@
     <template v-for="(item, i) in list" :key="'bar_'+i">
         <div class="gridBar">
             <div class="td check"><input type="checkbox" name="" id=""></div>
-            <div class="td parent">{{item.parent_id}}</div>
+            <div class="td parent">{{item.depath_id}}</div>
             <div class="td id">{{item.id}}</div>
             <div class="td icon">
                 <elSvgIcon :name="item.icon"></elSvgIcon>
@@ -11,7 +11,7 @@
             <div class="td link"> {{item.link}} </div>
             <div class="td crud">
                 <elSvgIcon :href="'/section/info/' + item.id" class="tipsBtn" name="edit" text=""></elSvgIcon>
-                <elSvgIcon class="tipsBtn" name="trash" @click="delectSection"></elSvgIcon>
+                <elSvgIcon class="tipsBtn" name="trash" @click="delectSection(item.id)"></elSvgIcon>
             </div>
         </div>
 
@@ -42,6 +42,7 @@ export default {
     mounted() {
         this.list = this.deepCopy(this.menu);
         for (const key in this.list) {
+            console.log(key);
             if (this.objHOP(this.list, key)) {
                 const ele = this.list[key];
 
@@ -51,11 +52,15 @@ export default {
                 }
                 if (this.depth > 0) { depath += '>'; }
 
-                this.list[key].parent_id = ele.parent_id + ' ' + depath;
+                this.list[key].depath_id = ele.parent_id +' '+ depath;
             }
         }
     },
-    methods: {},
+    methods: {
+        delectSection: function (id) {
+            console.log(id);
+        }
+    },
     computed: {},
     watch: {
         menu: {
