@@ -8,7 +8,10 @@
             </transition-group>
         </h1>
 
-        <div class="searchBar"></div>
+        <div class="searchBar">
+            <elInput placeholder="搜尋列"></elInput>
+            <elSvgIcon name="search"></elSvgIcon>
+        </div>
 
         <div class="CRUDBox">
             <elSvgIcon name="disk"></elSvgIcon>
@@ -20,6 +23,7 @@
 
 <script>
     import { mapState } from "vuex";
+    import elInput from "@/components/el-input.vue";
     import elSvgIcon from "@/components/el-svgIcon.vue";
 
 
@@ -28,7 +32,7 @@
     // @ is an alias to /src
     export default {
         name: "Header",
-        components: { elSvgIcon },
+        components: { elInput, elSvgIcon },
         data: function () {
             return {};
         },
@@ -51,7 +55,7 @@
         position: relative;
         flex-shrink: 0;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
         background: $colorBack;
         width: 100%;
@@ -72,22 +76,28 @@
             color: #fff;
             line-height: 0.8;
         }
-        .CRUDBox {
-            position: absolute;
-            right: 0;
-            bottom: 0;
+        .searchBar {
             display: flex;
-            background: $colorBack;
-            padding: 10px;
-            border-radius: 5px;
-            transform: translate3d(-25px, 50%, 0);
-            z-index: 1;
+            margin: 0 10px;
             .icon {
-                @include setSize(40px, 40px);
-                + .icon {
-                    margin: 0 0 0 10px;
-                }
+                margin: 0 0 0 5px;
             }
+        }
+        .CRUDBox {
+            // position: absolute;
+            // right: 0;
+            // bottom: 0;
+            display: flex;
+            background: #333;
+            padding: 8px 5px 8px 15px;
+            border-radius: 10px;
+            transform: translate3d(25px, 0, 0);
+            z-index: 1;
+        }
+
+        .icon {
+            @include setSize(40px, 40px);
+            + .icon { margin: 0 0 0 10px; }
         }
     }
 </style>
