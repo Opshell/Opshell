@@ -1,7 +1,7 @@
 <template>
     <template v-for="(item, i) in list" :key="'bar_'+i">
         <div class="gridBar">
-            <div class="td check"><input type="checkbox" name="" id=""></div>
+            <div class="td check"><elInput type="checkbox" /></div>
             <div class="td parent">{{item.depath_id}}</div>
             <div class="td id">{{item.id}}</div>
             <div class="td icon">
@@ -21,11 +21,12 @@
 
 <script>
 // import { obj } from "../assets/js/opshellLibary";
-import elSvgIcon from "../components/el-svgIcon.vue";
+import elSvgIcon from "@/components/el-svgIcon.vue";
+import elInput from "@/components/el-input.vue";
 
 export default {
     name: "elSectionBar",
-    components: { elSvgIcon },
+    components: { elSvgIcon, elInput },
     emits: [ "calcHeight" ] ,
     props: {
         menu: {}, //
@@ -42,7 +43,7 @@ export default {
     mounted() {
         this.list = this.deepCopy(this.menu);
         for (const key in this.list) {
-            console.log(key);
+
             if (this.objHOP(this.list, key)) {
                 const ele = this.list[key];
 
@@ -51,7 +52,7 @@ export default {
                     depath += '=';
                 }
                 if (this.depth > 0) { depath += '>'; }
-
+                this.list[key].parent_id = ele.parent_id.toString();
                 this.list[key].depath_id = ele.parent_id +' '+ depath;
             }
         }
