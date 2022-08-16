@@ -4,7 +4,6 @@ export default createStore({
     state: {
         // 存放所有需要共用的變數
         isLoading: false, // 是否處於Loading狀態
-        redirect: "",
         isLogin: false, // 是否有登入
         userData: {
             // 登入資訊
@@ -17,36 +16,40 @@ export default createStore({
              */
             auth: "3",
         },
-        pageData: {
-            // 頁面資訊
-            title: "測試",
-            do: "list",
-            breadcrumbs: "",
+        redirect: "",
+        route: {
+            from: null,
+            to: null
         },
+        pageData: {},
     },
     getter: {},
     mutations: {
         // 變動 state 用(只能同步)
-        Loaded(state) {
+        setLoading(state) {
             // state的isLoading true/false 互轉
             state.isLoading = !state.isLoading;
         },
-        Signin(state) {
+        signin(state) {
             state.isLogin = !state.isLogin;
         },
-        SetUser(state, userData) {
+        setUser(state, userData) {
             // 記錄登入者資訊
             state.userData.user = userData.user;
             state.userData.name = userData.name;
             state.userData.auth = userData.auth;
         },
-        setRedirect(state, redirect) {
-            // 導向紀錄
+        setRedirect(state, redirect) {// 導向紀錄
             state.redirect = redirect;
         },
-        setPage(state, name) {
-            // 導向紀錄
-            state.pageData.title = name;
+        setRouteFrom(state, from) {// 導向紀錄
+            state.route.from = from;
+        },
+        setRouteTo(state, to) {// 導向紀錄
+            state.route.to = to;
+        },
+        setPage(state, pageData) {
+            state.pageData = pageData;
         },
     },
     actions: {

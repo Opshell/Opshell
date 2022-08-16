@@ -10,7 +10,7 @@
             <div class="td title"> {{item.title}} </div>
             <div class="td link"> {{item.link}} </div>
             <div class="td crud">
-                <elSvgIcon :href="'/section/info/' + item.id" class="tipsBtn" name="edit" text=""></elSvgIcon>
+                <elSvgIcon :href="'/sectionInfo/' + item.id" class="tipsBtn" name="edit" text=""></elSvgIcon>
                 <elSvgIcon class="tipsBtn" name="trash" @click="delectSection(item.id)"></elSvgIcon>
             </div>
         </div>
@@ -21,8 +21,8 @@
 
 <script>
 // import { obj } from "../assets/js/opshellLibary";
-import elSvgIcon from "@/components/el-svgIcon.vue";
-import elInput from "@/components/el-input.vue";
+import elSvgIcon from "../components/el-svgIcon.vue";
+import elInput from "../components/el-input.vue";
 
 export default {
     name: "elSectionBar",
@@ -62,7 +62,9 @@ export default {
             console.log(id);
         }
     },
-    computed: {},
+    computed: {
+
+    },
     watch: {
         menu: {
             handler: function (v) {

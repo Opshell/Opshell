@@ -71,10 +71,11 @@
                             let data = auth.data.split("."); // 解析使用者資料
                             data = JSON.parse(Base64.decode(data[1]));
 
-                            store.commit("Signin");
-                            store.commit("SetUser", data); // 記錄使用者資料
+                            store.commit("signin");
+                            store.commit("setUser", data); // 記錄使用者資料
 
                             const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Dashboard" : store.state.redirect;
+                            // this.$router.push({ name: redirect });
                             this.$router.push({ name: redirect });
                         } else {
                             console.log(auth);

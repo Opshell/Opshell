@@ -9,31 +9,37 @@ const routes = [
         name: "Login",
         path: "/login",
         component: () => import("../views/Login.vue"),
+        meta: { requireAuth: true, title: '登入' },
     }, {
         name: "Dashboard",
         path: "/dashboard",
         component: () => import("../views/Dashboard.vue"),
-        meta: { requireAuth: true },
+        meta: { requireAuth: true, title: '後台總覽' },
     }, {
         name: "IconList",
         path: "/iconList",
         component: () => import("../views/IconList.vue"),
         meta: { requireAuth: true },
     }, {
-        name: "News",
-        path: "/news",
-        component: () => import("../views/News.vue"),
-        meta: { requireAuth: true },
-    }, {
-        name: "Section",
-        path: "/section",
+        name: "SectionList",
+        path: "/sectionList",
         component: () => import("../views/Section.vue"),
-        meta: { requireAuth: true },
+        meta: { requireAuth: true, title: "功能列表" },
     }, {
-        name: "NewsInfo",
-        path: "/newsinfo/:newsId",
-        component: () => import("../views/NewsInfo.vue"),
-        meta: { requireAuth: true },
+        name: "SectionInfo",
+        path: "/sectionInfo/:id",
+        component: () => import("../views/SectionInfo.vue"),
+        meta: { requireAuth: true, title: "功能" },
+    }, {
+        name: "ArticleList",
+        path: "/articleList",
+        component: () => import("../views/ArticleList.vue"),
+        meta: { requireAuth: true, title: "文章列表" },
+    }, {
+        name: "ArticleInfo",
+        path: "/articleInfo/:articleId",
+        component: () => import("../views/ArticleInfo.vue"),
+        meta: { requireAuth: true, title: "文章" },
     }, {
         // Home
         name: "Home",
@@ -68,8 +74,8 @@ router.beforeEach(async (to, from) => {
     // console.log("to: ", to);
     // console.log("from: ", from);
 
-    store.commit("setRedirect", from.name);
-
+    store.commit("setRouteFrom", from);
+    store.commit("setLoading");
     // 目的路由在meta上是否有設置requireAuth: true
     if (to.meta.requireAuth) {
         const isLogin = store.state.isLogin;
@@ -81,32 +87,31 @@ router.beforeEach(async (to, from) => {
                 url: "/api/auth/verify",
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
-            })
-                .then((res) => {
-                    if (res.status == 200) {
-                        if (res.data.status == "Success") {
-                            localStorage.setItem("token", res.data.data);
-                            store.commit("setRedirect", "");
-                        } else {
-                            localStorage.setItem("token", "");
-                            return { name: "Login" };
-                        }
+            }).then((res) => {
+                if (res.status == 200) {
+                    if (res.data.status == "Success") {
+                        localStorage.setItem("token", res.data.data);
+                        store.commit("setRedirect", "");
                     } else {
                         localStorage.setItem("token", "");
                         return { name: "Login" };
                     }
-                })
-                .catch(() => {
+                } else {
                     localStorage.setItem("token", "");
                     return { name: "Login" };
-                });
+                }
+            })
+            .catch(() => {
+                localStorage.setItem("token", "");
+                return { name: "Login" };
+            });
         } else {
             localStorage.setItem("token", "");
             return { name: "Login" };
         }
     }
 
-    store.commit("setPage", to.name);
+    store.commit("setRouteTo", to);
 });
 
 export default router;

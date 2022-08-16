@@ -2,7 +2,7 @@
     <article class="gridBlock">
 
         <header class="gridBar">
-            <div class="td check"><elInput type="check" @click="selectAll()" /></div>
+            <div class="td check"><elInput type="checkbox" @click="selectAll()" /></div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
             <div class="td icon">圖示</div>
@@ -20,7 +20,8 @@
     import { getData } from "@/composition/getData.js"
 
     import elSectionBar from "@/components/el-sectionBar.vue";
-    import elInput from "@/components/el-Input.vue";
+    import elInput from "@/components/el-input.vue";
+    import store from "../store";
     // import elTable from "../components/el-gridTable.vue";
 
     export default {
@@ -39,15 +40,16 @@
                 "GET", {},
                 { Authorization: `Bearer ${token}` },
             ).then((result) => {
+                store.commit('setLoading');
                 if (result.status) {
                     this.list = result.data.data;
                 }
             });
         },
-        methods: {},
         computed: {
             ...mapState([
                 // 批量載入vuex state
+                "isLoading",
                 "userData",
                 "pageData",
             ]),

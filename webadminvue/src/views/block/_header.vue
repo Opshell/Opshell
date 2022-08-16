@@ -1,11 +1,16 @@
 <template>
     <header class="headerBlock">
         <h1 class="breadcrumbs">
-            <transition-group name="verbatim">
+            <!-- <transition-group name="verbatim">
                 <span v-for="(item, i) in pageData.title" v-bind:key="i">
                     {{ item }}
                 </span>
-            </transition-group>
+            </transition-group> -->
+            <!-- <transition-group name="verbatim"> -->
+                <span v-for="(item, i) in breadcrumbs" :key="i">
+                    {{ item }}
+                </span>
+            <!-- </transition-group> -->
         </h1>
 
         <div class="searchBar">
@@ -38,15 +43,33 @@
         },
         mounted: function () {},
         method: {},
-        computed: mapState([
-            "isLogin",
-            "isLoading",
-            "userData",
-            "pageData",
-            // isLogin(){ // 取得共用狀態(是否登入)
-            //     return this.$store.state.isLogin;
-            // },
-        ]),
+        computed: {
+            ...mapState([
+                "isLogin",
+                "isLoading",
+                "userData",
+                "router",
+                "redirect",
+                "pageData",
+                // isLogin(){ // 取得共用狀態(是否登入)
+                //     return this.$store.state.isLogin;
+                // },
+            ]),
+            breadcrumbs: function () {
+                // console.log(this.pageData);
+                // console.log(this.redirect);
+                // console.log(this.route);
+
+                // let breadcrumbs = this.route.to.fullPath.split("/");
+                // breadcrumbs[0] = '首頁';
+                // if (breadcrumbs[2]) {
+                //     breadcrumbs[2] = 'ID：' + breadcrumbs[2];
+                // }
+                // return breadcrumbs;
+                return 1;
+            }
+    },
+
     };
 </script>
 
