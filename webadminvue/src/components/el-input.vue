@@ -55,7 +55,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-
     input {
         @include setSize(100%, 35px);
         box-sizing: border-box;
@@ -101,15 +100,12 @@
         position: relative;
         display: flex;
         align-items: center;
-        padding-left: 30px;
+        margin: 0;
         .input{
-
+            position: relative;
             &[type="checkbox"] {
-                // position: absolute;
                 @include setSize(0, 0);
-                top: 0;
-                left: 0;
-
+                margin: 0;
                 &::before,
                 &::after {
                     content: '';
@@ -122,8 +118,9 @@
                     @include setSize(20px, 20px);
                     border-radius: 3px;
                     border: 3px solid #aaa;
-                    transform: translate3d(-100%, -50%, 0);
-                    transition: border-color, background-color .15s $cubic-FiSo;
+                    transform: translate3d(-50%, -50%, 0);
+                    transition: border-color  .15s $cubic-FiSo,
+                                background-color .15s $cubic-FiSo .05s;
                 }
                 &::after {
                     @include setSize(0, 0);
@@ -131,13 +128,13 @@
                     border-right: none;
                     border-width: 0;
                     border-radius: 1px;
-                    transform: rotateZ(-45deg) translate3d(-30%, -200%, 0);
+                    transform: rotateZ(-45deg) translate3d(0, -120%, 0);
                 }
 
                 &:checked {
                     &::before{
                         border-color: #20ac33;
-                        background: #20ac33;
+                        background-color: #16a328;
                     }
                     &::after {
                         @include setSize(20px, 10px);
@@ -150,6 +147,8 @@
                                     width .15s $cubic-FiSo .14s;
                     }
                 }
+
+                + .text { margin: 0 0 0 12px; }
             }
         }
     }

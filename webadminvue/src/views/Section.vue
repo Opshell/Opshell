@@ -2,7 +2,7 @@
     <article class="gridBlock">
 
         <header class="gridBar">
-            <div class="td check"><input type="checkbox" name="" id=""></div>
+            <div class="td check"><elInput type="check" @click="selectAll()" /></div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
             <div class="td icon">圖示</div>
@@ -17,9 +17,10 @@
 
 <script>
     import { mapState } from "vuex";
-    import { getData } from "../composition/getData.js"
+    import { getData } from "@/composition/getData.js"
 
-    import elSectionBar from "../components/el-sectionBar.vue";
+    import elSectionBar from "@/components/el-sectionBar.vue";
+    import elInput from "@/components/el-Input.vue";
     // import elTable from "../components/el-gridTable.vue";
 
     export default {
@@ -30,7 +31,7 @@
                 number: [1, 2, 3]
             };
         },
-        components: { elSectionBar  },
+        components: { elSectionBar, elInput },
         mounted: function () {
             const token = localStorage.getItem("token");
             getData(
@@ -51,6 +52,11 @@
                 "pageData",
             ]),
         },
+        methods: {
+            selectAll: function () {
+
+            }
+        }
     };
 </script>
 
