@@ -24,12 +24,9 @@ export default createStore({
         pageData: {},
     },
     getter: {},
-    mutations: {
-        // 變動 state 用(只能同步)
-        setLoading(state) {
-            // state的isLoading true/false 互轉
-            state.isLoading = !state.isLoading;
-        },
+    mutations: { // 變動 state 用(只能同步)
+        startLoading(state) { state.isLoading = true; },
+        endLoading(state) { state.isLoading = false; },
         signin(state) {
             state.isLogin = !state.isLogin;
         },

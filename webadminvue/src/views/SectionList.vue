@@ -17,11 +17,10 @@
 
 <script>
     import { mapState } from "vuex";
-    import { getData } from "@/composition/getData.js"
+    import { getData } from "../composition/getData.js"
 
-    import elSectionBar from "@/components/el-sectionBar.vue";
-    import elInput from "@/components/el-input.vue";
-    import store from "../store";
+    import elSectionBar from "../components/el-sectionBar.vue";
+    import elInput from "../components/el-input.vue";
     // import elTable from "../components/el-gridTable.vue";
 
     export default {
@@ -40,10 +39,10 @@
                 "GET", {},
                 { Authorization: `Bearer ${token}` },
             ).then((result) => {
-                store.commit('setLoading');
                 if (result.status) {
                     this.list = result.data.data;
                 }
+                this.$store.commit('endLoading');
             });
         },
         computed: {

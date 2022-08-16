@@ -13,6 +13,7 @@
         },
         components: {},
         mounted() {
+            this.$store.commit("endLoading");
             // const token = localStorage.getItem("token");
             // this.axios({
             //     url: "/api/dashboard/info",

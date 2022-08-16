@@ -11,6 +11,9 @@
         data() {
             return {};
         },
+        mounted: function() {
+            this.$store.commit("endLoading");
+        },
         components: {},
         methods: {},
         computed: {

@@ -9,7 +9,7 @@ const routes = [
         name: "Login",
         path: "/login",
         component: () => import("../views/Login.vue"),
-        meta: { requireAuth: true, title: '登入' },
+        meta: { title: '登入' },
     }, {
         name: "Dashboard",
         path: "/dashboard",
@@ -23,7 +23,7 @@ const routes = [
     }, {
         name: "SectionList",
         path: "/sectionList",
-        component: () => import("../views/Section.vue"),
+        component: () => import("../views/SectionList.vue"),
         meta: { requireAuth: true, title: "功能列表" },
     }, {
         name: "SectionInfo",
@@ -37,7 +37,7 @@ const routes = [
         meta: { requireAuth: true, title: "文章列表" },
     }, {
         name: "ArticleInfo",
-        path: "/articleInfo/:articleId",
+        path: "/articleInfo/:id",
         component: () => import("../views/ArticleInfo.vue"),
         meta: { requireAuth: true, title: "文章" },
     }, {
@@ -75,7 +75,7 @@ router.beforeEach(async (to, from) => {
     // console.log("from: ", from);
 
     store.commit("setRouteFrom", from);
-    store.commit("setLoading");
+    store.commit("startLoading"); // 開啟遮罩
     // 目的路由在meta上是否有設置requireAuth: true
     if (to.meta.requireAuth) {
         const isLogin = store.state.isLogin;

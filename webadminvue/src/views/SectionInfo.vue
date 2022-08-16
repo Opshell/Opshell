@@ -1,6 +1,6 @@
 <template>
     <div class="NewsInfo">
-        <h1>Here show the news{{ newsId }}'s information .</h1>
+        <h1>Here show the section's information by id = {{id}}.</h1>
     </div>
 </template>
 
@@ -12,6 +12,10 @@
             return {};
         },
         components: {},
+        mounted: function () {
+            console.log(this);
+            this.$store.commit("endLoading");
+        },
         methods: {},
         computed: {
             ...mapState([
@@ -19,8 +23,8 @@
                 "userData",
                 "pageData",
             ]),
-            newsId() {
-                return this.$route.params.newsId;
+            id: function() {
+                return this.$route.params.id;
             },
         },
     };

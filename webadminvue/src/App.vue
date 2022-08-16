@@ -17,6 +17,9 @@
             <Header class="headerBlock"></Header>
 
             <section class="contentBlock">
+                <transition name="fadeX" mode="out-in">
+                    <div class="loadingMask" v-show="isLoading"></div>
+                </transition>
                 <router-view v-slot="{ Component }">
                     <transition name="fadeX" mode="out-in">
                         <component :is="Component"></component>
@@ -58,18 +61,20 @@
         },
         method: {
             // logout: function () {
-            //     this.$store.commit("Signin");
+            //     this.$store.commit("signin");
             // },
         },
-        computed: mapState([
-            "isLogin",
-            "isLoading",
-            "userData",
-            "pageData",
-            // isLogin(){ // 取得共用狀態(是否登入)
-            //     return this.$store.state.isLogin;
-            // },
-        ]),
+        computed: {
+            ...mapState([
+                "isLogin",
+                "isLoading",
+                "userData",
+                "pageData",
+                // isLogin(){ // 取得共用狀態(是否登入)
+                //     return this.$store.state.isLogin;
+                // },
+            ]),
+        },
     };
 </script>
 
@@ -125,11 +130,21 @@
 
         .contentBlock {
             flex: 1;
+            position: relative;
             background: #1b1b1b;
             padding: 20px;
             box-shadow: $bascShadow;
             overflow: hidden;
             overflow-y: auto;
+
+            .loadingMask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: #2c474e;
+                @include setSize(100%, 100%);
+                z-index: 1;
+            }
 
             /* 卷軸設定 */
             &::-webkit-scrollbar {

@@ -34,6 +34,10 @@
                 this.iconList.push(svgDom.id);
             });
 
+            // console.log(this);
+            this.$store.commit('endLoading');
+
+
             // this.axios({
             //     url: "/sprite.svg",
             //     method: "GET",

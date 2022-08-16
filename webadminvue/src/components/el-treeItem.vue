@@ -116,6 +116,9 @@
 </script>
 
 <style scoped lang="scss">
+
+
+
     .linkBlock{
         .linkBox{
             background: rgba(0, 0, 0, 0.2);
@@ -142,6 +145,7 @@
         box-sizing: border-box;
 
         color: #eee;
+        transition: background-color .5s $cubic-FiSo .2s;
         cursor: pointer;
         overflow: hidden;
         .icon {
@@ -174,6 +178,12 @@
             }
             // &::before {}
         }
+
+        &:active {
+            background-color: #2c474e;
+            transition: background-color .15s $cubic-FiSo;
+        }
+
         &.router-link-exact-active {
             color: $colorSubs;
             .icon{

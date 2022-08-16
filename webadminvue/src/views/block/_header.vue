@@ -1,27 +1,33 @@
 <template>
     <header class="headerBlock">
         <h1 class="breadcrumbs">
+            <!-- <transition-group name="verbatim"> -->
+            <template v-for="(item, i) in breadcrumbs" :key="i">
+                <router-link v-if="item.href" class="breadcrumb" :to="item.href">
+                    <elSvgIcon v-if="i!=0" name="angle-small-right" />{{ item.title }}
+                </router-link>
+                <span v-else class="breadcrumb">
+                    <elSvgIcon v-if="i!=0" name="angle-small-right" />{{ item.title }}
+                </span>
+            </template>
+            <!-- </transition-group> -->
+
             <!-- <transition-group name="verbatim">
                 <span v-for="(item, i) in pageData.title" v-bind:key="i">
                     {{ item }}
                 </span>
             </transition-group> -->
-            <!-- <transition-group name="verbatim"> -->
-                <span v-for="(item, i) in breadcrumbs" :key="i">
-                    {{ item }}
-                </span>
-            <!-- </transition-group> -->
         </h1>
 
         <div class="searchBar">
-            <elInput placeholder="搜尋列"></elInput>
-            <elSvgIcon name="search"></elSvgIcon>
+            <elInput placeholder="搜尋列" />
+            <elSvgIcon name="search" />
         </div>
 
         <div class="CRUDBox">
-            <elSvgIcon name="disk"></elSvgIcon>
-            <elSvgIcon name="undo"></elSvgIcon>
-            <elSvgIcon name="trash"></elSvgIcon>
+            <elSvgIcon name="disk" />
+            <elSvgIcon name="undo" />
+            <elSvgIcon name="trash" />
         </div>
     </header>
 </template>
@@ -48,25 +54,25 @@
                 "isLogin",
                 "isLoading",
                 "userData",
-                "router",
+                "route",
                 "redirect",
                 "pageData",
-                // isLogin(){ // 取得共用狀態(是否登入)
-                //     return this.$store.state.isLogin;
-                // },
             ]),
             breadcrumbs: function () {
-                // console.log(this.pageData);
-                // console.log(this.redirect);
-                // console.log(this.route);
+                let breadcrumbs = this.route.to.fullPath.split("/");
+                breadcrumbs[0] = {
+                    title: '總覽',
+                    href: "/dashboard"
+                };
+                breadcrumbs[1] = {
+                    title: this.route.to.meta.title,
+                    href: this.route.to.path
+                };
+                if (breadcrumbs[2]) {
+                    breadcrumbs[2] = { title: 'ID：' + breadcrumbs[2], };
+                }
 
-                // let breadcrumbs = this.route.to.fullPath.split("/");
-                // breadcrumbs[0] = '首頁';
-                // if (breadcrumbs[2]) {
-                //     breadcrumbs[2] = 'ID：' + breadcrumbs[2];
-                // }
-                // return breadcrumbs;
-                return 1;
+                return breadcrumbs;
             }
     },
 
@@ -74,6 +80,7 @@
 </script>
 
 <style lang="scss">
+
     .headerBlock {
         position: relative;
         flex-shrink: 0;
@@ -98,6 +105,10 @@
             font-weight: normal;
             color: #fff;
             line-height: 0.8;
+            .breadcrumb {
+                display: flex;
+                align-items: center;
+            }
         }
         .searchBar {
             display: flex;

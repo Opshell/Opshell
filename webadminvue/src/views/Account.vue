@@ -27,7 +27,7 @@
         methods: {
             logout() {
                 // Cookies.remove("login");
-                this.$store.commit("Signin");
+                this.$store.commit("signin");
                 this.$router.push({ name: "Login" });
             },
         },
