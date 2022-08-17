@@ -1,11 +1,16 @@
 <template>
-
     <label class="labInput" v-if="type == 'checkbox'">
         <input class="input" type="checkbox" v-model="rawValue">
         <span v-if="placeholder" class="text">{{ placeholder }}</span>
     </label>
-    <input v-else-if="type == 'text'" :type="type" :name="name" :placeholder="placeholder" v-model="rawValue"
-        class="input" :disabled="disabled" />
+    <input v-else-if="type == 'text'"
+        class="input"
+        :type="type" :name="name"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        v-model="rawValue"
+        @change="backShow"
+    />
     <input v-else :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input"
         :disabled="disabled" />
 </template>
@@ -43,6 +48,11 @@
         mounted: function () {
             let vm = this;
             vm.rawValue = vm.value;
+        },
+        methods: {
+            backShow(e) {
+                this.$set(this, this.value, e);
+            }
         },
         watch: {
             rawValue: function (v) {

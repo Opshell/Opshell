@@ -30,7 +30,7 @@ class sectionController extends Controller
         //     ];
         //     $result = $this->sysSectionService->getList(0, 10, $param[0], $param[1], $getFeild);
         } else if($action == 'info') {
-
+            $result = $this->sysSectionService->getInfo($param[0]);
         }
 
         // return $result->toJson();

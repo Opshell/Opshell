@@ -65,7 +65,7 @@ $rwd-768: 768px;
 $rwd-500: 500px;
 $rwd-414: 414px;
 $rwd-320: 320px;
-@mixin setRwd($size) {
+@mixin setRWD($size) {
     @media(max-width: $size){
         @content;
     }

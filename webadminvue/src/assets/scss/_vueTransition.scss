@@ -12,7 +12,7 @@
 .blackHole-leave-active { transition: .3s $cubic-FiSo; }
 .blackHole-enter-from,
 .blackHole-leave-to { @include setSize(); }
-.blackHole-enter-to, 
+.blackHole-enter-to,
 .blackHole-leave-from { @include setSize(100%, 100%); }
 
 // 垂直位移淡入淡出
@@ -20,7 +20,6 @@
 .fadeY-leave-active {
     transition: .3s $cubic-FiSo;
 }
-
 .fadeY-enter-from {
     opacity: 0;
     transform: translateY(-100px);
@@ -32,14 +31,19 @@
 
 // 水平位移淡入淡出
 .fadeX-enter-active,
-.fadeX-leave-active { transition: .3s $cubic-FiSo; }
+.fadeX-leave-active {
+    border-radius: 0;
+    transition: .3s $cubic-FiSo;
+}
 
 .fadeX-enter-from {
     opacity: 0;
+    border-radius: 9999;
     transform: translateX(-100px);
 }
 .fadeX-leave-to {
     opacity: 0;
+    border-radius: 9999;
     transform: translateX(100px);
 }
 
@@ -52,7 +56,7 @@
     transition: .5s $cubic-FiSo;
 }
 .verbatim-enter-from,
-.verbatim-leave-to { 
-    opacity: 0; 
+.verbatim-leave-to {
+    opacity: 0;
     transform: translateX(-10px);
 }

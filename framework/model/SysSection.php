@@ -9,4 +9,8 @@ class SysSection extends Eloquent
     public $timestamps = true;
 
     protected $appends = [];
+
+    public function Parent(){
+        return $this->hasMany(SysSection::class, 'id', 'parent_id');
+    }
 }

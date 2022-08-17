@@ -39,10 +39,19 @@ abstract class Repository
         // ->toArray();
     }
 
-    public function getInfo($id = '') {
-        return $this->builder
-            ->find($id)
-        ->toArray();
+    public function getInfo($id = '', $select = []) {
+        if(empty($select)){
+            $info = $this->builder
+                ->where('id', $id)
+            ->first();
+        } else {
+            $info = $this->builder
+                ->select($select)
+                ->where('id', $id)
+            ->first();
+        }
+
+        return $info;
     }
 
     /** 建立builder

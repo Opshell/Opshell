@@ -10,6 +10,7 @@
 ## 程式碼風格原則：
 > - 是基底層(會被繼承的class)檔案開頭大寫。
 > - 繼承者，駝峰模式，開頭小寫。
+> - url => 要請求的網址 href => 要導向的位址
 
 ## 架構參考：
 ### [架構參考](https://www.muzilong.cn/storage/html/2/oomusou.io/laravel/laravel-architecture/index.html)：

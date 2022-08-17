@@ -4,13 +4,13 @@
 
         <div class="featuresBlock">
             <!-- <transition name="blackHole" mode="out-in"> -->
-            <Account v-if="isLogin"></Account>
-            <Login v-else></Login>
+                <Account v-if="isLogin"></Account>
+                <Login v-else></Login>
             <!-- </transition> -->
 
-            <!-- <transition name="blackHole" mode="out-in"> -->
-            <SideMenu v-if="isLogin"></SideMenu>
-            <!-- </transition> -->
+            <transition name="blackHole" mode="out-in">
+                <SideMenu v-if="isLogin"></SideMenu>
+            </transition>
         </div>
 
         <div v-if="isLogin" class="viewBlock">
@@ -141,7 +141,7 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                background: #2c474e;
+                background: #1e2b2e;
                 @include setSize(100%, 100%);
                 z-index: 1;
             }

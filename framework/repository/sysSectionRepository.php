@@ -13,19 +13,36 @@ class sysSectionRepository extends Repository
         return self::$_instance;
     }
     public function construct(){
-        // $this->builder = SysSection::query();
+        $this->builder = SysSection::query();
         // $this->creatTableSQL();
     }
 
     public function getList($cid = 0, $curPage = 1, $pageSize = 10, $select = [],  $lang = 1){
         if(empty($select)){
-            $list = SysSection::get();
+            $list = $this->builder->get();
         } else {
             $select = implode(', ', $select);
-            $list = SysSection::select($select)->get();
+            $list = $this->builder->select($select)->get();
         }
 
         return $list;
+    }
+
+    public function getInfo($id = '', $select = []) {
+        if(empty($select)){
+            $info = $this->builder
+                ->with([ 'Parent' ])
+                ->where('id', $id)
+            ->first();
+        } else {
+            $info = $this->builder
+                ->select($select)
+                ->with([ 'Parent' ])
+                ->where('id', $id)
+            ->first();
+        }
+
+        return $info;
     }
 
     /** 取得後台SideMenu
