@@ -33,8 +33,6 @@ export const mutations = { // 同步
         const Token = JWT.split("."); // 解析使用者資料
         const data = JSON.parse(Base64.decode(Token[1]));
 
-        console.log(data);
-
         // 記錄登入者資訊
         state.userData.user = data.user;
         state.userData.name = data.name;

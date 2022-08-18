@@ -18,7 +18,7 @@
                     :menu="item.child"
                     :depth="depth+1"
                     :hide_sub="(item.hide_sub)? true : false"
-                    :child_count="item.child.length"
+                    :child_count="item.child.length || 0"
                     @calc-height="calcHeight"
                 />
             </div>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { ref, reactive, onMounted, onUpdated, watch } from "vue";
     import elSvgIcon from "../components/el-svgIcon.vue";
 
     export default {
@@ -45,7 +46,10 @@
         components: { elSvgIcon },
         emits: [ "calcHeight" ],
         props: {
-            menu: {}, //
+            menu: {
+                type:  Object,
+                default: () => { }
+            },
             depth: { // 計算後推用
                 type: Number,
                 default: 0
@@ -59,59 +63,62 @@
                 default: 0
             }
         },
-        data: function () {
-            return {
-                list: {},
-                optionHeight: 40,
-                boxHeight: 0,
+        setup(props, { emit }) {
+            const list = reactive(props.menu);
+            // const hideSub = ref(props.hide_sub);
+            const boxHeight = ref(0);
+            const optionHeight = 40;
+
+            console.log(list);
+            onMounted(() => {
+                console.log(list);
+            });
+            onUpdated(() => {
+                console.log(list);
+            });
+
+            // --- methods ---
+            // 開啟子層
+            const openChild = (i) => {
+                list[i].hide_sub = !list[i].hide_sub; // hide_sub == 1 的時候，是收闔的
             };
-        },
-        mounted() {
-            this.list = this.menu;
-        },
-        methods: {
-            openChild: function (i) {
-                this.list[i].hide_sub = !this.list[i].hide_sub; // hide_sub == 1 的時候，是收闔的
-            },
-            calcHeight: function (boxh) {
-                this.boxHeight += boxh;
-                if(this.depth != 0){
-                    this.$emit("calcHeight", boxh);
+            /** 回拋Height
+             * @param {*} boxh  // 盒子高度
+             */
+            const calcHeight = (boxh) => {
+                boxHeight.value = Number(boxHeight.value) + Number(boxh);
+                if (props.depth != 0) {
+                    emit("calcHeight", boxh);
                 }
-            },
+            };
             /** 遞迴關閉下層選單
              * @param {list} Array // 要檢查的Array
              */
-            rcsCloseChild: function (list) {
-                let ths = this;
-                list.forEach(function(el){
-                    if(el.child != undefined){
+            const rcsCloseChild = (list) => {
+                list.forEach((el) => {
+                    if (el.child != undefined) {
                         el.hide_sub = true;
-                        ths.rcsCloseChild(el.child);
+                        rcsCloseChild(el.child);
                     }
                 });
             }
-        },
-        computed: {
-            // bh() {
-            //     return `height: ${(!this.hide_sub)? this.child_count * 40 : 0}px`;
-            // }
-        },
-        watch: {
-            menu: {
-                handler: function (v) {
-                    this.list = v;
-                },
-                deep: true,
-            },
-            hide_sub: {
-                handler: function (v) {
-                    if(v){ this.rcsCloseChild(this.list); }
-                    this.$emit("calcHeight", (!v)? this.child_count * this.optionHeight : -this.child_count * this.optionHeight);
-                },
-                deep: true,
+
+            // 上層關閉時，觸發遞進關閉下層
+            watch(props.hide_sub, (val) => {
+
+                console.log(val);
+                console.log(val);
+                if (val) { rcsCloseChild(list); }
+                emit("calcHeight", (!val) ? props.child_count * optionHeight : props.child_count * optionHeight);
+            }, { deep: true });
+
+            return {
+                list,
+                boxHeight,
+                openChild,
+                calcHeight,
             }
-        },
+        }
     }
 </script>
 

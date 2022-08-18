@@ -5,9 +5,7 @@
         @mouseleave="unfold"
     >
         <elSvgIcon v-if="icon != ''" class="svgIcon" :name="icon" />
-        <!-- <transition name="unfold" mode="out-in"> -->
-        <span class="text" :class="{unfold: showText}" :style="textSize">{{ text }}</span>
-        <!-- </transition> -->
+        <span class="text" :style="textSize">{{ text }}</span>
     </div>
 </template>
 
@@ -33,32 +31,28 @@
             },
         },
         setup(props) {
-            let show = ref(false);
+            let isHover = ref(false);
 
-            // 判斷伸縮文字
-            const showText = computed(() => props.icon == '' || (props.text != '' && show.value));
             // 計算展開長度
             const textSize = computed(() => {
-                const textLen = props.text.length;
-                let size = '';
+                const textLen = props.text.length; // 字數
+                let size = ''; // 預設輸出
 
-                if (props.icon != '' && props.text != '' && show.value) {
+                // 如果有icon && 有文字 && 被hover
+                if (props.icon != '' && props.text != '' && isHover.value) {
                     size = `width: ${textLen}em;`
                 }
 
                 return size;
             });
-
             // 判斷hover
             const unfold = () => {
                 if (props.icon != '') {
-                    show.value = !show.value;
+                    isHover.value = !isHover.value;
                 }
             };
 
             return {
-                show,
-                showText,
                 textSize,
                 unfold
             };
@@ -91,22 +85,25 @@
             box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .1),
                 -1px -1px 1px 0 rgba(255, 255, 255, .1);
             overflow: hidden;
-            // &:hover {
-            //     width: auto;
-            // }
             .text{
                 width: 0;
-                margin: 0 0 0 15px;
+                margin: 0 0 0 5px;
                 transition: .3s $cubic-FiSo;
                 white-space: nowrap;
             }
         }
 
         &:hover{
-            .svgIcon{
-                fill: $colorSubs;
-            }
             color: $colorSubs;
+            .svgIcon{ fill: $colorSubs; }
+        }
+        &:active{
+            color: #eee;
+            transition: 0;
+            .svgIcon{
+                fill: #eee;
+                transition: 0;
+            }
         }
     }
 </style>
