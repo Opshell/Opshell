@@ -1,33 +1,39 @@
 <template>
     <label class="labInput" v-if="type == 'checkbox'">
-        <input class="input" type="checkbox" v-model="rawValue">
+        <input class="input" type="checkbox" :value="modelValue">
         <span v-if="placeholder" class="text">{{ placeholder }}</span>
     </label>
-    <input v-else-if="type == 'text'"
-        class="input"
-        :type="type" :name="name"
+
+    <input v-else-if="type == 'text'" class="input"
+        :type="type"
+        :name="name"
         :placeholder="placeholder"
         :disabled="disabled"
-        v-model="rawValue"
-        @change="backShow"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
     />
-    <input v-else :type="type" :name="name" :placeholder="placeholder" v-model="rawValue" class="input"
-        :disabled="disabled" />
+
+    <input v-else class="input"
+        :type="type"
+        :name="name"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+    />
+
 </template>
 
 <script>
     export default {
         name: "elInput",
         props: {
+            modelValue: {},
             type: {
                 type: String,
                 default: "text",
             },
             name: {
-                type: String,
-                default: "",
-            },
-            value: {
                 type: String,
                 default: "",
             },
@@ -40,31 +46,12 @@
                 default: false,
             },
         },
-        data: function () {
-            return {
-                rawValue: "",
-            };
-        },
-        mounted: function () {
-            let vm = this;
-            vm.rawValue = vm.value;
-        },
-        methods: {
-            backShow(e) {
-                this.$set(this, this.value, e);
-            }
-        },
-        watch: {
-            rawValue: function (v) {
-                this.$emit("input", v);
-            },
-        },
+        data: function () { return {}; }
     };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
     input {
         @include setSize(100%, 35px);
         box-sizing: border-box;

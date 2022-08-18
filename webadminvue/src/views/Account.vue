@@ -6,7 +6,8 @@
 
         <div class="btnBox">
             <h2 class="text">{{ userData.name }}</h2>
-            <elBtn @click="logout" text="" title="登出" icon="sign-out" />
+            <elBtn @click="logout" text="登出" title="登出" icon="sign-out" />
+            <elBtn @click="logout" text="選項" title="選項" icon="settings-sliders" />
         </div>
     </article>
 </template>
@@ -41,12 +42,13 @@
 </script>
 
 <style scoped lang="scss">
+
     .accountBlock {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
-        padding: 20px;
+        padding: 20px 10px 10px;
         border-bottom: 5px solid $colorBack;
         box-sizing: border-box;
         margin: 0 auto;
@@ -63,7 +65,6 @@
             margin: 10px 10px 25px;
             overflow: hidden;
             box-shadow: $bascShadow, $bascShadow-in;
-
             .logo {
                 width: 100%;
             }
@@ -73,14 +74,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
 
             .text {
+                flex-grow: 1;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
                 color: #fff;
+                text-align: center;
             }
             .Btn {
                 @include setSize(40px, 40px);
                 flex-grow: 0;
                 margin: 0 0 0 10px;
+                .icon {
+                    @include setSize(40px, 40px);
+                }
+                &:hover {
+                    width: auto;
+                }
             }
         }
     }

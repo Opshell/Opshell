@@ -1,20 +1,19 @@
 <template>
     <section v-if="info" class="gridList" role="table">
         <header class="header">
-            <elSvgIcon :name="header.icon"/>
+            <elSvgIcon :name="header.icon" />
             <h2 class="title">
                 <elFormGroup title="功能名稱">
-                    <elInput v-model="header.title"/>
+                    <elInput v-model="header.title" />
                 </elFormGroup>
             </h2>
         </header>
 
         <div class="groupBlock">
-            <elFormGroup v-for="(item, i) in demand" :title="item.title" :key="'group_'+i">
-                <elInput v-model="info.value" :type="item.type" />
+            <elFormGroup v-for="(item, i) in info" :title="item.title" :key="'group_'+i">
+                <elInput v-model="item.value" :type="item.type" />
             </elFormGroup>
         </div>
-
     </section>
 </template>
 
@@ -39,8 +38,10 @@
         },
         data: function () {
             return {
-                header: {},
-                info: {},
+                header: {
+                    title: 123
+                },
+                info: [],
             };
         },
         components: { elSvgIcon, elFormGroup, elInput },
@@ -54,23 +55,22 @@
                 "GET", {},
                 { Authorization: `Bearer ${token}` },
             ).then((result) => {
-                console.log(result);
                 if (result.status) {
                     data = result.data;
-                }
 
-                if (!this.isObjEmpty(data)) {
-                    this.header.title = data.title;
-                    this.header.icon = data.icon;
-                    this.header.img = data.img;
-                }
+                    if (!this.isObjEmpty(data)) {
+                        this.header.title = data.title;
+                        this.header.icon = data.icon;
+                        this.header.img = data.img;
 
-                for (const key in this.info) {
-                    if (this.objHOP(this.info, key)) {
-                        const ele = this.info[key];
+                        for (const key in this.info) {
+                            if (this.objHOP(this.info, key)) {
+                                const ele = this.info[key];
 
-                        // 設定資料庫撈出來的值到info
-                        this.info[key].value = (data[ele.field])? data[ele.field] : this.info[key].default;
+                                // 設定資料庫撈出來的值到info
+                                this.info[key].value = (data[ele.field]) ? data[ele.field] : this.info[key].default;
+                            }
+                        }
                     }
                 }
 

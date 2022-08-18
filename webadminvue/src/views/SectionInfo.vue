@@ -13,67 +13,63 @@
     export default {
         data() {
             return {
-                demand: []
+                demand: [
+                    {
+                        title: '上層ID',
+                        field: 'parent_id',
+                        type: 'text',
+                        default: 0
+                    }, {
+                        title: '資料表名稱',
+                        field: 'table_name',
+                        type: 'text',
+                        default: ''
+                    }, {
+                        title: '檢查欄位名稱',
+                        field: 'field_name',
+                        type: 'text',
+                        default: ''
+                    }, {
+                        title: '檢查欄位值',
+                        field: 'field_value',
+                        type: 'text',
+                        default: ''
+                    }, {
+                        title: '檢視需要等級',
+                        field: 'auth_view',
+                        type: 'text',
+                        default: 0
+                    }, {
+                        title: '操作需要等級',
+                        field: 'auth_crud',
+                        type: 'text',
+                        default: 0
+                    }, {
+                        title: '資料夾預設關閉',
+                        field: 'hide_sub',
+                        type: 'text',
+                        default: 1
+                    }, {
+                        title: '節點連結',
+                        field: 'link',
+                        type: 'text',
+                        default: ''
+                    }, {
+                        title: '排序',
+                        field: 'sort',
+                        type: 'text',
+                        default: 1000
+                    }, {
+                        title: '節點狀態',
+                        field: 'status',
+                        type: 'radio',
+                        default: 1
+                    }
+                ]
             };
         },
         components: { elDetail },
-        mounted: function () {
-            const demand = [
-                {
-                    title: '上層ID',
-                    feild: 'parent_id',
-                    type: 'text',
-                    default: 0
-                }, {
-                    title: '資料表名稱',
-                    feild: 'table_name',
-                    type: 'text',
-                    default: ''
-                }, {
-                    title: '檢查欄位名稱',
-                    feild: 'field_name',
-                    type: 'text',
-                    default: ''
-                }, {
-                    title: '檢查欄位值',
-                    feild: 'field_value',
-                    type: 'text',
-                    default: ''
-                }, {
-                    title: '檢視需要等級',
-                    feild: 'auth_view',
-                    type: 'text',
-                    default: 0
-                }, {
-                    title: '操作需要等級',
-                    feild: 'auth_crud',
-                    type: 'text',
-                    default: 0
-                }, {
-                    title: '資料夾預設關閉',
-                    feild: 'hide_sub',
-                    type: 'text',
-                    default: 1
-                }, {
-                    title: '節點連結',
-                    feild: 'link',
-                    type: 'text',
-                    default: ''
-                }, {
-                    title: '排序',
-                    feild: 'sort',
-                    type: 'text',
-                    default: 1000
-                }, {
-                    title: '節點狀態',
-                    feild: 'status',
-                    type: 'radio',
-                    default: 1
-                }
-            ];
-
-            this.demand = demand;
-        },
+        mounted: function () {},
         methods: {},
         computed: {
             ...mapState([

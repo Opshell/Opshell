@@ -13,7 +13,7 @@
             <elInput v-model="loginForm.verification" placeholder="verification" :disabled="true" />
             <div class="btnBox">
                 <elBtn @click="handleLogin" text="登入" />
-                <elBtn text="忘記密碼" />
+                <elBtn @click="showData" text="忘記密碼" />
             </div>
         </form>
     </article>
@@ -47,7 +47,6 @@
         mounted() {
             this.loginForm.username = "Opshell";
             this.loginForm.password = "pass";
-            this.loginForm.verification = "test";
         },
         methods: {
             handleLogin() {
@@ -85,6 +84,10 @@
                     // 登入失敗
                     alert("帳號密碼不能為空");
                 }
+            },
+            showData() {
+                console.log(this.loginForm);
+                console.log(this.username);
             },
             authenticate: async function (username, password) {
                 return await this.axios({
