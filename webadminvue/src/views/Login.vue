@@ -13,68 +13,72 @@
             <elInput v-model="loginForm.verification" placeholder="verification" :disabled="true" />
             <div class="btnBox">
                 <elBtn @click="handleLogin" text="登入" />
-                <elBtn @click="showData" text="忘記密碼" />
+                <elBtn text="忘記密碼" />
             </div>
         </form>
     </article>
 </template>
 
 <script>
-    // import Cookies from "js-cookie";
-    // import { Base64 } from "js-base64";
-    import { mapState } from "vuex";
+import { defineAsyncComponent, reactive, onMounted } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
+    // import { useState } from "../hook/vuexSugar.js"
     import { getData } from "../hook/getData.js"
 
     // import elImg from "../components/el-img.vue";
-    import elBtn from "../components/el-button.vue";
     import elInput from "../components/el-input.vue";
 
     export default {
-        data() {
-            return {
-                loginForm: {
-                    username: "",
-                    password: "",
-                    verification: "",
-                },
-            };
-        },
+        name: "LoginVue3",
         components: {
             // elImg,
-            elBtn,
+            elBtn: defineAsyncComponent(() => import("../components/el-button.vue")),
             elInput,
         },
-        mounted() {
-            this.loginForm.username = "Opshell";
-            this.loginForm.password = "pass";
-        },
-        methods: {
-            handleLogin() {
+        setup() {
+            const store = useStore();
+            const router = useRouter();
+
+            //data
+            const loginForm = reactive({
+                username: '',
+                password: '',
+                verification: '',
+            });
+
+            // const vuexState = useState(['user']);
+
+            onMounted(() => {
+                loginForm.username = "Opshell";
+                loginForm.password = "pass";
+            });
+
+            // Methods
+            const handleLogin = () => {
                 const verification = "test";
-                const username = this.loginForm.username;
-                const password = this.loginForm.password;
+                const username = loginForm.username;
+                const password = loginForm.password;
 
                 if (username !== "" && password !== "") {
                     // 登入成功
-                    let store = this.$store;
-                    this.loginForm.verification = verification;
+                    // let store = useStore();
+                    loginForm.verification = verification;
 
                     // this.authenticate(username, password)
                     getData(
                         "/api/backEnd/login", "POST",
-                        {username, password}
+                        { username, password }
                     ).then((auth) => {
                         if (auth.status) {
                             localStorage.setItem("token", auth.data); // 紀錄token
-
-                            // let data = auth.data.split("."); // 解析使用者資料
-                            // data = JSON.parse(Base64.decode(data[1]));
 
                             store.commit("user/signIn");
                             store.commit("user/setUser", auth.data); // 記錄使用者資料
 
                             const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Dashboard" : store.state.redirect;
-                            this.$router.push({ name: redirect });
+                            router.push({ name: redirect });
                         } else {
                             console.log(auth);
                         }
@@ -83,53 +87,18 @@
                     // 登入失敗
                     alert("帳號密碼不能為空");
                 }
-            },
-            showData() {
-                console.log(this.loginForm);
-                console.log(this.username);
-            },
-            authenticate: async function (username, password) {
-                return await this.axios({
-                    url: "/api/backEnd/login",
-                    method: "POST",
-                    data: { username, password },
-                    // headers: { 'Content-Type': 'application/json' },
-                }).then((result) => {
-                    if (result.status == 200) {
-                        if (result.data.status == "Success") {
-                            return {
-                                status: true,
-                                msg: "登入成功",
-                                data: result.data.data,
-                            };
-                        } else {
-                            return {
-                                status: false,
-                                msg: result.data.message,
-                                data: result.data.data,
-                            };
-                        }
-                    } else {
-                        return {
-                            status: false,
-                            msg: result.data.message,
-                            data: result.data.data,
-                        };
-                    }
-                }).catch(() => {
-                    return false;
-                });
-            },
-        },
-        computed: mapState([
-            // 批量載入vuex state
-            "user",
-            "isLoading",
-        ]),
+            };
+
+            return {
+                // ...vuexState,
+                loginForm,
+                handleLogin
+            }
+        }
     };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .loginBlock {
         display: flex;
         flex-direction: column;
@@ -160,24 +129,16 @@
                 overflow: hidden;
                 box-shadow: $bascShadow, $bascShadow-in;
             }
-            .logo {
-                width: 100%;
-            }
-            .title {
-                color: #000;
-            }
+            .logo { width: 100%; }
+            .title { color: #000; }
         }
 
-        .input {
-            margin: 0 0 10px;
-        }
+        .input { margin: 0 0 10px; }
         .btnBox {
             display: flex;
             justify-content: center;
             margin: 10px 0 0;
-            .Btn + .Btn {
-                margin: 0 0 0 10px;
-            }
+            .Btn + .Btn { margin: 0 0 0 10px; }
         }
     }
 </style>

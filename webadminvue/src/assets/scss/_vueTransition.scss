@@ -15,6 +15,7 @@
 .blackHole-enter-to,
 .blackHole-leave-from { @include setSize(100%, 100%); }
 
+
 // 垂直位移淡入淡出
 .fadeY-enter-active,
 .fadeY-leave-active {
@@ -35,7 +36,6 @@
     border-radius: 0;
     transition: .3s $cubic-FiSo;
 }
-
 .fadeX-enter-from {
     opacity: 0;
     border-radius: 9999;
@@ -47,6 +47,21 @@
     transform: translateX(100px);
 }
 
+
+// 水平展開
+.unfold-enter-active,
+.unfold-leave-active {
+    transform: scaleX(1);
+    transition: .3s $cubic-FiSo;
+}
+.unfold-enter-from {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.unfold-leave-to {
+    opacity: 0;
+    transform: scaleX(0);
+}
 
 
 // 逐字出現

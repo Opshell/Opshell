@@ -34,8 +34,7 @@
 
 <script>
     import { mapState } from "vuex";
-    // import Login from "./views/Login.vue";
-    import Login from "./views/LoginVue3.vue";
+    import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
     import Header from "./views/block/_header.vue";
