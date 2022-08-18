@@ -50,9 +50,8 @@
         method: {},
         computed: {
             ...mapState([
-                "isLogin",
+                "user",
                 "isLoading",
-                "userData",
                 "route",
                 "redirect",
                 "pageData",

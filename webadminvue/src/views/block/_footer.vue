@@ -21,15 +21,13 @@
         },
         mounted: function () {},
         method: {},
-        computed: mapState([
-            "isLogin",
-            "isLoading",
-            "userData",
-            "pageData",
-            // isLogin(){ // 取得共用狀態(是否登入)
-            //     return this.$store.state.isLogin;
-            // },
-        ]),
+        computed: {
+            ...mapState([
+                "isLoading",
+                "user",
+                "pageData",
+            ]),
+        }
     };
 </script>
 

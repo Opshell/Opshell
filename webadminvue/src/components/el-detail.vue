@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import { getData } from "../composition/getData.js"
+    import { getData } from "../hook/getData.js"
     import elSvgIcon from "../components/el-svgIcon.vue";
     import elFormGroup from "../components/el-formGroup.vue";
     import elInput from "../components/el-input.vue";

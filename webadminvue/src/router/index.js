@@ -78,7 +78,7 @@ router.beforeEach(async (to, from) => {
     store.commit("startLoading"); // 開啟遮罩
     // 目的路由在meta上是否有設置requireAuth: true
     if (to.meta.requireAuth) {
-        const isLogin = store.state.isLogin;
+        const isLogin = store.state.user.isLogin;
 
         if (isLogin) {
             // const userDate = store.state.userData;

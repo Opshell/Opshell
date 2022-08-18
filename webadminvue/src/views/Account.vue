@@ -5,7 +5,7 @@
         </div>
 
         <div class="btnBox">
-            <h2 class="text">{{ userData.name }}</h2>
+            <h2 class="text">{{ user.userData.name }}</h2>
             <elBtn @click="logout" text="登出" title="登出" icon="sign-out" />
             <elBtn @click="logout" text="選項" title="選項" icon="settings-sliders" />
         </div>
@@ -28,21 +28,21 @@
         methods: {
             logout() {
                 // Cookies.remove("login");
-                this.$store.commit("signin");
+                this.$store.commit("user/signOut");
                 this.$router.push({ name: "Login" });
             },
         },
-        computed: mapState([
-            // 批量載入vuex state
-            "isLogin",
-            "isLoading",
-            "userData",
-        ]),
+        computed: {
+            ...mapState([
+                // 批量載入vuex state
+                "user",
+                "isLoading",
+            ]),
+        }
     };
 </script>
 
 <style scoped lang="scss">
-
     .accountBlock {
         display: flex;
         flex-direction: column;
@@ -69,7 +69,6 @@
                 width: 100%;
             }
         }
-
         .btnBox {
             display: flex;
             justify-content: center;

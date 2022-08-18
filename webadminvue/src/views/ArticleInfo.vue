@@ -8,7 +8,7 @@
 
 <script>
     import { mapState } from "vuex";
-    import { getData } from "../composition/getData.js"
+    import { getData } from "../hook/getData.js"
 
     import elTable from "../components/el-gridTable.vue";
 

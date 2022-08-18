@@ -1,6 +1,6 @@
 <template>
     <div class="Dashboard">
-        <h1>Welcome back {{ userData.name }}</h1>
+        <h1>Welcome back {{ user.userData.name }}</h1>
     </div>
 </template>
 
@@ -22,10 +22,12 @@
             // }).then(res => console.log(res));
         },
         methods: {},
-        computed: mapState([
-            // 批量載入vuex state
-            "userData",
-        ]),
+        computed: {
+            ...mapState([
+                // 批量載入vuex state
+                "user",
+            ])
+        },
     };
 </script>
 

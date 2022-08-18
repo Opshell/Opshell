@@ -17,7 +17,7 @@
 
 <script>
     import { mapState } from "vuex";
-    import { getData } from "../composition/getData.js"
+    import { getData } from "../hook/getData.js"
 
     import elSectionBar from "../components/el-sectionBar.vue";
     import elInput from "../components/el-input.vue";
@@ -49,7 +49,7 @@
             ...mapState([
                 // 批量載入vuex state
                 "isLoading",
-                "userData",
+                "user",
                 "pageData",
             ]),
         },

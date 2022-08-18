@@ -38,8 +38,13 @@
                 return false;
             });
         },
-        computed: mapState(["isLogin", "isLoading", "userData"]),
-        // <transition-group v-if="isLogin" name="verbatim" tag="nav" class="sideMenu"></transition-group>
+        computed: {
+            ...mapState([
+                "user",
+                "isLoading",
+                "userData"
+            ]),
+        }
     };
 </script>
 

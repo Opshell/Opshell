@@ -1,19 +1,19 @@
 <template>
-    <div class="app" :class="{ login: isLogin }">
+    <div class="app" :class="{ login: user.isLogin }">
         <div class="popupBlock"></div>
 
         <div class="featuresBlock">
             <!-- <transition name="blackHole" mode="out-in"> -->
-                <Account v-if="isLogin"></Account>
+                <Account v-if="user.isLogin"></Account>
                 <Login v-else></Login>
             <!-- </transition> -->
 
             <transition name="blackHole" mode="out-in">
-                <SideMenu v-if="isLogin"></SideMenu>
+                <SideMenu v-if="user.isLogin"></SideMenu>
             </transition>
         </div>
 
-        <div v-if="isLogin" class="viewBlock">
+        <div v-if="user.isLogin" class="viewBlock">
             <Header class="headerBlock"></Header>
 
             <section class="contentBlock">
@@ -34,7 +34,8 @@
 
 <script>
     import { mapState } from "vuex";
-    import Login from "./views/Login.vue";
+    // import Login from "./views/Login.vue";
+    import Login from "./views/LoginVue3.vue";
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
     import Header from "./views/block/_header.vue";
@@ -56,7 +57,6 @@
             return {};
         },
         mounted: function () {
-            // console.log(isLogin);
             // console.log(this.$store);
         },
         method: {
@@ -66,9 +66,8 @@
         },
         computed: {
             ...mapState([
-                "isLogin",
                 "isLoading",
-                "userData",
+                "user",
                 "pageData",
                 // isLogin(){ // 取得共用狀態(是否登入)
                 //     return this.$store.state.isLogin;
