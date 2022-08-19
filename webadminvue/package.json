@@ -52,10 +52,23 @@
   },
   "prettier": {
     "printWidth": 200,
-    "trailingComma": "es5",
     "tabWidth": 4,
-    "quotes": true,
-    "vueIndentScriptAndStyle": true
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "requirePragma": false,
+    "insertPragma": false,
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": true,
+    "endOfLine": "lf"
   },
   "browserslist": [
     "> 1%",

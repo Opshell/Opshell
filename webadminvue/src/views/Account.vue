@@ -83,17 +83,7 @@
                 color: #fff;
                 text-align: center;
             }
-            .Btn {
-                @include setSize(40px, 40px);
-                flex-grow: 0;
-                margin: 0 0 0 10px;
-                .icon {
-                    @include setSize(40px, 40px);
-                }
-                &:hover {
-                    width: auto;
-                }
-            }
+
         }
     }
 </style>

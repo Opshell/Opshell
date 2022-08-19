@@ -25,9 +25,9 @@
         </div>
 
         <div class="CRUDBox">
-            <elSvgIcon name="disk" />
-            <elSvgIcon name="undo" />
-            <elSvgIcon name="trash" />
+            <elBtn text="儲存" title="儲存" icon="disk" />
+            <elBtn text="回上頁" title="回上頁" icon="undo" />
+            <elBtn text="刪除" title="刪除" icon="trash" />
         </div>
     </header>
 </template>
@@ -36,13 +36,12 @@
     import { mapState } from "vuex";
     import elInput from "@/components/el-input.vue";
     import elSvgIcon from "@/components/el-svgIcon.vue";
-
-    // import elBtn from "./components/el-button.vue";
+    import elBtn from "@/components/el-button.vue";
 
     // @ is an alias to /src
     export default {
         name: "Header",
-        components: { elInput, elSvgIcon },
+        components: { elInput, elSvgIcon, elBtn },
         data: function () {
             return {};
         },
@@ -78,7 +77,6 @@
 </script>
 
 <style lang="scss">
-
     .headerBlock {
         position: relative;
         flex-shrink: 0;
@@ -107,29 +105,25 @@
                 display: flex;
                 align-items: center;
             }
+            .icon {
+                @include setSize(40px, 40px);
+            }
         }
         .searchBar {
             display: flex;
             margin: 0 10px;
             .icon {
+                @include setSize(40px, 40px);
                 margin: 0 0 0 5px;
             }
         }
         .CRUDBox {
-            // position: absolute;
-            // right: 0;
-            // bottom: 0;
             display: flex;
             background: #333;
             padding: 8px 5px 8px 15px;
             border-radius: 10px;
             transform: translate3d(25px, 0, 0);
             z-index: 1;
-        }
-
-        .icon {
-            @include setSize(40px, 40px);
-            + .icon { margin: 0 0 0 10px; }
         }
     }
 </style>

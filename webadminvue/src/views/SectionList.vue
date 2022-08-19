@@ -1,6 +1,5 @@
 <template>
     <article class="gridBlock">
-
         <header class="gridBar">
             <div class="td check"><elInput type="checkbox" @click="selectAll()" /></div>
             <div class="td parent">父層ID</div>
@@ -72,7 +71,7 @@
         display: grid;
         grid-gap: 2px 2px; // 水平 垂直
         grid-template-areas: "check parent id icon title link crud";
-        grid-template-columns: 40px 100px 60px 65px 1fr 1fr 120px;
+        grid-template-columns: 40px 100px 60px 65px 1fr 1fr 150px;
         width: 100%;
         border-bottom: 2px solid #1b1b1b;
         // align-items: center;
@@ -108,7 +107,10 @@
         }
         .title {grid-area: title;}
         .link {grid-area: link;}
-        .crud { grid-area: crud; }
+        .crud {
+            grid-area: crud;
+            justify-content: flex-end;
+        }
 
         &:hover .td {
             background: $colorMain;

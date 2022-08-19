@@ -10,8 +10,14 @@
             <div class="td title"> {{item.title}} </div>
             <div class="td link"> {{item.link}} </div>
             <div class="td crud">
-                <elSvgIcon :href="'/sectionInfo/' + item.id" class="tipsBtn" name="edit" text=""></elSvgIcon>
-                <elSvgIcon class="tipsBtn" name="trash" @click="delectSection(item.id)"></elSvgIcon>
+                <elBtn class="tipsBtn"
+                    :href="'/sectionInfo/' + item.id"
+                    icon="edit" text="編輯"
+                />
+                <elBtn class="tipsBtn"
+                    icon="trash" text="刪除"
+                    @click="delectSection(item.id)"
+                />
             </div>
         </div>
 
@@ -20,58 +26,51 @@
 </template>
 
 <script>
-// import { obj } from "../assets/js/opshellLibary";
+import { ref, watch } from "vue";
 import elSvgIcon from "../components/el-svgIcon.vue";
 import elInput from "../components/el-input.vue";
+import elBtn from "../components/el-button.vue";
 
 export default {
     name: "elSectionBar",
-    components: { elSvgIcon, elInput },
-    emits: [ "calcHeight" ] ,
+    components: { elSvgIcon, elInput, elBtn },
     props: {
-        menu: {}, //
+        menu: {},
         depth: { // 計算後推用
             type: Number,
             default: 0
         },
     },
-    data: function () {
-        return {
-            list: {},
-        };
-    },
-    mounted() {
-        this.list = this.deepCopy(this.menu);
-        for (const key in this.list) {
+    setup(props) {
+        const list = ref(props.menu);
 
-            if (this.objHOP(this.list, key)) {
-                const ele = this.list[key];
+        for (const key in list.value) {
+            if (Object.hasOwnProperty.call(list.value, key)) {
+                const ele = list.value[key];
 
                 let depath = '';
-                for (let i = 0; i < this.depth; i++) {
+                for (let i = 0; i < props.depth; i++) {
                     depath += '=';
                 }
-                if (this.depth > 0) { depath += '>'; }
-                this.list[key].parent_id = ele.parent_id.toString();
-                this.list[key].depath_id = ele.parent_id +' '+ depath;
+                if (props.depth > 0) { depath += '>'; }
+
+                list.value[key].parent_id = ele.parent_id.toString();
+                list.value[key].depath_id = ele.parent_id + ' ' + depath;
             }
         }
-    },
-    methods: {
-        delectSection: function (id) {
-            console.log(id);
-        }
-    },
-    computed: {
 
-    },
-    watch: {
-        menu: {
-            handler: function (v) {
-                this.list = v;
-            },
-            deep: true,
-        },
+        const delectSection = (id) => {
+            console.log(id);
+        };
+
+        watch(() => props.menu, (val) => {
+            list.value = val;
+        }, {deep: true});
+
+        return {
+            list,
+            delectSection
+        }
     },
 }
 </script>

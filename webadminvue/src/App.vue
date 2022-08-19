@@ -33,14 +33,13 @@
 </template>
 
 <script>
-    import { mapState } from "vuex";
+    import { useState } from "./hook/vuexSugar.js";
+
+    import Header from "./views/block/_header.vue";
+    import Footer from "./views/block/_footer.vue";
     import Login from "./views/Login.vue";
     import Account from "./views/Account.vue";
     import SideMenu from "./views/block/_sideMenu.vue";
-    import Header from "./views/block/_header.vue";
-    import Footer from "./views/block/_footer.vue";
-
-    // import elBtn from "./components/el-button.vue";
 
     // @ is an alias to /src
     export default {
@@ -52,27 +51,13 @@
             Login,
             Account,
         },
-        data: function () {
-            return {};
-        },
-        mounted: function () {
-            // console.log(this.$store);
-        },
-        method: {
-            // logout: function () {
-            //     this.$store.commit("signin");
-            // },
-        },
-        computed: {
-            ...mapState([
-                "isLoading",
-                "user",
-                "pageData",
-                // isLogin(){ // 取得共用狀態(是否登入)
-                //     return this.$store.state.isLogin;
-                // },
-            ]),
-        },
+        setup() {
+            const storeState = useState(['isLoading', 'user']);
+
+            return {
+                ...storeState
+            }
+        }
     };
 </script>
 
