@@ -5,28 +5,26 @@
 </template>
 
 <script>
-    import { mapState } from "vuex";
+import { ref } from "vue";
+    import axios from "axios";
 
-    import elTreeItem from "@/components/el-treeItemVue3";
+    import elTreeItem from "@/components/el-treeItem.vue";
 
     export default {
         name: "sideMenu",
-        components: {elTreeItem},
-        data: function () {
-            return {
-                list: {},
-            };
-        },
-        mounted: function () {
+        components: { elTreeItem },
+        setup() {
             const token = localStorage.getItem("token");
-            this.axios({
+            const list = ref([]);
+
+            axios({
                 url: "/api/backEnd/sidemenu",
                 method: "GET",
                 data: {},
                 headers: { Authorization: `Bearer ${token}` },
             }).then((result) => {
                 if (result.status == 200) {
-                    this.list = result.data.data;
+                    list.value = result.data.data;
                 } else {
                     return {
                         status: false,
@@ -37,14 +35,11 @@
             }).catch(() => {
                 return false;
             });
+
+            return {
+                list
+            };
         },
-        computed: {
-            ...mapState([
-                "user",
-                "isLoading",
-                "userData"
-            ]),
-        }
     };
 </script>
 
@@ -56,7 +51,6 @@
         @include setSize(100%, 100%);
         padding: 0;
         box-sizing: border-box;
-
         overflow-y: auto;
 
         .fitBar {
