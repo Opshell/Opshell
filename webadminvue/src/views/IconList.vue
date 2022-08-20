@@ -11,32 +11,30 @@
 </template>
 
 <script>
-    import { mapState } from "vuex";
+    import { onMounted, ref } from "vue";
+    import { useStore } from "vuex";
+    import { useState } from "../hook/vuexSugar.js";
     // import { getData } from "../hook/getData.js"
 
     import elSvgIcon from "../components/el-svgIcon.vue";
 
-    export default {
-        data() {
-            return {
-                iconList: [],
-            };
-        },
-        mounted: function () {
-            // getData(
-            //     '/sprite.svg',
-            //     {},
-            //     'GET'
-            // ).then((result) => {
+export default {
+        components: { elSvgIcon },
+        setup() {
+            const store = useStore();
+            const states = useState(["userData"]);
+            const iconList = ref([]);
 
-            let spriteSvg = [...document.getElementById('__SVG_SPRITE_NODE__').children];
-            spriteSvg.forEach(svgDom => {
-                this.iconList.push(svgDom.id);
+            onMounted(() => {
+                iconList.value = [];
+
+                let spriteSvg = [...document.getElementById('__SVG_SPRITE_NODE__').children];
+                spriteSvg.forEach(svgDom => {
+                    iconList.value.push(svgDom.id);
+                });
             });
 
-            // console.log(this);
-            this.$store.commit('endLoading');
-
+            store.commit('endLoading');
 
             // this.axios({
             //     url: "/sprite.svg",
@@ -52,13 +50,11 @@
             //         }
             //     }
             // });
+            return {
+                ...states,
+                iconList
+            };
         },
-        components: { elSvgIcon },
-        methods: {},
-        computed: mapState([
-            // 批量載入vuex state
-            "userData",
-        ]),
     };
 </script>
 

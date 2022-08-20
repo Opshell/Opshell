@@ -5,28 +5,23 @@
 </template>
 
 <script>
-    import { mapState } from "vuex";
+    import { onMounted } from "vue";
+    import { useStore } from "vuex";
+    import { useState } from "../hook/vuexSugar.js";
 
     export default {
-        data() {
-            return {};
-        },
         components: {},
-        mounted() {
-            this.$store.commit("endLoading");
-            // const token = localStorage.getItem("token");
-            // this.axios({
-            //     url: "/api/dashboard/info",
-            //     method: "GET",
-            //     headers: { "Authorization": `Bearer ${token}` }
-            // }).then(res => console.log(res));
-        },
-        methods: {},
-        computed: {
-            ...mapState([
-                // 批量載入vuex state
-                "user",
-            ])
+        setup() {
+            const store = useStore();
+            const states = useState(['user']);
+
+            onMounted(() => {
+                store.commit("endLoading");
+            });
+
+            return {
+                ...states
+            }
         },
     };
 </script>

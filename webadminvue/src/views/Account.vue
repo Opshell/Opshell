@@ -14,30 +14,30 @@
 
 <script>
     // import Cookies from "js-cookie";
-    import { mapState } from "vuex";
+    import { useRouter } from "vue-router";
+    import { useStore } from "vuex";
+    import { useState } from "../hook/vuexSugar.js";
 
     import elBtn from "../components/el-button.vue";
 
     export default {
-        data() {
-            return {};
-        },
         components: {
             elBtn,
         },
-        methods: {
-            logout() {
-                // Cookies.remove("login");
-                this.$store.commit("user/signOut");
-                this.$router.push({ name: "Login" });
-            },
-        },
-        computed: {
-            ...mapState([
-                // 批量載入vuex state
-                "user",
-                "isLoading",
-            ]),
+        setup() {
+            const store = useStore();
+            const router = useRouter();
+            const states = useState(['user']);
+
+            const logout = () => {
+                store.commit("user/signOut");
+                router.push({ name: "Login" });
+            }
+
+            return {
+                ...states,
+                logout
+            }
         }
     };
 </script>

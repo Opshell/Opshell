@@ -15,48 +15,44 @@
 </template>
 
 <script>
-    import { mapState } from "vuex";
+    import { onMounted, ref } from "vue";
+    import { useStore } from "vuex";
+    import { useState } from "../hook/vuexSugar.js";
     import { getData } from "../hook/getData.js"
 
     import elSectionBar from "../components/el-sectionBar.vue";
     import elInput from "../components/el-input.vue";
-    // import elTable from "../components/el-gridTable.vue";
 
     export default {
-        data() {
-            return {
-                header: [],
-                list: {},
-                number: [1, 2, 3]
-            };
-        },
         components: { elSectionBar, elInput },
-        mounted: function () {
-            const token = localStorage.getItem("token");
-            getData(
-                "/api/section/list",
-                "GET", {},
-                { Authorization: `Bearer ${token}` },
-            ).then((result) => {
-                if (result.status) {
-                    this.list = result.data.data;
-                }
-                this.$store.commit('endLoading');
+        setup() {
+            const store = useStore();
+            const states = useState(["isLoading", "user", "pageData"]);
+            const list = ref([]);
+            onMounted(() => {
+                const token = localStorage.getItem("token");
+                getData(
+                    "/api/section/list",
+                    "GET", {},
+                    { Authorization: `Bearer ${token}` },
+                ).then((result) => {
+                    if (result.status) {
+                        list.value = result.data.data;
+                    }
+                    store.commit('endLoading');
+                });
             });
-        },
-        computed: {
-            ...mapState([
-                // 批量載入vuex state
-                "isLoading",
-                "user",
-                "pageData",
-            ]),
-        },
-        methods: {
-            selectAll: function () {
+
+            const selectAll = () => {
 
             }
-        }
+
+            return {
+                ...states,
+                list,
+                selectAll
+            }
+        },
     };
 </script>
 
