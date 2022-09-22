@@ -1,7 +1,27 @@
 <template>
     <div class="app" :class="{ login: user.isLogin }">
-        <Home v-if="user.isLogin"></Home>
-        <Login v-else></Login>
+        <div class="popupBlock"></div>
+
+        <div class="featuresBlock">
+            <Login v-if="!user.isLogin"></Login>
+        </div>
+
+        <div v-if="user.isLogin" class="viewBlock">
+            <Header class="headerBlock"></Header>
+
+            <section class="contentBlock">
+                <transition name="fadeX" mode="out-in">
+                    <div class="loadingMask" v-show="isLoading"></div>
+                </transition>
+                <router-view v-slot="{ Component }">
+                    <transition name="fadeX" mode="out-in">
+                        <component :is="Component"></component>
+                    </transition>
+                </router-view>
+            </section>
+
+            <Footer class="footerBlock"></Footer>
+        </div>
     </div>
 </template>
 
@@ -34,6 +54,9 @@
         align-items: center;
         background: $colorBack;
         @include setSize(100%, 100vh);
+
+        padding: 0;
+        margin: 0;
 
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

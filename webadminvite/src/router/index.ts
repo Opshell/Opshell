@@ -10,7 +10,6 @@ const router = createRouter({
 
 // 在 login 頁面還不能完全做到攔截不正確登入訊息，我們必須在router.js做更進一步處理
 router.beforeEach(async (to, from) => {
-    console.log(store.state);
 
     store.commit('route/setRouteFrom', from);
     store.commit('route/startLoading'); // 開啟遮罩

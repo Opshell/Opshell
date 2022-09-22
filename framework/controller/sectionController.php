@@ -6,7 +6,7 @@ use stdClass;
 
 class sectionController extends Controller
 {
-    private $_path = 'news';
+    private $_path = 'section';
 
     public function __construct(){
         $this->sysSectionService = sysSectionService::getInstance();

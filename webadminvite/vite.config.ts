@@ -14,7 +14,9 @@ export default defineConfig({
     },
 
     plugins: [
-        vue(),
+        vue({
+
+        }),
         Components({
             dirs: [ 'src/components', 'src/views' ], // 指定components位置 預設是'src/components'
             dts: 'src/types/components.d.ts', // .d.ts生成位置
@@ -36,11 +38,19 @@ export default defineConfig({
                     'axios': [ // 整包 axios import
                         ['default', 'axios'], // import { default as axios } from 'axios',
                     ],
+                    'vue': [
+                        'PropType', 'defineProps'
+                    ]
                 },
             ],
             dirs: [],
             dts: 'src/types/auto-imports.d.ts', // typescript 宣告檔案位置
             vueTemplate: false,
+            eslintrc: {
+                enabled: false, // Default `false`
+                filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+                globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+            },
         }),
     ],
 

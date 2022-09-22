@@ -29,7 +29,7 @@ for (const path in modulesFiles) {
     // }
 }
 
-export const key: InjectionKey<Store<State>> = Symbol()
+export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
     modules
 });

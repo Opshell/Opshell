@@ -16,9 +16,7 @@ export const state = {
         auth: '3',
     },
 };
-export const actions = { // 非同步
-
-};
+export const actions = {};// 非同步
 export const mutations = { // 同步
     signIn(state) { state.isLogin = true; },
     signOut(state) { state.isLogin = false; },

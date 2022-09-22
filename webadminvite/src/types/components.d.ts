@@ -7,6 +7,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElBtn: typeof import('./../components/el-btn.vue')['default']
+    ElDetail: typeof import('./../components/el-detail.vue')['default']
+    ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
+    ElGridTable: typeof import('./../components/el-gridTable.vue')['default']
+    ElImg: typeof import('./../components/el-img.vue')['default']
+    ElInput: typeof import('./../components/el-input.vue')['default']
+    ElSectionBar: typeof import('./../components/el-sectionBar.vue')['default']
+    ElSvgIcon: typeof import('./../components/el-svgIcon.vue')['default']
+    ElTreeItem: typeof import('./../components/el-treeItem.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     Home: typeof import('./../views/Home.vue')['default']
     Login: typeof import('./../views/Login.vue')['default']
