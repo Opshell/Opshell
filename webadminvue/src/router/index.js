@@ -1,67 +1,53 @@
 import { createRouter, createWebHistory } from "vue-router";
 import axios from "axios";
 import store from "../store";
-import Home from "../views/Home.vue";
-// import Cookies from "js-cookie";
 
-const routes = [
-    {
-        name: "Login",
-        path: "/login",
-        component: () => import("../views/Login.vue"),
-        meta: { title: '登入' },
-    }, {
-        name: "Dashboard",
-        path: "/dashboard",
-        component: () => import("../views/Dashboard.vue"),
-        meta: { requireAuth: true, title: '後台總覽' },
-    }, {
-        name: "IconList",
-        path: "/iconList",
-        component: () => import("../views/IconList.vue"),
-        meta: { requireAuth: true },
-    }, {
-        name: "SectionList",
-        path: "/sectionList",
-        component: () => import("../views/SectionList.vue"),
-        meta: { requireAuth: true, title: "功能列表" },
-    }, {
-        name: "SectionInfo",
-        path: "/sectionInfo/:id",
-        component: () => import("../views/SectionInfo.vue"),
-        meta: { requireAuth: true, title: "功能" },
-    }, {
-        name: "ArticleList",
-        path: "/articleList",
-        component: () => import("../views/ArticleList.vue"),
-        meta: { requireAuth: true, title: "文章列表" },
-    }, {
-        name: "ArticleInfo",
-        path: "/articleInfo/:id",
-        component: () => import("../views/ArticleInfo.vue"),
-        meta: { requireAuth: true, title: "文章" },
-    }, {
-        // Home
-        name: "Home",
-        path: "/",
-        component: Home,
-        meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
-    }, {
-        // About
-        name: "About",
-        path: "/about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
-        meta: { requireAuth: true }, // 用來作為此頁是否需要權限驗證的設定
-    }, {
-        // 未定義網址 => 404
-        name: "PageNotFound",
-        path: "/:pathMatch(.*)*",
-        component: () => import("../views/PageNotFound.vue"),
-    },
-];
+// import Cookies from "js-cookie";
+import routes from "./router.js";
+
+// const routes = [
+//     {
+//         name: "Login",
+//         path: "/login",
+//         component: () => import("../views/Login.vue"),
+//         meta: { title: '登入' },
+//     }, {
+//         name: "Dashboard",
+//         path: "/dashboard",
+//         component: () => import("../views/Dashboard.vue"),
+//         meta: { requireAuth: true, title: '後台總覽' },
+//     }, {
+//         name: "IconList",
+//         path: "/iconList",
+//         component: () => import("../views/IconList.vue"),
+//         meta: { requireAuth: true },
+//     }, {
+//         name: "SectionList",
+//         path: "/sectionList",
+//         component: () => import("../views/SectionList.vue"),
+//         meta: { requireAuth: true, title: "功能列表" },
+//     }, {
+//         name: "SectionInfo",
+//         path: "/sectionInfo/:id",
+//         component: () => import("../views/SectionInfo.vue"),
+//         meta: { requireAuth: true, title: "功能" },
+//     }, {
+//         name: "ArticleList",
+//         path: "/articleList",
+//         component: () => import("../views/ArticleList.vue"),
+//         meta: { requireAuth: true, title: "文章列表" },
+//     }, {
+//         name: "ArticleInfo",
+//         path: "/articleInfo/:id",
+//         component: () => import("../views/ArticleInfo.vue"),
+//         meta: { requireAuth: true, title: "文章" },
+//     }, {
+//         // 未定義網址 => 404
+//         name: "PageNotFound",
+//         path: "/:pathMatch(.*)*",
+//         component: () => import("../views/PageNotFound.vue"),
+//     },
+// ];
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
