@@ -19,7 +19,13 @@ const routes: iRoute[] = [
         path: "/login",
         component: () => import('@/views/Login.vue'),
         meta: { title: '登入' },
-    }
+    }, {
+        name: "IconList",
+        path: "/iconList",
+        component: () => import('@/views/IconList.vue'),
+        meta: { title: 'Icon列表' },
+    },
+
 ];
 
 export default routes;

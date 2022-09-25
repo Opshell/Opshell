@@ -21,6 +21,7 @@ declare module '@vue/runtime-core' {
     ElTreeItem: typeof import('./../components/el-treeItem.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     Home: typeof import('./../views/Home.vue')['default']
+    IconList: typeof import('./../views/IconList.vue')['default']
     Login: typeof import('./../views/Login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

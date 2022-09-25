@@ -63,7 +63,7 @@
                             store.commit("user/signIn");
                             store.commit("user/setUser", auth.data); // 記錄使用者資料
 
-                            const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "Home" : store.state.redirect;
+                            const redirect = store.state.redirect == "" || store.state.redirect == undefined ? "IconList" : store.state.redirect;
                             router.push({ name: redirect });
                         } else {
                             console.log(auth);
