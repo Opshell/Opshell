@@ -32,48 +32,27 @@
     </header>
 </template>
 
-<script>
-    import { mapState } from "vuex";
-    import elInput from "@/components/el-input.vue";
-    import elSvgIcon from "@/components/el-svgIcon.vue";
-    import elBtn from "@/components/el-button.vue";
+<script setup lang="ts">
+    import { useStore } from "@/store";
 
-    // @ is an alias to /src
-    export default {
-        name: "Header",
-        components: { elInput, elSvgIcon, elBtn },
-        data: function () {
-            return {};
-        },
-        mounted: function () {},
-        method: {},
-        computed: {
-            ...mapState([
-                "user",
-                "isLoading",
-                "route",
-                "redirect",
-                "pageData",
-            ]),
-            breadcrumbs: function () {
-                let breadcrumbs = this.route.to.fullPath.split("/");
-                breadcrumbs[0] = {
-                    title: '總覽',
-                    href: "/dashboard"
-                };
-                breadcrumbs[1] = {
-                    title: this.route.to.meta.title,
-                    href: this.route.to.path
-                };
-                if (breadcrumbs[2]) {
-                    breadcrumbs[2] = { title: 'ID：' + breadcrumbs[2], };
-                }
+    const store = useStore();
 
-                return breadcrumbs;
-            }
-    },
+    const breadcrumbs = function () {
+        let breadcrumbs = store.state.route.to.fullPath.split("/");
+        breadcrumbs[0] = {
+            title: '總覽',
+            href: "/dashboard"
+        };
+        breadcrumbs[1] = {
+            title: store.state.route.to.meta.title,
+            href: store.state.route.to.path
+        };
+        if (breadcrumbs[2]) {
+            breadcrumbs[2] = { title: 'ID：' + breadcrumbs[2], };
+        }
 
-    };
+        return breadcrumbs;
+    }
 </script>
 
 <style lang="scss">

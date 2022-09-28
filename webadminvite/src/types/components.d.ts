@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     _footer: typeof import('./../views/block/_footer.vue')['default']
     _header: typeof import('./../views/block/_header.vue')['default']
     _sideMenu: typeof import('./../views/block/_sideMenu.vue')['default']
-    copy: typeof import('./../views/IconList copy.vue')['default']
     ElBtn: typeof import('./../components/el-btn.vue')['default']
     ElDetail: typeof import('./../components/el-detail.vue')['default']
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']

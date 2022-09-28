@@ -7,7 +7,7 @@
     </footer>
 </template>
 
-<script>
+<script lang="ts">
     import { mapState } from "vuex";
 
     // import elBtn from "./components/el-button.vue";
