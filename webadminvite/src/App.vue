@@ -7,11 +7,11 @@
         </div>
 
         <div v-if="user.isLogin" class="viewBlock">
-            <Header class="headerBlock"></Header>
+            <!-- <Header class="headerBlock"></Header> -->
 
             <section class="contentBlock">
                 <transition name="fadeX" mode="out-in">
-                    <div class="loadingMask" v-show="isLoading"></div>
+                    <div class="loadingMask" v-show="route.isLoading"></div>
                 </transition>
                 <router-view v-slot="{ Component }">
                     <transition name="fadeX" mode="out-in">
@@ -20,7 +20,7 @@
                 </router-view>
             </section>
 
-            <Footer class="footerBlock"></Footer>
+            <!-- <Footer class="footerBlock"></Footer> -->
         </div>
     </div>
 </template>
