@@ -7,6 +7,9 @@ module.exports = {
         sourceType: 'module', // 設定原始碼類型
         ecmaFeatures: {} // 其他語言擴展，包含jsx、全域嚴格模式等
     },
+    env: {
+        "vue/setup-compiler-macros": true,
+    },
     // 繼承套件的規則設定
     extends: [
         './.eslintrc-auto-import.json', // `unplugin-auto-import` 生成的規則設定

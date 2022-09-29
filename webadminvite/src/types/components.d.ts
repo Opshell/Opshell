@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     _footer: typeof import('./../views/block/_footer.vue')['default']
     _header: typeof import('./../views/block/_header.vue')['default']
     _sideMenu: typeof import('./../views/block/_sideMenu.vue')['default']
+    Account: typeof import('./../views/Account.vue')['default']
     ElBtn: typeof import('./../components/el-btn.vue')['default']
     ElDetail: typeof import('./../components/el-detail.vue')['default']
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
@@ -19,6 +20,8 @@ declare module '@vue/runtime-core' {
     ElSectionBar: typeof import('./../components/el-sectionBar.vue')['default']
     ElSvgIcon: typeof import('./../components/el-svgIcon.vue')['default']
     ElTreeItem: typeof import('./../components/el-treeItem.vue')['default']
+    Footer: typeof import('./../views/block/footer.vue')['default']
+    Header: typeof import('./../views/block/header.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     Home: typeof import('./../views/Home.vue')['default']
     IconList: typeof import('./../views/IconList.vue')['default']
@@ -26,5 +29,6 @@ declare module '@vue/runtime-core' {
     Login: typeof import('./../views/Login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SideMenu: typeof import('./../views/block/sideMenu.vue')['default']
   }
 }

@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
     import { useStore } from '@/store';
-    import { Ref } from '@vue/reactivity';
 
     const store = useStore();
     const iconList: Ref<string[]> = ref([]);
@@ -20,9 +19,8 @@
         iconList.value = [];
 
         const spriteSvg = document.getElementById('__svg__icons__dom__');
-
         if (spriteSvg != null) {
-            let svgList = Array.from(spriteSvg.children);
+            let svgList = [...spriteSvg.children];
 
             svgList.forEach((svgDom) => {
                 iconList.value.push(svgDom.id);

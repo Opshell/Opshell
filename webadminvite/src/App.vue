@@ -3,11 +3,18 @@
         <div class="popupBlock"></div>
 
         <div class="featuresBlock">
-            <Login v-if="!user.isLogin"></Login>
+            <!-- <transition name="blackHole" mode="out-in"> -->
+            <Account v-if="user.isLogin"></Account>
+            <Login v-else></Login>
+            <!-- </transition> -->
+
+            <transition name="blackHole" mode="out-in">
+                <SideMenu v-if="user.isLogin"></SideMenu>
+            </transition>
         </div>
 
         <div v-if="user.isLogin" class="viewBlock">
-            <!-- <Header class="headerBlock"></Header> -->
+            <Header class="headerBlock"></Header>
 
             <section class="contentBlock">
                 <transition name="fadeX" mode="out-in">
@@ -20,20 +27,13 @@
                 </router-view>
             </section>
 
-            <!-- <Footer class="footerBlock"></Footer> -->
+            <Footer class="footerBlock"></Footer>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import { useStore } from './store';
-    // import { useState } from "./hook/vuexSugar.js";
-
-    // import Home from "./views/block/_header.vue";
-    // import Header from "./views/block/_header.vue";
-    // import Footer from "./views/block/_footer.vue";
-    // import Account from "./views/Account.vue";
-    // import SideMenu from "./views/block/_sideMenu.vue";
 
     // @ is an alias to /src
     export default {

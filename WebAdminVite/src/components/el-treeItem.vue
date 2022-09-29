@@ -37,84 +37,69 @@
     </template>
 </template>
 
-<script>
-import { ref, watch } from "vue";
-    import elSvgIcon from "./el-svgIcon.vue";
+<script setup lang="ts">
+    import { Ref } from '@vue/reactivity';
 
-    export default {
-        name: "elTreeItem",
-        components: { elSvgIcon },
-        emits: [ "calcHeight" ],
-        props: {
-            menu: {
-                type:  Array,
-                default: () => []
-            },
-            depth: { // 計算後推用
-                type: Number,
-                default: 0
-            },
-            hide_sub: { // 是否收闔
-                type: Boolean,
-                default: true
-            },
-            child_count: { // 子層數量
-                type: Number,
-                default: 0
-            },
-        },
-        setup(props, target) {
-            const list = ref(props.menu);
-            const boxHeight = ref(0);
-            const optionHeight = 40;
-
-            // --- methods ---
-            // 開啟子層
-            const openChild = (i) => {
-                list.value[i].hide_sub = !list.value[i].hide_sub; // hide_sub == 1 的時候，是收闔的
-            };
-            /** 回拋Height
-             * @param {*} boxh  // 盒子高度
-             */
-            const calcHeight = (boxh) => {
-                boxHeight.value = Number(boxHeight.value) + Number(boxh);
-                if (props.depth != 0) {
-                    target.emit("calcHeight", boxh);
-                }
-            };
-            /** 遞迴關閉下層選單
-             * @param {list} Array // 要檢查的Array
-             */
-            const rcsCloseChild = (list) => {
-                list.forEach((el) => {
-                    // if (el.child != undefined) {
-                    if (el.child) {
-                        el.hide_sub = true;
-                        rcsCloseChild(el.child);
-                    }
-                });
-            }
-
-            // 監聽prop 要用函式丟
-            watch(() => props.menu, (val) => {
-                list.value = val;
-            }, { deep: true });
-
-            // 上層關閉時，觸發遞進關閉下層
-            watch(() => props.hide_sub, (val) => {
-                if (val) { rcsCloseChild(list.value); }
-                // 判斷開或關
-                target.emit("calcHeight", (!val) ? props.child_count * optionHeight : -props.child_count * optionHeight);
-            }, { deep: true });
-
-            return {
-                list,
-                boxHeight,
-                openChild,
-                calcHeight,
-            }
-        }
+    export interface iMenu {
+        id: number;
+        parent_id: number;
+        icon: string;
+        title: string;
+        link: string;
+        hide_sub: Boolean;
+        child?: iMenu[];
     }
+
+    const props = defineProps({
+        menu: Array<iMenu>,
+        depth: Number,
+        hide_sub: Boolean,
+        child_count: Number,
+    });
+    const emit = defineEmits(['calcHeight']);
+
+    const list: Ref<iMenu[]> = ref(props.menu);
+    const boxHeight: Ref<number> = ref(0);
+    const optionHeight = 40;
+
+    // --- methods ---
+    // 開啟子層
+    const openChild = (i: number) => {
+        list.value[i].hide_sub = !list.value[i].hide_sub; // hide_sub == 1 的時候，是收闔的
+    };
+
+    /** 回拋Height
+     * @param {*} boxh  // 盒子高度
+     */
+    const calcHeight = (boxh: number) => {
+        boxHeight.value = Number(boxHeight.value) + Number(boxh);
+        if (props.depth != 0) {
+            emit("calcHeight", boxh);
+        }
+    };
+
+    // 遞迴關閉下層選單
+    const rcsCloseChild = (list: iMenu[]) => {
+        list.forEach((el) => {
+            // if (el.child != undefined) {
+            if (el.child) {
+                el.hide_sub = true;
+                rcsCloseChild(el.child);
+            }
+        });
+    }
+
+    // 監聽prop 要用函式丟
+    watch(() => props.menu, (val: iMenu[]) => {
+        list.value = val;
+    }, { deep: true });
+
+    // 上層關閉時，觸發遞進關閉下層
+    watch(() => props.hide_sub, (val: boolean) => {
+        if (val) { rcsCloseChild(list.value); }
+        // 判斷開或關
+        emit("calcHeight", (!val) ? props.child_count * optionHeight : -props.child_count * optionHeight);
+    }, { deep: true });
 </script>
 
 <style scoped lang="scss">

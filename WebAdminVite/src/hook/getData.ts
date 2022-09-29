@@ -1,15 +1,6 @@
 // 從Axios 拉型別出來用
 import { Method, AxiosRequestHeaders } from "axios";
 
-// enum HTTP_VERBS {
-//     GET = 'GET',
-//     POST = 'POST',
-//     PUT = 'PUT',
-//     DELETE = 'DELETE',
-//     PATCH = 'PATCH',
-// }
-// type tHttpVerbs = keyof typeof HTTP_VERBS;
-
 export interface iResult {
     status: boolean;
     msg: string;

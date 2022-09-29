@@ -21,7 +21,7 @@ export default defineConfig({
         Components({
             dirs: [ 'src/components', 'src/views' ], // 指定components位置 預設是'src/components'
             dts: 'src/types/components.d.ts', // .d.ts生成位置
-            // resolvers: [ NaiveUiResolver() ] // 解析規則
+            resolvers: [ NaiveUiResolver() ] // 解析規則
         }),
         AutoImport({ // targets to transform
             // global imports to register
@@ -36,12 +36,15 @@ export default defineConfig({
                         // alias
                         ['useFetch', 'useMyFetch'], // import { useFetch as useMyFetch } from '@vueuse/core',
                     ],
+                    '@vue/reactivity': [
+                        'Ref'
+                    ],
                     'axios': [ // 整包 axios import
                         ['default', 'axios'], // import { default as axios } from 'axios',
                     ],
                     'vue': [
                         'PropType', 'defineProps'
-                    ]
+                    ],
                 },
             ],
             dirs: [],
