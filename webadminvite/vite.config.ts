@@ -15,9 +15,7 @@ export default defineConfig({
     },
 
     plugins: [
-        vue({
-
-        }),
+        vue({}),
         Components({
             dirs: [ 'src/components', 'src/views' ], // 指定components位置 預設是'src/components'
             dts: 'src/types/components.d.ts', // .d.ts生成位置
