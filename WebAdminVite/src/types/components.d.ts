@@ -7,6 +7,23 @@ export {};
 
 declare module '@vue/runtime-core' {
     export interface GlobalComponents {
+        BlockAccount: typeof import('./../views/block/block-account.vue')['default'];
+        BlockFooter: typeof import('./../views/block/block-footer.vue')['default'];
+        BlockHeader: typeof import('./../views/block/block-header.vue')['default'];
+        BlockSideMenu: typeof import('./../views/block/block-sideMenu.vue')['default'];
+        ElBtn: typeof import('./../components/el-btn.vue')['default'];
+        ElDetail: typeof import('./../components/el-detail.vue')['default'];
+        ElFormGroup: typeof import('./../components/el-formGroup.vue')['default'];
+        ElGridTable: typeof import('./../components/el-gridTable.vue')['default'];
+        ElInput: typeof import('./../components/el-input.vue')['default'];
+        ElSectionBar: typeof import('./../components/el-sectionBar.vue')['default'];
+        ElSvgIcon: typeof import('./../components/el-svgIcon.vue')['default'];
+        ElTreeItem: typeof import('./../components/el-treeItem.vue')['default'];
         HelloWorld: typeof import('./../components/HelloWorld.vue')['default'];
+        HomePage: typeof import('./../views/HomePage.vue')['default'];
+        IconList: typeof import('./../views/IconList.vue')['default'];
+        LoginPage: typeof import('./../views/LoginPage.vue')['default'];
+        RouterLink: typeof import('vue-router')['RouterLink'];
+        RouterView: typeof import('vue-router')['RouterView'];
     }
 }

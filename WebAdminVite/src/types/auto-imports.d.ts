@@ -4,7 +4,7 @@ declare global {
     const EffectScope: typeof import('vue')['EffectScope'];
     const InjectionKey: typeof import('vue')['InjectionKey'];
     const PropType: typeof import('vue')['PropType'];
-    const Ref: typeof import('@vue/reactivity')['Ref'];
+    const Ref: typeof import('vue')['Ref'];
     const axios: typeof import('axios')['default'];
     const computed: typeof import('vue')['computed'];
     const createApp: typeof import('vue')['createApp'];

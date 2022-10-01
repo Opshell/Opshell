@@ -49,14 +49,15 @@
         child?: iMenu[];
     }
 
-    const props = defineProps({
-        menu: Array<iMenu>,
-        depth: {
-            type: Number,
-            defualt: 0,
-        },
-        hide_sub: Boolean,
-        child_count: Number,
+    interface iProps {
+        menu: Array<iMenu>;
+        child_count: number;
+        hide_sub?: boolean;
+        depth?: number;
+    }
+
+    const props = withDefaults(defineProps<iProps>(), {
+        depth: 0,
     });
 
     const emit = defineEmits(['calcHeight']);

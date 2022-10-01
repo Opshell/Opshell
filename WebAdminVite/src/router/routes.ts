@@ -10,15 +10,15 @@ interface iRoute {
 
 const routes: iRoute[] = [
     {
-        name: 'Home',
+        name: 'HomePage',
         path: '/',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/HomePage.vue'),
         meta: {},
     },
     {
-        name: 'Login',
+        name: 'LoginPage',
         path: '/login',
-        component: () => import('@/views/Login.vue'),
+        component: () => import('@/views/LoginPage.vue'),
         meta: { title: '登入' },
     },
     {

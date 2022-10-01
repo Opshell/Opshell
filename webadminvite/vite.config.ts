@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
@@ -51,6 +52,13 @@ export default defineConfig({
             // include: [/\.vue$/],
             dts: 'src/types/components.d.ts', // .d.ts生成位置
             extensions: ['vue'],
+        }),
+        createSvgIconsPlugin({
+            iconDirs: [resolve(process.cwd(), 'src/assets/icons')], // 指定需要占存的Icon目錄
+            symbolId: '[name]', // 指定symbolId格式 預設：'icon-[dir]-[name]
+
+            inject: 'body-last', // | 'body-first' sprite插入位置
+            customDomId: '__svg__icons__dom__', // 自訂 Dom ID
         }),
     ],
     // 代理伺服器
