@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
@@ -44,6 +45,10 @@ export default defineConfig({
                 filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
                 globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
             },
+        }),
+        Components({
+            dirs: ['src/components', 'src/views'], // 指定components位置 預設是'src/components'
+            dts: 'src/types/components.d.ts', // .d.ts生成位置
         }),
     ],
 });
