@@ -14,3 +14,17 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
+<!-- Opshell Expansion -->
+## 完成 ESLint + Prettier 的架設
+
+1. 安裝 ESLint
+2. --init
+3. 設定除錯
+
+1. 安裝
+2. 補裝
+yarn add eslint-config-prettier -D
+yarn add eslint-plugin-prettier -D
+3. 設定繼承
+4. .prettierrc 注意使用 json 格式
