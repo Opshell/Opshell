@@ -8,7 +8,7 @@ import { resolve } from 'path';
 export default defineConfig({
     resolve: {
         alias: {
-            '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
+            '@': resolve(__dirname, 'src'), // 設定路徑別名 '@'指向'src'目录
         },
     },
     plugins: [
@@ -34,7 +34,7 @@ export default defineConfig({
                         // 整包 axios import
                         ['default', 'axios'], // import { default as axios } from 'axios',
                     ],
-                    vue: ['PropType', 'defineProps'],
+                    vue: ['PropType', 'defineProps', 'InjectionKey'],
                 },
             ],
             dirs: [],
@@ -51,7 +51,22 @@ export default defineConfig({
             dts: 'src/types/components.d.ts', // .d.ts生成位置
         }),
     ],
-
+    // 代理伺服器
+    server: {
+        port: 8080,
+        strictPort: false, // Port被占用時直接退出， false會嘗試連接下一個可用Port
+        open: true, // dev時自動打開網頁，也可以給網址指定。
+        // 自訂代理規則，配合後端進行Api呼叫等。
+        // 預設使用 [http-proxy](https://github.com/http-party/node-http-proxy) 完整設定請見官方
+        proxy: {
+            '/api': {
+                target: 'http://www.opshell/api/', // 本機串接
+                ws: true, // 代理的WebSockets
+                changeOrigin: true, // 允許websockets跨域
+                rewrite: (path) => path.replace(/^\/api/, ''),
+            },
+        },
+    },
     // 全域 SCSS
     css: {
         preprocessorOptions: {

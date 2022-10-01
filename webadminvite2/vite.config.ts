@@ -86,7 +86,6 @@ export default defineConfig({
             }
         }
     },
-
     build: {
         outDir: '../WebAdmin/', // 指定輸出位置(相對於project根目錄).
     }
