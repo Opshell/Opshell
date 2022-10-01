@@ -29,12 +29,12 @@ export default defineConfig({
                         // alias
                         ['useFetch', 'useMyFetch'], // import { useFetch as useMyFetch } from '@vueuse/core',
                     ],
-                    '@vue/reactivity': ['Ref'],
+                    // '@vue/reactivity': ['Ref'],
                     axios: [
                         // 整包 axios import
                         ['default', 'axios'], // import { default as axios } from 'axios',
                     ],
-                    vue: ['PropType', 'defineProps', 'InjectionKey'],
+                    vue: ['PropType', 'defineProps', 'InjectionKey', 'Ref'],
                 },
             ],
             dirs: [],
@@ -48,7 +48,9 @@ export default defineConfig({
         }),
         Components({
             dirs: ['src/components', 'src/views'], // 指定components位置 預設是'src/components'
+            // include: [/\.vue$/],
             dts: 'src/types/components.d.ts', // .d.ts生成位置
+            extensions: ['vue'],
         }),
     ],
     // 代理伺服器
@@ -75,5 +77,8 @@ export default defineConfig({
                 charset: false,
             },
         },
+    },
+    build: {
+        outDir: '../WebAdmin/', // 指定輸出位置(相對於project根目錄).
     },
 });
