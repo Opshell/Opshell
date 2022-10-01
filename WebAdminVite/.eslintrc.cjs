@@ -5,6 +5,7 @@ module.exports = {
         node: true,
     },
     extends: [
+        './.eslintrc-auto-import.json', // `unplugin-auto-import` 生成的規則設定
         'eslint:recommended',
         'plugin:vue/vue3-essential',
         'plugin:@typescript-eslint/recommended',

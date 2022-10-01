@@ -28,3 +28,5 @@ yarn add eslint-config-prettier -D
 yarn add eslint-plugin-prettier -D
 3. 設定繼承
 4. .prettierrc 注意使用 json 格式
+
+## 添加 unplugin-auto-import

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
@@ -9,5 +10,40 @@ export default defineConfig({
             '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
         },
     },
-    plugins: [vue()],
+    plugins: [
+        vue(),
+        AutoImport({
+            // targets to transform
+            // global imports to register
+            imports: [
+                // presets
+                'vue',
+                'vue-router',
+                'vuex',
+                {
+                    // custom
+                    '@vueuse/core': [
+                        // named imports
+                        'useMouse', // import { useMouse } from '@vueuse/core',
+                        // alias
+                        ['useFetch', 'useMyFetch'], // import { useFetch as useMyFetch } from '@vueuse/core',
+                    ],
+                    '@vue/reactivity': ['Ref'],
+                    axios: [
+                        // 整包 axios import
+                        ['default', 'axios'], // import { default as axios } from 'axios',
+                    ],
+                    vue: ['PropType', 'defineProps'],
+                },
+            ],
+            dirs: [],
+            dts: 'src/types/auto-imports.d.ts', // typescript 宣告檔案位置
+            vueTemplate: false,
+            eslintrc: {
+                enabled: true, // Default `false`
+                filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+                globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+            },
+        }),
+    ],
 });
