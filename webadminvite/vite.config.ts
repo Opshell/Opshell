@@ -51,4 +51,14 @@ export default defineConfig({
             dts: 'src/types/components.d.ts', // .d.ts生成位置
         }),
     ],
+
+    // 全域 SCSS
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "@/assets/scss/stylesheet.scss";`,
+                charset: false,
+            },
+        },
+    },
 });
