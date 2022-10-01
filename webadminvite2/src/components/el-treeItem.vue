@@ -48,7 +48,7 @@
         link: string;
         hide_sub: Boolean;
         child?: iMenu[];
-    }
+    };
 
     const props = defineProps({
         menu: Array<iMenu>,
@@ -56,6 +56,11 @@
         hide_sub: Boolean,
         child_count: Number,
     });
+
+    // const props = withDefaults(defineProps<Props>(), {
+    //     count: 0
+    // });
+
     const emit = defineEmits(['calcHeight']);
 
     const list: Ref<iMenu[]> = ref(props.menu);
@@ -97,8 +102,11 @@
     // 上層關閉時，觸發遞進關閉下層
     watch(() => props.hide_sub, (val: boolean) => {
         if (val) { rcsCloseChild(list.value); }
-        // 判斷開或關
-        emit("calcHeight", (!val) ? props.child_count * optionHeight : -props.child_count * optionHeight);
+
+        if (props.child_count) {
+            // 判斷開或關
+            emit("calcHeight", (!val) ? props.child_count * optionHeight : -props.child_count * optionHeight);
+        }
     }, { deep: true });
 </script>
 
