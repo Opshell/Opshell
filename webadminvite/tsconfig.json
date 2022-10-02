@@ -8,8 +8,8 @@
         "useDefineForClassFields": true,
         "module": "ESNext",
         "moduleResolution": "Node",
-        "strict": false, // 好像很容易誤報 先改成false
-        "noImplicitAny": false, // 是否在表達式和宣告上有含有的any時報錯
+        "strict": true, // 好像很容易誤報 先改成false
+        "noImplicitAny": true, // 是否在表達式和宣告上有含有的any時報錯
         "jsx": "preserve",
         "sourceMap": true,
         "resolveJsonModule": true,

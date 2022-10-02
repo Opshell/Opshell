@@ -105,11 +105,12 @@
     // 上層關閉時，觸發遞進關閉下層
     watch(
         () => props.hide_sub,
-        (val: boolean) => {
+        (val) => {
             if (val) {
                 rcsCloseChild(list.value);
             }
 
+            // 不等於0就進來
             if (props.child_count) {
                 // 判斷開或關
                 emit(

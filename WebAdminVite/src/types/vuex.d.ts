@@ -1,3 +1,5 @@
+import '@vue/runtime-core';
+
 import { iRouteState } from '@/store/modules/route'; // 路由相關
 import { iUserState } from '@/store/modules/user'; // 登入、使用者相關
 
