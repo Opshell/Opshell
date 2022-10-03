@@ -1,40 +1,23 @@
 {
     "compilerOptions": {
         "paths": {
-            "@/*": [
-                "./src/*"
-            ]
+            "@/*": ["./src/*"]
         },
-        "types": [
-            "vite/client",
-            "vite-plugin-svg-icons/client"
-        ],
+        "types": ["vite/client", "node", "vite-plugin-svg-icons/client"],
         "target": "ESNext",
         "useDefineForClassFields": true,
         "module": "ESNext",
         "moduleResolution": "Node",
-        "strict": true,
+        "strict": true, // 好像很容易誤報 先改成false
+        "noImplicitAny": true, // 是否在表達式和宣告上有含有的any時報錯
         "jsx": "preserve",
         "sourceMap": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
         "esModuleInterop": true,
-        "lib": [
-            "ESNext",
-            "DOM"
-        ],
+        "lib": ["ESNext", "DOM"],
         "skipLibCheck": true
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "src/types/*.d.ts"
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

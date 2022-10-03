@@ -1,5 +1,5 @@
 // 從Axios 拉型別出來用
-import { Method, AxiosRequestHeaders } from "axios";
+import { Method, AxiosRequestHeaders } from 'axios';
 
 export interface iResult {
     status: boolean;
@@ -11,32 +11,34 @@ export const getData = async function (
     url: string,
     method: Method = 'GET',
     data: any = {},
-    headers: AxiosRequestHeaders = {}
+    headers: AxiosRequestHeaders = {},
 ): Promise<iResult | false> {
     return await axios({
         url,
         method,
         data,
         headers,
-    }).then((response) => {
-        let result: iResult = {
-            status: false,
-            msg: response.data.message,
-            data: response.data.data,
-        }
+    })
+        .then((response) => {
+            const result: iResult = {
+                status: false,
+                msg: response.data.message,
+                data: response.data.data,
+            };
 
-        if (response.status == 200 && response.data.status == 'Success') {
-            result.status = true;
-        }
+            if (response.status == 200 && response.data.status == 'Success') {
+                result.status = true;
+            }
 
-        return result;
-    }).catch(() => false);
-}
+            return result;
+        })
+        .catch(() => false);
+};
 
 export default {
     setup() {
         return {
-            getData
-        }
-    }
-}
+            getData,
+        };
+    },
+};

@@ -1,10 +1,12 @@
 <template>
     <label class="labInput" v-if="type == 'checkbox'">
-        <input class="input" type="checkbox" :value="modelValue">
+        <input class="input" type="checkbox" :value="modelValue" />
         <span v-if="placeholder" class="text">{{ placeholder }}</span>
     </label>
 
-    <input v-else-if="type == 'text'" class="input"
+    <input
+        v-else-if="type == 'text'"
+        class="input"
         :type="type"
         :name="name"
         :placeholder="placeholder"
@@ -13,7 +15,9 @@
         @input="$emit('update:modelValue', $event.target.value)"
     />
 
-    <input v-else class="input"
+    <input
+        v-else
+        class="input"
         :type="type"
         :name="name"
         :placeholder="placeholder"
@@ -21,32 +25,33 @@
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
     />
-
 </template>
 
 <script>
     export default {
-        name: "elInput",
+        name: 'elInput',
         props: {
             modelValue: {},
             type: {
                 type: String,
-                default: "text",
+                default: 'text',
             },
             name: {
                 type: String,
-                default: "",
+                default: '',
             },
             placeholder: {
                 type: String,
-                default: "",
+                default: '',
             },
             disabled: {
                 type: Boolean,
                 default: false,
             },
         },
-        data: function () { return {}; }
+        data: function () {
+            return {};
+        },
     };
 </script>
 
@@ -65,25 +70,25 @@
             color: #ccc;
         }
 
-        &[type="text"],
-        &[type="password"] {
+        &[type='text'],
+        &[type='password'] {
             padding: 0px 5px;
             vertical-align: top;
             border: 1px solid rgba(216, 216, 216, 0.8);
         }
 
-        &[type="radio"],
-        &[type="checkbox"] {
+        &[type='radio'],
+        &[type='checkbox'] {
             margin-right: 5px;
             cursor: pointer;
             vertical-align: middle;
         }
 
-        &[type="number"] {
+        &[type='number'] {
             -moz-appearance: textfield;
         }
-        &[type="number"]::-webkit-inner-spin-button,
-        [type="number"]::-webkit-outer-spin-button {
+        &[type='number']::-webkit-inner-spin-button,
+        [type='number']::-webkit-outer-spin-button {
             margin: 0;
             -webkit-appearance: none;
         }
@@ -98,9 +103,9 @@
         display: flex;
         align-items: center;
         margin: 0;
-        .input{
+        .input {
             position: relative;
-            &[type="checkbox"] {
+            &[type='checkbox'] {
                 @include setSize(0, 0);
                 margin: 0;
                 &::before,
@@ -116,8 +121,8 @@
                     border-radius: 3px;
                     border: 3px solid #aaa;
                     transform: translate3d(-50%, -50%, 0);
-                    transition: border-color  .15s $cubic-FiSo,
-                                background-color .15s $cubic-FiSo .05s;
+                    transition: border-color 0.15s $cubic-FiSo,
+                        background-color 0.15s $cubic-FiSo 0.05s;
                 }
                 &::after {
                     @include setSize(0, 0);
@@ -129,7 +134,7 @@
                 }
 
                 &:checked {
-                    &::before{
+                    &::before {
                         border-color: #20ac33;
                         background-color: #16a328;
                     }
@@ -139,13 +144,14 @@
                         border-top: none;
                         border-right: none;
                         filter: drop-shadow(0 0 3px rgba(0, 0, 0, 1));
-                        transition: border-color .15s $cubic-FiSo,
-                                    height .15s $cubic-FiSo,
-                                    width .15s $cubic-FiSo .14s;
+                        transition: border-color 0.15s $cubic-FiSo, height 0.15s $cubic-FiSo,
+                            width 0.15s $cubic-FiSo 0.14s;
                     }
                 }
 
-                + .text { margin: 0 0 0 12px; }
+                + .text {
+                    margin: 0 0 0 12px;
+                }
             }
         }
     }

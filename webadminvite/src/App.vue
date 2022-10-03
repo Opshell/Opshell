@@ -1,24 +1,24 @@
 <template>
-    <div class="app" :class="{ login: user.isLogin }">
+    <div class="app" :class="{ login: states.user.isLogin }">
         <div class="popupBlock"></div>
 
         <div class="featuresBlock">
             <!-- <transition name="blackHole" mode="out-in"> -->
-            <Account v-if="user.isLogin"></Account>
-            <Login v-else></Login>
+            <BlockAccount v-if="states.user.isLogin"></BlockAccount>
+            <LoginPage v-else></LoginPage>
             <!-- </transition> -->
 
             <transition name="blackHole" mode="out-in">
-                <SideMenu v-if="user.isLogin"></SideMenu>
+                <BlockSideMenu v-if="states.user.isLogin"></BlockSideMenu>
             </transition>
         </div>
 
-        <div v-if="user.isLogin" class="viewBlock">
-            <Header class="headerBlock"></Header>
+        <div v-if="states.user.isLogin" class="viewBlock">
+            <BlockHeader class="headerBlock"></BlockHeader>
 
             <section class="contentBlock">
                 <transition name="fadeX" mode="out-in">
-                    <div class="loadingMask" v-show="route.isLoading"></div>
+                    <div class="loadingMask" v-show="states.route.isLoading"></div>
                 </transition>
                 <router-view v-slot="{ Component }">
                     <transition name="fadeX" mode="out-in">
@@ -27,25 +27,18 @@
                 </router-view>
             </section>
 
-            <Footer class="footerBlock"></Footer>
+            <BlockFooter class="footerBlock"></BlockFooter>
         </div>
     </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
     import { useStore } from './store';
 
     // @ is an alias to /src
-    export default {
-        name: "App",
-        setup() {
-            const store = useStore();
+    const store = useStore();
 
-            return {
-                ...store.state
-            }
-        }
-    };
+    const states = store.state;
 </script>
 
 <style lang="scss">

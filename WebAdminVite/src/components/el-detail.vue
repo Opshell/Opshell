@@ -10,7 +10,7 @@
         </header>
 
         <div class="groupBlock">
-            <elFormGroup v-for="(item, i) in info" :title="item.title" :key="'group_'+i">
+            <elFormGroup v-for="(item, i) in info" :title="item.title" :key="'group_' + i">
                 <elInput v-model="item.value" :type="item.type" />
             </elFormGroup>
         </div>
@@ -18,28 +18,29 @@
 </template>
 
 <script>
-    import { getData } from "../hook/getData.js"
-    import elSvgIcon from "../components/el-svgIcon.vue";
-    import elFormGroup from "../components/el-formGroup.vue";
-    import elInput from "./el-input.vue";
+    import { getData } from '../hook/getData.js';
+    import elSvgIcon from '../components/el-svgIcon.vue';
+    import elFormGroup from '../components/el-formGroup.vue';
+    import elInput from './el-input.vue';
 
     export default {
-        name: "elDetail",
+        name: 'elDetail',
         props: {
             url: {
                 type: String,
-                default: ""
+                default: '',
             },
-            demand: { // 要顯示的欄位 (裡面是物件 欄位名 欄位類型 預設值)
+            demand: {
+                // 要顯示的欄位 (裡面是物件 欄位名 欄位類型 預設值)
                 type: Array,
-                default: () => []
+                default: () => [],
             },
             value: {},
         },
         data: function () {
             return {
                 header: {
-                    title: 123
+                    title: 123,
                 },
                 info: [],
             };
@@ -47,14 +48,10 @@
         components: { elSvgIcon, elFormGroup, elInput },
         mounted() {
             this.info = this.deepCopy(this.demand);
-            let data = {}
+            let data = {};
 
-            const token = localStorage.getItem("token");
-            getData(
-                this.url,
-                "GET", {},
-                { Authorization: `Bearer ${token}` },
-            ).then((result) => {
+            const token = localStorage.getItem('token');
+            getData(this.url, 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
                 if (result.status) {
                     data = result.data;
 
@@ -68,7 +65,9 @@
                                 const ele = this.info[key];
 
                                 // 設定資料庫撈出來的值到info
-                                this.info[key].value = (data[ele.field]) ? data[ele.field] : this.info[key].default;
+                                this.info[key].value = data[ele.field]
+                                    ? data[ele.field]
+                                    : this.info[key].default;
                             }
                         }
                     }
@@ -86,7 +85,9 @@
         display: flex;
         align-items: flex-end;
         justify-content: flex-start;
-        .groupBox{ width: calc(100% - 150px) }
+        .groupBox {
+            width: calc(100% - 150px);
+        }
         .icon {
             @include setSize(100px, 100px);
             padding: 5px;
@@ -94,13 +95,14 @@
             border-radius: 3px;
             margin: -20px 5px 5px;
         }
-        .title { flex: 1;}
+        .title {
+            flex: 1;
+        }
     }
 
-    .groupBlock{
+    .groupBlock {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
     }
-
 </style>

@@ -1,0 +1,171 @@
+$colorBack: #000;
+$colorBack2: #2c2c2c;
+$colorBase: #eee;
+
+$colorMain: #2c3e50; // 主色
+$colorSubs: #F8B62B; // 輔色
+
+$colorSub2: #666;    // 輔色2
+
+$colorErro: #BC2837;
+$colorSucc: #339C3F;
+$colorWarr: #E99A2C;
+$colorInfo: #32abea;
+
+$colorFB  : #3b5998;
+$colorLINE: #00BA01;
+$colorTWIT: #1DA1F2;
+
+$bascShadow: 0 0 1px 0 rgba(0, 0, 0, .15);
+$bascShadow-in: 0 0 1px 0 rgba(0, 0, 0, .15) inset;
+
+$fzBase:15px;
+$fzTitle:16px;
+$fzSubtit:18px;
+$fzContent:20px;
+
+// 基本字形
+%baseFont {
+    color: $colorMain;
+    fill: $colorMain;
+    font-size: $fzBase;
+    font-family: 'Arial', 'Noto Sans TC', '微軟正黑體', sans-serif;
+    -webkit-text-stroke: 0.1px;
+    letter-spacing: 1px;
+}
+
+$cubic-FiSo: cubic-bezier(.37,.99,.92,.96); //快進場緩停
+$cubic-SiRo: cubic-bezier(.31,1.26,.19,1.11); //快速回彈
+$cubic-SiMo: cubic-bezier(.3,1,.94,1.1); //緩進微彈
+
+// 區塊設定
+%pm0 { margin: 0px; padding: 0px; }
+
+$sh_sans: 'source-han-sans-traditional', '微軟正黑體', sans-serif; // 無襯線(思源黑體)
+$sh_serif:'source-han-serif-tc', serif; // 襯線(思源宋體)
+
+//google Font
+$nt_sans: 'Arial', 'Noto Sans TC', '微軟正黑體', sans-serif; //思源黑體
+$Roboto: 'Roboto'; //Roboto
+$RozhaOne: 'Rozha One';
+
+// popup
+$popup-width : 800px;
+$popup-height : 900px;
+
+//RWD
+$rwd-1920: 1920px;
+$rwd-1600: 1600px;
+$rwd-1550: 1550px;
+$rwd-1300: 1300px;
+$rwd-1024: 1024px;
+$rwd-768: 768px;
+$rwd-500: 500px;
+$rwd-414: 414px;
+$rwd-320: 320px;
+@mixin setRWD($size) {
+    @media(max-width: $size){
+        @content;
+    }
+}
+
+
+//Browser compatibility
+@mixin setBC($k, $v){
+    -webkit-#{$k}: $v;
+       -moz-#{$k}: $v;
+        -ms-#{$k}: $v;
+         -o-#{$k}: $v;
+            #{$k}: $v;
+}
+
+@mixin setBack($rep:no-repeat, $pos:50% 50%, $siz:cover) {
+    background : {
+        repeat: $rep;
+        position: $pos;
+        size: $siz;
+    }
+}
+@mixin setSize($w:0, $h:0){
+    width: $w;
+    height: $h;
+}
+@mixin setProportion($proportion: 100%, $bs: contain){ // 等比例區塊
+    background-size: $bs;
+    &::before{
+        content: '';
+        display: block;
+        padding-top: $proportion;
+        @content;
+    }
+}
+
+// 分配字距justify
+@mixin setJustify(){
+    text-align: justify;
+    text-justify: inter-ideograph;
+    &::after{
+        content: "";
+        display: inline-block;
+        width: 100%;
+    }
+}
+//Delay Animate
+@mixin setDelay($ty, $e, $tv, $btv: 0, $s: 1) {
+    @for $i from $s through $e {
+        &:nth-child(#{$i}){
+            #{$ty}: #{$btv + $i * $tv}s;
+            @content;
+        }
+    }
+}
+@mixin setStr($el, $ty, $baseStr, $e, $attcStr: '', $s: 1){
+    @for $i from $s through $e {
+        &:nth-child(#{$i})#{$el}{
+            #{$ty}:#{$baseStr}#{$i}#{$attcStr};
+            @content;
+        }
+    }
+    //EX:{
+        // @include setStr("::after", "background", "url('../image/contact/line'", 6, ".png')");
+    // }
+}
+
+// 設定進場：未進場樣式, 進場樣式, 動畫曲線(預設)
+@mixin setIntoView($basc, $show, $cubic: .85s $cubic-SiRo){
+    @each $k, $v in $basc {
+        #{$k}: $v;
+    }
+    transition: $cubic;
+    &.animation{
+        @each $k, $v in $show {
+            #{$k}: $v;
+        }
+        @content;
+    }
+    //EX:{
+        // .setIntoView{
+        //     @include setIntoView(
+        //         $basc:(
+        //             transform: translate3d(-50px,0,0),
+        //             opacity: 0,
+        //         ),
+        //         $show:(
+        //             transform: translate3d(0,0,0),
+        //             opacity: 1,
+        //         ),
+        //         $cubic: .65s $cubic-SiRo
+        //     )
+        // }
+    //}
+}
+
+
+@import 'base';
+@import 'vueTransition';
+
+.noJS > div,
+.noJS > ul{display:none;}
+.noJS > noscript{display:block;width:100%;line-height:10em;}
+
+// @import 'responsive';

@@ -1,8 +1,11 @@
 <template>
-    <router-link v-if="href != ''"  :to="href"
-        class="Btn" role="button"
+    <router-link
+        v-if="href != ''"
+        :to="href"
+        class="Btn"
+        role="button"
         :title="title"
-        :class="[{icon: icon != ''}]"
+        :class="[{ icon: icon != '' }]"
         @mouseenter="unfold"
         @mouseleave="unfold"
         :style="boxSize"
@@ -11,9 +14,12 @@
         <span class="text" :style="textSize">{{ text }}</span>
     </router-link>
 
-    <div v-else class="Btn" role="button"
+    <div
+        v-else
+        class="Btn"
+        role="button"
         :title="title"
-        :class="[{icon: icon != ''}]"
+        :class="[{ icon: icon != '' }]"
         @mouseenter="unfold"
         @mouseleave="unfold"
         :style="boxSize"
@@ -24,28 +30,28 @@
 </template>
 
 <script>
-    import { defineAsyncComponent, ref, computed } from "vue";
+    import { defineAsyncComponent, ref, computed } from 'vue';
     export default {
-        name: "elBtn",
+        name: 'elBtn',
         components: {
-            elSvgIcon: defineAsyncComponent(() => import("./el-svgIcon.vue")),
+            elSvgIcon: defineAsyncComponent(() => import('./el-svgIcon.vue')),
         },
         props: {
             title: {
                 type: String,
-                default: "",
+                default: '',
             },
             icon: {
                 type: String,
-                default: "",
+                default: '',
             },
             href: {
                 type: String,
-                default: "",
+                default: '',
             },
             text: {
                 type: String,
-                default: "",
+                default: '',
             },
         },
         setup(props) {
@@ -60,30 +66,30 @@
             };
             // 如果有icon && 有文字 && 被hover
             const iconTextHover = computed(() => {
-                return (props.icon != '' && props.text != '' && isHover.value);
+                return props.icon != '' && props.text != '' && isHover.value;
             });
 
             // 盒子展開尺寸(讀取computed 要使用value)
             const boxSize = computed(() => {
-                return (iconTextHover.value)? `width: calc(50px + ${textLen.value}em);` : '';
+                return iconTextHover.value ? `width: calc(50px + ${textLen.value}em);` : '';
             });
             // 文字展開尺寸
             const textSize = computed(() => {
-                return (iconTextHover.value)? `width: ${textLen.value}em;` : '';
+                return iconTextHover.value ? `width: ${textLen.value}em;` : '';
             });
 
             return {
                 boxSize,
                 textSize,
-                unfold
+                unfold,
             };
-        }
+        },
     };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-    .Btn{
+    .Btn {
         position: relative;
         display: flex;
         align-items: center;
@@ -91,13 +97,13 @@
         background: $colorMain;
         width: 100%;
         padding: 8px 15px;
-        border: 1px solid rgba(60, 60, 60, .1);
+        border: 1px solid rgba(60, 60, 60, 0.1);
         border-radius: 1px;
         box-sizing: border-box;
-        box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15);
+        box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
         color: $colorBase;
         cursor: pointer;
-        transition: .2s $cubic-FiSo;
+        transition: 0.2s $cubic-FiSo;
         overflow: hidden;
 
         &.icon {
@@ -106,45 +112,49 @@
             justify-content: flex-start;
             @include setSize(40px, 40px);
             padding: 5px;
-            box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .1),
-                -1px -1px 1px 0 rgba(255, 255, 255, .1);
+            box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1), -1px -1px 1px 0 rgba(255, 255, 255, 0.1);
 
-            .text{
+            .text {
                 width: 0;
                 margin: 0;
-                transition: .15s $cubic-FiSo;
+                transition: 0.15s $cubic-FiSo;
                 white-space: nowrap;
                 overflow: hidden;
             }
 
             &:hover {
-                .text{ margin: 0 0 0 5px; }
+                .text {
+                    margin: 0 0 0 5px;
+                }
             }
-            + .icon { margin: 0 0 0 10px; }
+            + .icon {
+                margin: 0 0 0 10px;
+            }
         }
 
-        .svgIcon{
+        .svgIcon {
             flex-shrink: 0;
             fill: currentColor;
             @include setSize(30px, 100%);
             min-width: 12px;
             min-height: 12px;
             overflow: hidden;
-            transition: .3s ease-in-out;
+            transition: 0.3s ease-in-out;
         }
 
-        &:hover{
+        &:hover {
             background: $colorSub2;
             color: $colorSubs;
-            .svgIcon{ fill: $colorSubs; }
+            .svgIcon {
+                fill: $colorSubs;
+            }
         }
-        &:active{
+        &:active {
             background: $colorSubs;
             color: $colorMain;
-            transition: .03s $cubic-FiSo;
-            box-shadow: 0 0 1px 0 rgba(0, 0, 0, .15) inset,
-                        0 0 1px 0 rgba(255, 255, 255, .35);
-            .svgIcon{
+            transition: 0.03s $cubic-FiSo;
+            box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15) inset, 0 0 1px 0 rgba(255, 255, 255, 0.35);
+            .svgIcon {
                 fill: $colorMain;
                 transition: 0;
             }

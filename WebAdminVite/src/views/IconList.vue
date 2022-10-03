@@ -2,7 +2,7 @@
     <div class="iconBlock">
         <div v-for="(item, i) in iconList" class="iconBox" :key="i">
             <div class="box" :title="item">
-                <elSvgIcon :name="item" />
+                <ElSvgIcon :name="item" />
             </div>
             <!-- <div class="name">{{item}}</div> -->
         </div>
@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
     import { useStore } from '@/store';
+    import { Ref } from 'vue';
 
     const store = useStore();
     const iconList: Ref<string[]> = ref([]);
@@ -20,7 +21,7 @@
 
         const spriteSvg = document.getElementById('__svg__icons__dom__');
         if (spriteSvg != null) {
-            let svgList = [...spriteSvg.children];
+            let svgList = Array.from(spriteSvg.children);
 
             svgList.forEach((svgDom) => {
                 iconList.value.push(svgDom.id);
@@ -46,8 +47,8 @@
             border-radius: 5px;
             margin: 5px;
             cursor: pointer;
-            transition: .3s $cubic-FiSo;
-            .box{
+            transition: 0.3s $cubic-FiSo;
+            .box {
                 position: relative;
                 display: flex;
                 flex-direction: column;
@@ -67,7 +68,9 @@
                 word-break: break-all;
             }
 
-            &:hover { fill: #ccc; }
+            &:hover {
+                fill: #ccc;
+            }
         }
     }
 </style>

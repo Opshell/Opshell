@@ -1,18 +1,18 @@
 <template>
     <div class="groupBox" role="button" :title="title">
-        <h6 class="title">{{title}}：</h6>
+        <h6 class="title">{{ title }}：</h6>
         <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-        name: "elFormGroup",
+        name: 'elFormGroup',
         components: {},
         props: {
             title: {
                 type: String,
-                default: "",
+                default: '',
             },
         },
         data: function () {
@@ -34,16 +34,16 @@
         .title {
             display: flex;
             align-items: center;
-            border-right: 2px solid #1B1B1B;
+            border-right: 2px solid #1b1b1b;
             color: #bbb;
             font-size: 22px;
             white-space: nowrap;
         }
 
-        @include setRWD(1200px){
+        @include setRWD(1200px) {
             width: calc(50% - 5px);
         }
-        @include setRWD(500px){
+        @include setRWD(500px) {
             width: calc(100% - 5px);
         }
     }

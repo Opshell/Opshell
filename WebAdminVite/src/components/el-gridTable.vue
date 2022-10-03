@@ -7,7 +7,7 @@
         </header>
 
         <div v-for="(item, i) in list" class="gridBlock" :key="'item_' + i">
-            <div class=" gridBox" v-for="(val, key) in item" :key="val" :class="key">
+            <div class="gridBox" v-for="(val, key) in item" :key="val" :class="key">
                 <!-- <span class="key">{{ key }}</span> -->
                 <span class="value">{{ val }}</span>
             </div>
@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: "elGridTable",
+        name: 'elGridTable',
         props: {
             value: {},
         },
@@ -68,5 +68,4 @@
             border-right: 1px solid #3a7878;
         }
     }
-
 </style>
