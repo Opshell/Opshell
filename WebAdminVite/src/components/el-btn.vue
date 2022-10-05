@@ -29,62 +29,44 @@
     </div>
 </template>
 
-<script>
-    import { defineAsyncComponent, ref, computed } from 'vue';
-    export default {
-        name: 'elBtn',
-        components: {
-            elSvgIcon: defineAsyncComponent(() => import('./el-svgIcon.vue')),
-        },
-        props: {
-            title: {
-                type: String,
-                default: '',
-            },
-            icon: {
-                type: String,
-                default: '',
-            },
-            href: {
-                type: String,
-                default: '',
-            },
-            text: {
-                type: String,
-                default: '',
-            },
-        },
-        setup(props) {
-            const isHover = ref(false);
-            const textLen = ref(props.text.length); // 字數
+<script setup lang="ts">
+    import { RouteLocationRaw } from 'vue-router';
 
-            // 判斷hover
-            const unfold = () => {
-                if (props.icon != '') {
-                    isHover.value = !isHover.value;
-                }
-            };
-            // 如果有icon && 有文字 && 被hover
-            const iconTextHover = computed(() => {
-                return props.icon != '' && props.text != '' && isHover.value;
-            });
+    interface iProps {
+        title?: string;
+        icon?: string;
+        href?: RouteLocationRaw;
+        text?: string;
+    }
+    const props = withDefaults(defineProps<iProps>(), {
+        title: '',
+        icon: '',
+        href: '',
+        text: '',
+    });
 
-            // 盒子展開尺寸(讀取computed 要使用value)
-            const boxSize = computed(() => {
-                return iconTextHover.value ? `width: calc(50px + ${textLen.value}em);` : '';
-            });
-            // 文字展開尺寸
-            const textSize = computed(() => {
-                return iconTextHover.value ? `width: ${textLen.value}em;` : '';
-            });
+    const isHover = ref(false);
+    const textLen = ref(props.text.length); // 字數
 
-            return {
-                boxSize,
-                textSize,
-                unfold,
-            };
-        },
+    // 判斷hover
+    const unfold = () => {
+        if (props.icon != '') {
+            isHover.value = !isHover.value;
+        }
     };
+    // 如果有icon && 有文字 && 被hover
+    const iconTextHover = computed(() => {
+        return props.icon != '' && props.text != '' && isHover.value;
+    });
+
+    // 盒子展開尺寸(讀取computed 要使用value)
+    const boxSize = computed(() => {
+        return iconTextHover.value ? `width: calc(50px + ${textLen.value}em);` : '';
+    });
+    // 文字展開尺寸
+    const textSize = computed(() => {
+        return iconTextHover.value ? `width: ${textLen.value}em;` : '';
+    });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

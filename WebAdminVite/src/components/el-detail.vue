@@ -1,83 +1,69 @@
 <template>
     <section v-if="info" class="gridList" role="table">
         <header class="header">
-            <elSvgIcon :name="header.icon" />
+            <ElSvgIcon :name="header.icon" />
             <h2 class="title">
-                <elFormGroup title="功能名稱">
-                    <elInput v-model="header.title" />
-                </elFormGroup>
+                <ElFormGroup title="功能名稱">
+                    <ElInput v-model="header.title" />
+                </ElFormGroup>
             </h2>
         </header>
 
         <div class="groupBlock">
-            <elFormGroup v-for="(item, i) in info" :title="item.title" :key="'group_' + i">
+            <ElFormGroup v-for="(item, i) in info" :title="item.title" :key="'group_' + i">
                 <elInput v-model="item.value" :type="item.type" />
-            </elFormGroup>
+            </ElFormGroup>
         </div>
     </section>
 </template>
 
-<script>
-    import { getData } from '../hook/getData.js';
-    import elSvgIcon from '../components/el-svgIcon.vue';
-    import elFormGroup from '../components/el-formGroup.vue';
-    import elInput from './el-input.vue';
+<script setup lang="ts">
+    import { getData } from '@/hook/getData';
+    import { obj } from '@/hook/opshellLibary';
+    import { useStore } from '@/store';
+    const store = useStore();
 
-    export default {
-        name: 'elDetail',
-        props: {
-            url: {
-                type: String,
-                default: '',
-            },
-            demand: {
-                // 要顯示的欄位 (裡面是物件 欄位名 欄位類型 預設值)
-                type: Array,
-                default: () => [],
-            },
-            value: {},
-        },
-        data: function () {
-            return {
-                header: {
-                    title: 123,
-                },
-                info: [],
-            };
-        },
-        components: { elSvgIcon, elFormGroup, elInput },
-        mounted() {
-            this.info = this.deepCopy(this.demand);
-            let data = {};
+    interface iProps {
+        url: string;
+        demand: string[];
+        value?: {};
+    }
+    const props = withDefaults(defineProps<iProps>(), {});
 
-            const token = localStorage.getItem('token');
-            getData(this.url, 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
-                if (result.status) {
-                    data = result.data;
+    const info = obj.deepCopy(props.demand);
+    // let data = {};
 
-                    if (!this.isObjEmpty(data)) {
-                        this.header.title = data.title;
-                        this.header.icon = data.icon;
-                        this.header.img = data.img;
+    interface iData {
+        title: string;
+        icon: string;
+        img: string;
+    }
 
-                        for (const key in this.info) {
-                            if (this.objHOP(this.info, key)) {
-                                const ele = this.info[key];
+    let header: iData = { title: '', icon: '', img: '' };
 
-                                // 設定資料庫撈出來的值到info
-                                this.info[key].value = data[ele.field]
-                                    ? data[ele.field]
-                                    : this.info[key].default;
-                            }
-                        }
+    const token = localStorage.getItem('token');
+    getData(props.url, 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
+        if (result && result.status) {
+            let data = result.data;
+
+            if (!obj.isObjEmpty(data)) {
+                header.title = data.title;
+                header.icon = data.icon;
+                header.img = data.img;
+
+                for (const key in info) {
+                    if (obj.objHOP(info, key)) {
+                        const ele = info[key];
+
+                        // 設定資料庫撈出來的值到info
+                        info[key].value = data[ele.field] ? data[ele.field] : info[key].default;
                     }
                 }
+            }
+        }
 
-                this.$store.commit('endLoading');
-            });
-        },
-        watch: {},
-    };
+        store.state.commit('route/endLoading');
+    });
 </script>
 
 <style scoped lang="scss">

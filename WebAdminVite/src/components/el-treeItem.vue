@@ -63,7 +63,7 @@
     const emit = defineEmits(['calcHeight']);
 
     const list: Ref<iMenu[]> = ref(props.menu);
-    const boxHeight: Ref<number> = ref(0);
+    const boxHeight = ref(0);
     const optionHeight = 40;
 
     // --- methods ---
