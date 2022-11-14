@@ -30,20 +30,20 @@ router.beforeEach(async (to, from) => {
                             store.commit('route/setRedirect', '');
                         } else {
                             localStorage.setItem('token', '');
-                            return { name: 'Login' };
+                            return { name: 'LoginPage' };
                         }
                     } else {
                         localStorage.setItem('token', '');
-                        return { name: 'Login' };
+                        return { name: 'LoginPage' };
                     }
                 })
                 .catch(() => {
                     localStorage.setItem('token', '');
-                    return { name: 'Login' };
+                    return { name: 'LoginPage' };
                 });
         } else {
             localStorage.setItem('token', '');
-            return { name: 'Login' };
+            return { name: 'LoginPage' };
         }
     }
 

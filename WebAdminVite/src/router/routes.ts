@@ -24,14 +24,14 @@ const routes: iRoute[] = [
     {
         name: 'Dashboard',
         path: '/dashboard',
-        component: () => import('@/views/Dashboard.vue'),
+        component: () => import('@/views/DashboardPage.vue'),
         meta: { requireAuth: true, title: '後台總覽' },
     },
     {
         name: 'IconList',
         path: '/iconList',
         component: () => import('@/views/IconList.vue'),
-        meta: { requireAuth: true },
+        meta: { requireAuth: true, title: 'Icon列表' },
     },
     {
         name: 'SectionList',
@@ -63,12 +63,6 @@ const routes: iRoute[] = [
         path: '/:pathMatch(.*)*',
         component: () => import('@/views/PageNotFound.vue'),
         meta: { title: '未定義網址' },
-    },
-    {
-        name: 'IconList',
-        path: '/iconList',
-        component: () => import('@/views/IconList.vue'),
-        meta: { title: 'Icon列表' },
     },
 ];
 

@@ -1,7 +1,7 @@
 <template>
     <article class="gridBlock">
         <header class="gridBar">
-            <div class="td check"><elInput type="checkbox" @click="selectAll()" /></div>
+            <div class="td check"><ElInput type="checkbox" @click="selectAll()" /></div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
             <div class="td icon">圖示</div>
@@ -14,41 +14,29 @@
     </article>
 </template>
 
-<script>
-    import { onMounted, ref } from 'vue';
-    import { useStore } from 'vuex';
-    import { useState } from '../hook/vuexSugar.js';
-    import { getData } from '../hook/getData.js';
+<script setup lang="ts">
+    import { useStore } from '@/store';
+    import { getData } from '@/hook/getData';
 
-    import elSectionBar from '../components/el-sectionBar.vue';
-    import elInput from '../components/el-input.vue';
+    const store = useStore();
 
-    export default {
-        components: { elSectionBar, elInput },
-        setup() {
-            const store = useStore();
-            const states = useState(['isLoading', 'user', 'pageData']);
-            const list = ref([]);
-            onMounted(() => {
-                const token = localStorage.getItem('token');
-                getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then(
-                    (result) => {
-                        if (result.status) {
-                            list.value = result.data.data;
-                        }
-                        store.commit('endLoading');
-                    },
-                );
-            });
+    // [-] 取得列表
+    const list = ref([]);
+    onMounted(() => {
+        const token = localStorage.getItem('token');
+        getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then(
+            (result) => {
+                if (result && result.status) {
+                    list.value = result.data.data;
+                }
+                store.commit('endLoading');
+            },
+        );
+    });
 
-            const selectAll = () => {};
-
-            return {
-                ...states,
-                list,
-                selectAll,
-            };
-        },
+    // [+] 全選功能
+    const selectAll = () => {
+        console.log('ee');
     };
 </script>
 

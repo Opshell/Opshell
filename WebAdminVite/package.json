@@ -32,7 +32,7 @@
         "vite": "^3.1.0",
         "vite-plugin-svg-icons": "^2.0.1",
         "vue-router": "^4.0.13",
-        "vue-tsc": "^0.40.4",
+        "vue-tsc": "^1.0.9",
         "vuex": "^4.0.2"
     }
 }
