@@ -1,8 +1,6 @@
 <template>
-    <div class="News">
-        <h1>Here show the news list.</h1>
-
-        <elTable :value="list"></elTable>
+    <div class="NewsInfo">
+        <h1>Here show the news{{ newsId }}'s information .</h1>
     </div>
 </template>
 
@@ -44,6 +42,9 @@
                 'userData',
                 'pageData',
             ]),
+            newsId() {
+                return this.$route.params.newsId;
+            },
         },
     };
 </script>

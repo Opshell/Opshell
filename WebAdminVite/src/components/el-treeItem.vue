@@ -47,6 +47,8 @@
         link: string;
         hide_sub: boolean;
         child?: iMenu[];
+        depath_id?: string;
+        checked?: boolean;
     }
 
     interface iProps {

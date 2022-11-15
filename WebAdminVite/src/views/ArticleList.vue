@@ -1,29 +1,30 @@
 <template>
-    <div class="NewsInfo">
-        <h1>Here show the news{{ newsId }}'s information .</h1>
+    <div class="News">
+        <h1>Here show the news list.</h1>
+
+        <elTable :value="list"></elTable>
     </div>
 </template>
 
-<script>
-    import { mapState } from 'vuex';
+<script setup lang="ts">
+    import { useStore } from '@/store';
+    import { getData } from '@/hook/getData';
 
-    export default {
-        data() {
-            return {};
-        },
-        components: {},
-        methods: {},
-        computed: {
-            ...mapState([
-                // 批量載入vuex state
-                'userData',
-                'pageData',
-            ]),
-            newsId() {
-                return this.$route.params.newsId;
+    const store = useStore();
+
+    // 取得列表
+    const list = ref([]);
+    onMounted(() => {
+        const token = localStorage.getItem('token');
+        getData('/api/news/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then(
+            (result) => {
+                if (result && result.status) {
+                    list.value = result.data.data;
+                    store.commit('route/endLoading');
+                }
             },
-        },
-    };
+        );
+    });
 </script>
 
 <style scoped lang="scss"></style>

@@ -1,7 +1,9 @@
 <template>
     <article class="gridBlock">
         <header class="gridBar">
-            <div class="td check"><ElInput type="checkbox" @click="selectAll()" /></div>
+            <div class="td check">
+                <ElInput type="checkbox" v-model="allCheckStatus" @click="selectAll()" />
+            </div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
             <div class="td icon">圖示</div>
@@ -15,12 +17,15 @@
 </template>
 
 <script setup lang="ts">
+    import { iMenu } from '@/components/el-treeItem.vue';
+
     import { useStore } from '@/store';
     import { getData } from '@/hook/getData';
 
     const store = useStore();
 
-    // [-] 取得列表
+    // 取得列表
+    const allCheckStatus = ref(false);
     const list = ref([]);
     onMounted(() => {
         const token = localStorage.getItem('token');
@@ -28,15 +33,27 @@
             (result) => {
                 if (result && result.status) {
                     list.value = result.data.data;
+                    store.commit('route/endLoading');
                 }
-                store.commit('endLoading');
             },
         );
     });
 
     // [+] 全選功能
     const selectAll = () => {
-        console.log('ee');
+        const notCheckAll = list.value.filter((e: iMenu) => {
+            return e.checked == false;
+        });
+
+        if (notCheckAll) {
+            list.value.forEach((e: iMenu) => {
+                e.checked = true;
+            });
+        } else {
+            list.value.forEach((e: iMenu) => {
+                e.checked = false;
+            });
+        }
     };
 </script>
 

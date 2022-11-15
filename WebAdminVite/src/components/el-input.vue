@@ -1,6 +1,11 @@
 <template>
     <label v-if="type == 'checkbox'" class="labInput">
-        <input class="input" type="checkbox" :value="modelValue" />
+        <input
+            class="input"
+            type="checkbox"
+            :value="modelValue"
+            @input="updateModelValue($event)"
+        />
         <span v-if="placeholder" class="text">{{ placeholder }}</span>
     </label>
 
@@ -31,7 +36,7 @@
         (e: 'update:modelValue', value: string): void;
     }>();
     const updateModelValue = (event: Event) => {
-        // [-] 不斷言 HTMLInputElement的話 取值會有錯誤
+        // 不斷言 HTMLInputElement的話 取值會有錯誤
         const target = event.target as HTMLInputElement;
 
         emit('update:modelValue', target.value);

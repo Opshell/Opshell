@@ -54,7 +54,7 @@ export const obj = {
 
         return true;
     },
-    /** Object.prototype.hasOwnProperty.call */
+    // [-] Object.prototype.hasOwnProperty.call
     objHOP: function (obj: iAnyObj, key: string) {
         return Object.prototype.hasOwnProperty.call(obj, key);
     },
