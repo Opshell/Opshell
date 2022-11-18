@@ -1,4 +1,4 @@
-/**  字串相關 */
+// [-] 字串相關
 export const str = {
     // 補字 - 輸出成字串
     strPad: function (input: string, length: number, padStr = '0', type = 'left') {
