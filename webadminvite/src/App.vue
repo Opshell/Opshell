@@ -1,5 +1,6 @@
 <template>
     <div class="app" :class="{ login: states.user.isLogin }">
+        <elCanvasBg></elCanvasBg>
         <div class="popupBlock"></div>
 
         <div class="featuresBlock">

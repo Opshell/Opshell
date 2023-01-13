@@ -38,6 +38,7 @@
     import { getData } from '@/hook/getData';
 
     const store = useStore();
+    let aa: Opshell.iList = { title: ' 123', id: 1 };
 
     // 取得列表
     const list: Ref<Opshell.iList[]> = ref([]);
