@@ -1,57 +1,45 @@
 <template>
-    <label class="labInput" v-if="type == 'checkbox'">
-        <input class="input" type="checkbox" :value="modelValue" />
+    <label v-if="type == 'checkbox'" class="labInput">
+        <input
+            class="input"
+            type="checkbox"
+            :value="modelValue"
+            @input="updateModelValue($event)"
+        />
         <span v-if="placeholder" class="text">{{ placeholder }}</span>
     </label>
-
-    <input
-        v-else-if="type == 'text'"
-        class="input"
-        :type="type"
-        :name="name"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
-    />
 
     <input
         v-else
         class="input"
         :type="type"
-        :name="name"
         :placeholder="placeholder"
-        :disabled="disabled"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="updateModelValue($event)"
     />
 </template>
 
-<script>
-    export default {
-        name: 'elInput',
-        props: {
-            modelValue: {},
-            type: {
-                type: String,
-                default: 'text',
-            },
-            name: {
-                type: String,
-                default: '',
-            },
-            placeholder: {
-                type: String,
-                default: '',
-            },
-            disabled: {
-                type: Boolean,
-                default: false,
-            },
-        },
-        data: function () {
-            return {};
-        },
+<script setup lang="ts">
+    interface iProps {
+        modelValue?: any;
+        type?: string;
+        placeholder?: string;
+    }
+    const props = withDefaults(defineProps<iProps>(), {
+        type: 'text',
+        placeholder: '',
+    });
+
+    // type-based (TS)
+    const emit = defineEmits<{
+        (e: 'change', id: number): void;
+        (e: 'update:modelValue', value: string): void;
+    }>();
+    const updateModelValue = (event: Event) => {
+        // 不斷言 HTMLInputElement的話 取值會有錯誤
+        const target = event.target as HTMLInputElement;
+
+        emit('update:modelValue', target.value);
     };
 </script>
 

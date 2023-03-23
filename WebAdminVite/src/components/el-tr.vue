@@ -1,7 +1,9 @@
 <template>
     <template v-for="(item, i) in list" :key="'bar_' + i">
         <div class="gridBar">
-            <div class="td check"><elInput type="checkbox" v-model="item.checked" /></div>
+            <div class="td check">
+                <elInput type="checkbox" v-model="item.checked" />
+            </div>
             <div class="td parent">{{ item.depath_id }}</div>
             <div class="td id">{{ item.id }}</div>
             <div class="td icon">
@@ -11,11 +13,9 @@
             <div class="td link">{{ item.link }}</div>
             <div class="td crud">
                 <elBtn class="tipsBtn" :href="'/sectionInfo/' + item.id" icon="edit" text="編輯" />
-                <elBtn class="tipsBtn" icon="trash" text="刪除" @click="deleteSection(item.id)" />
+                <elBtn class="tipsBtn" icon="trash" text="刪除" @click="delectSection(item.id)" />
             </div>
         </div>
-
-        <elSectionBar v-if="item.child" :menu="item.child" :depth="depth + 1" />
     </template>
 </template>
 
@@ -52,7 +52,7 @@
         }
     }
 
-    const deleteSection = (id: number) => {
+    const delectSection = (id: number) => {
         console.log(id);
     };
 

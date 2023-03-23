@@ -1,4 +1,4 @@
-/**  字串相關 */
+// [-] 字串相關
 export const str = {
     // 補字 - 輸出成字串
     strPad: function (input: string, length: number, padStr = '0', type = 'left') {
@@ -54,7 +54,7 @@ export const obj = {
 
         return true;
     },
-    /** Object.prototype.hasOwnProperty.call */
+    // [-] Object.prototype.hasOwnProperty.call
     objHOP: function (obj: iAnyObj, key: string) {
         return Object.prototype.hasOwnProperty.call(obj, key);
     },

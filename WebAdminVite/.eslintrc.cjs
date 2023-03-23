@@ -31,6 +31,8 @@ module.exports = {
                 },
             },
         ],
+        // '@typescript-eslint/no-undef': ['off'], // 關閉警告(warning)：不允許未定義的變數
+        // '@typescript-eslint/no-unused-vars': ['off'], // 關閉警告(warning)：不允許未使用的變數
         // "@typescript-eslint/no-explicit-any": ["off"], // 關閉警告(warning)：不允許使用 any
     },
 };

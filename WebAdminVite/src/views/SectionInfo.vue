@@ -6,7 +6,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import { mapState } from 'vuex';
     import elDetail from '../components/el-detail.vue';
 

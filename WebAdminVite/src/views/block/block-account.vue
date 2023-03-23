@@ -21,7 +21,7 @@
 
     const logout = () => {
         store.commit('user/signOut');
-        router.push({ name: 'Login' });
+        router.push({ name: 'LoginPage' });
     };
 </script>
 

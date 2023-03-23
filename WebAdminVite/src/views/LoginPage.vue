@@ -7,7 +7,7 @@
             <h1 class="title">Opsehll 管理後台</h1>
         </section>
 
-        <form>
+        <form class="inputBox">
             <ElInput v-model="loginForm.username" placeholder="Username" />
             <ElInput v-model="loginForm.password" type="password" placeholder="Password" />
             <ElInput v-model="loginForm.verification" placeholder="verification" :disabled="true" />
@@ -77,11 +77,12 @@
     .loginBlock {
         display: flex;
         flex-direction: column;
-        background: #eee;
+        background: rgba(238, 238, 238, 0.65);
+        backdrop-filter: blur(8px);
         width: 100%;
-        max-width: 250px;
-        padding: 20px;
-        border-radius: 8px;
+        max-width: 300px;
+        padding: 40px;
+        border-radius: 15px;
         box-sizing: border-box;
         margin: 0 auto;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.08);
@@ -112,12 +113,21 @@
             }
         }
 
-        .input {
-            margin: 0 0 10px;
+        .inputBox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            .input {
+                height: 40px;
+            }
         }
+
         .btnBox {
             display: flex;
             justify-content: center;
+
+            width: 100%;
             margin: 10px 0 0;
             .Btn + .Btn {
                 margin: 0 0 0 10px;

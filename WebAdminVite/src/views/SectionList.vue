@@ -1,7 +1,9 @@
 <template>
     <article class="gridBlock">
         <header class="gridBar">
-            <div class="td check"><elInput type="checkbox" @click="selectAll()" /></div>
+            <div class="td check">
+                <ElInput type="checkbox" v-model="allCheckStatus" @click="selectAll()" />
+            </div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
             <div class="td icon">圖示</div>
@@ -14,41 +16,42 @@
     </article>
 </template>
 
-<script>
-    import { onMounted, ref } from 'vue';
-    import { useStore } from 'vuex';
-    import { useState } from '../hook/vuexSugar.js';
-    import { getData } from '../hook/getData.js';
+<script setup lang="ts">
+    import { iMenu } from '@/components/el-treeItem.vue';
 
-    import elSectionBar from '../components/el-sectionBar.vue';
-    import elInput from '../components/el-input.vue';
+    import { useStore } from '@/store';
+    import { getData } from '@/hook/getData';
 
-    export default {
-        components: { elSectionBar, elInput },
-        setup() {
-            const store = useStore();
-            const states = useState(['isLoading', 'user', 'pageData']);
-            const list = ref([]);
-            onMounted(() => {
-                const token = localStorage.getItem('token');
-                getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then(
-                    (result) => {
-                        if (result.status) {
-                            list.value = result.data.data;
-                        }
-                        store.commit('endLoading');
-                    },
-                );
+    const store = useStore();
+
+    // 取得列表
+    const allCheckStatus = ref(false);
+    const list = ref([]);
+    onMounted(() => {
+        const token = localStorage.getItem('token');
+        getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
+            if (result && result.status) {
+                list.value = result.data.data;
+                store.commit('route/endLoading');
+            }
+        });
+    });
+
+    // [+] 全選功能
+    const selectAll = () => {
+        const notCheckAll = list.value.filter((e: iMenu) => {
+            return e.checked == false;
+        });
+
+        if (notCheckAll) {
+            list.value.forEach((e: iMenu) => {
+                e.checked = true;
             });
-
-            const selectAll = () => {};
-
-            return {
-                ...states,
-                list,
-                selectAll,
-            };
-        },
+        } else {
+            list.value.forEach((e: iMenu) => {
+                e.checked = false;
+            });
+        }
     };
 </script>
 
