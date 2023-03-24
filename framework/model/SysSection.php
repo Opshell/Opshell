@@ -11,6 +11,6 @@ class SysSection extends Eloquent
     protected $appends = [];
 
     public function Parent(){
-        return $this->hasMany(SysSection::class, 'id', 'parent_id');
+        return $this->hasOne(SysSection::class, 'id', 'parent_id');
     }
 }

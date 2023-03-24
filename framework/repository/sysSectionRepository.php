@@ -28,15 +28,13 @@ class sysSectionRepository extends Repository
         return $list;
     }
 
-    public function getInfo($id = '', $select = []) {
+    public function getInfo($id = 0, $select = []) {
         if(empty($select)){
-            $info = $this->builder
-                ->with([ 'Parent' ])
+            $info = SysSection::with([ 'Parent' ])
                 ->where('id', $id)
             ->first();
         } else {
-            $info = $this->builder
-                ->select($select)
+            $info = SysSection::select($select)
                 ->with([ 'Parent' ])
                 ->where('id', $id)
             ->first();
@@ -58,6 +56,22 @@ class sysSectionRepository extends Repository
             ->orderBy('id', 'desc')
         ->get();
     }
+
+    /** 從parent_id == 0 && $authLevel 權限
+     *  開始取得後台section
+     *  如果有子節點，則繼續取得子節點並排序在後面
+     *  通通在同一階層
+     *  @param Int $authLevel
+     *  @return stdClass
+     */
+    public function getSectionList($authLevel){
+        return SysSection::select('id', 'parent_id', 'title', 'icon', 'hide_sub', 'link')
+            ->where('auth_view', '>=', $authLevel)
+            ->orderBy('parent_id')
+            ->orderBy('sort')
+        ->get();
+    }
+
 
     // 生成資料表
     public function creatTableSQL(){

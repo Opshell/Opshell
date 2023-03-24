@@ -1,40 +1,37 @@
 <template>
-    <label v-if="type == 'checkbox'" class="labInput">
-        <input class="input" type="checkbox" :checked="modelValue" @change="updateModelValue($event)" />
-        <span v-if="placeholder" class="text">{{ placeholder }}</span>
+    <label class="labInput">
+        <input class="input" type="checkbox" :checked="checked" @change="updateCheckStatus($event)" />
+        <span v-if="text" class="text">{{ text }}</span>
     </label>
-
-    <input v-else class="input" :type="type" :placeholder="placeholder" :value="modelValue" @input="updateModelValue($event)" />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+    // 一個vite + ts + vue3 的checkbox
     interface iProps {
-        modelValue?: string | number | boolean | null;
-        type?: string;
-        placeholder?: string;
+        checked?: boolean;
+        text?: string;
     }
+
     const props = withDefaults(defineProps<iProps>(), {
-        type: 'text',
-        placeholder: '',
+        checked: false,
+        text: '',
     });
 
-    // type-based (TS)
     const emit = defineEmits<{
         (e: 'change', id: number): void;
-        (e: 'update:modelValue', value: string): void;
+        (e: 'update:checked', checked: boolean): void;
     }>();
 
-    // input值更新的時候，emit出去
-    const updateModelValue = (event: Event) => {
+    // checkbox 狀態改變時
+    const updateCheckStatus = (event: Event) => {
         // 不斷言 HTMLInputElement的話 取值會有錯誤
         const target = event.target as HTMLInputElement;
 
-        emit('update:modelValue', target.value);
+        emit('update:checked', target.checked);
     };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
     input {
         @include setSize(100%, 35px);
         box-sizing: border-box;
@@ -48,34 +45,13 @@
             color: #ccc;
         }
 
-        &[type='text'],
-        &[type='password'] {
-            padding: 0px 5px;
-            vertical-align: top;
-            border: 1px solid rgba(216, 216, 216, 0.8);
-        }
-
         &[type='radio'],
         &[type='checkbox'] {
             margin-right: 5px;
             cursor: pointer;
             vertical-align: middle;
         }
-
-        &[type='number'] {
-            -moz-appearance: textfield;
-        }
-        &[type='number']::-webkit-inner-spin-button,
-        [type='number']::-webkit-outer-spin-button {
-            margin: 0;
-            -webkit-appearance: none;
-        }
-
-        &:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 30px #fcfcfc inset;
-        }
     }
-
     .labInput {
         position: relative;
         display: flex;

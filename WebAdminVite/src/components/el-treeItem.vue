@@ -1,10 +1,6 @@
 <template>
     <template v-for="(item, i) in list" :key="i">
-        <div
-            class="linkBlock"
-            v-if="item.child"
-            :class="{ box: item.child.length > 0, open: !item.hide_sub, fitBar: depth == 0 }"
-        >
+        <div class="linkBlock" v-if="item.child" :class="{ box: item.child.length > 0, open: !item.hide_sub, fitBar: depth == 0 }">
             <div class="link" :style="{ 'padding-left': depth * 1.5 + 'em' }" @click="openChild(i)">
                 <elSvgIcon class="icon" name="folder" />
                 <span class="text">{{ item.title }}</span>
@@ -12,24 +8,10 @@
                 <elSvgIcon v-else class="icon" name="square-minus" />
             </div>
             <div class="linkBox" :style="{ height: boxHeight + 'px' }">
-                <elTreeItem
-                    :menu="item.child"
-                    :depth="depth + 1"
-                    :hide_sub="item.hide_sub ? true : false"
-                    :child_count="item.child.length || 0"
-                    @calc-height="calcHeight"
-                />
+                <elTreeItem :menu="item.child" :depth="depth + 1" :hide_sub="item.hide_sub ? true : false" :child_count="item.child.length || 0" @calc-height="calcHeight" />
             </div>
         </div>
-        <router-link
-            v-else
-            class="link"
-            :class="{ fitBar: depth == 0 }"
-            :to="item.link"
-            :key="'i_' + item.id"
-            :depth="depth"
-            :style="{ 'padding-left': depth * 1.5 + 'em' }"
-        >
+        <router-link v-else class="link" :class="{ fitBar: depth == 0 }" :to="item.link" :key="'i_' + item.id" :depth="depth" :style="{ 'padding-left': depth * 1.5 + 'em' }">
             <elSvgIcon class="icon" :name="item.icon" />
             <span class="text">{{ item.title }}</span>
         </router-link>
@@ -46,6 +28,7 @@
         title: string;
         link: string;
         hide_sub: boolean;
+        stage?: string;
         child?: iMenu[];
         depath_id?: string;
         checked?: boolean;
@@ -115,10 +98,7 @@
             // 不等於0就進來
             if (props.child_count) {
                 // 判斷開或關
-                emit(
-                    'calcHeight',
-                    !val ? props.child_count * optionHeight : -props.child_count * optionHeight,
-                );
+                emit('calcHeight', !val ? props.child_count * optionHeight : -props.child_count * optionHeight);
             }
         },
         { deep: true },

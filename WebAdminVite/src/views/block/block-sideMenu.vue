@@ -13,13 +13,11 @@
     const token = localStorage.getItem('token');
     const list: Ref<iMenu[]> = ref([]);
 
-    getData('/api/backEnd/sidemenu', 'GET', {}, { Authorization: `Bearer ${token}` }).then(
-        (result) => {
-            if (result && result.status) {
-                list.value = result.data;
-            }
-        },
-    );
+    getData('/api/backEnd/sidemenu', 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
+        if (result && result.status) {
+            list.value = result.data;
+        }
+    });
 </script>
 
 <style lang="scss">

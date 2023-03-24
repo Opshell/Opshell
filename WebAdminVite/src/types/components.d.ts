@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     DashboardPage: typeof import('./../views/DashboardPage.vue')['default']
     ElBtn: typeof import('./../components/el-btn.vue')['default']
     ElCanvasBg: typeof import('./../components/el-canvasBg.vue')['default']
+    ElCheckBox: typeof import('./../components/el-checkBox.vue')['default']
     ElDetail: typeof import('./../components/el-detail.vue')['default']
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
     ElGridTable: typeof import('./../components/el-gridTable.vue')['default']

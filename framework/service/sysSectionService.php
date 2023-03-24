@@ -55,4 +55,41 @@ class sysSectionService extends Service {
                 return $e;
             })->toArray();
     }
+
+    /** 取得後台 SectionList
+     * @param Int $auth
+     */
+    public function getSectionList($auth) {
+        $this->result['status'] = true;
+        $this->result['message'] = 'Getting success.';
+
+        $list = [];
+        // 拉出全部的資料
+        $temp = $this->Repository->getSectionList($auth);
+
+        // [-] 用遞迴處理$temp的排序到$list裡
+        // 依照parent_id ,id 的關係做排序
+        // 並將parent_id = 0 的資料放到最上層
+        // 層數每增加一次 $level + 1
+        function recursive($temp, &$list, $parentId = 0, $level = 0) {
+            $stage = str_repeat('=', $level);
+            $level++;
+            foreach ($temp as $k => $e) {
+                if ($e->parent_id == $parentId) {
+                    $e->checked = false;
+                    $e->level = $level;
+                    $e->stage = "{$parentId} {$stage} >";
+
+                    $list[] = $e;
+                    unset($temp[$k]);
+                    recursive($temp, $list, $e->id, $level);
+                }
+            }
+        }
+        recursive($temp, $list);
+
+        $this->result['data'] = $list;
+
+        return (object)$this->result;
+    }
 }

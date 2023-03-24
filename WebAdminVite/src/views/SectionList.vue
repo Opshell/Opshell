@@ -2,7 +2,7 @@
     <article class="gridBlock">
         <header class="gridBar">
             <div class="td check">
-                <ElInput type="checkbox" v-model="allCheckStatus" @click="selectAll()" />
+                <ElCheckBox type="checkbox" v-model:checked="allCheckStatus" @click="selectAll()" />
             </div>
             <div class="td parent">父層ID</div>
             <div class="td id">ID</div>
@@ -12,7 +12,23 @@
             <div class="td crud">操作</div>
         </header>
 
-        <elSectionBar :menu="list" />
+        <!-- <elSectionBar :menu="list" /> -->
+        <template v-for="(item, i) in list" :key="'bar_' + i">
+            <div class="gridBar">
+                <div class="td check"><ElCheckBox type="checkbox" :value="item.id" v-model:checked="item.checked" /></div>
+                <div class="td parent">{{ item.stage }}</div>
+                <div class="td id">{{ item.id }}</div>
+                <div class="td icon">
+                    <elSvgIcon :name="item.icon"></elSvgIcon>
+                </div>
+                <div class="td title">{{ item.title }}</div>
+                <div class="td link">{{ item.link }}</div>
+                <div class="td crud">
+                    <elBtn class="tipsBtn" :href="'/sectionInfo/' + item.id" icon="edit" text="編輯" />
+                    <elBtn class="tipsBtn" icon="trash" text="刪除" @click="deleteSection(item.id)" />
+                </div>
+            </div>
+        </template>
     </article>
 </template>
 
@@ -26,7 +42,9 @@
 
     // 取得列表
     const allCheckStatus = ref(false);
-    const list = ref([]);
+
+    // 宣告 list 為類型iMenu 的Ref陣列
+    const list = ref<iMenu[]>([]);
     onMounted(() => {
         const token = localStorage.getItem('token');
         getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
@@ -34,16 +52,20 @@
                 list.value = result.data.data;
                 store.commit('route/endLoading');
             }
+
+            console.log(list.value);
         });
     });
 
     // [+] 全選功能
     const selectAll = () => {
+        // 有沒有已選的
         const notCheckAll = list.value.filter((e: iMenu) => {
             return e.checked == false;
         });
 
-        if (notCheckAll) {
+        if (notCheckAll.length > 0) {
+            // 有未選的
             list.value.forEach((e: iMenu) => {
                 e.checked = true;
             });
@@ -53,6 +75,25 @@
             });
         }
     };
+
+    // 監聽 list 裡面 item.checked 的變化
+    // 如果有人發生改變
+    // 隨著變化更改 selectAll 的狀態
+    watch(
+        () => list.value,
+        () => {
+            const notCheckAll = list.value.filter((e: iMenu) => {
+                return e.checked == false;
+            });
+
+            if (notCheckAll.length > 0) {
+                allCheckStatus.value = false;
+            } else {
+                allCheckStatus.value = true;
+            }
+        },
+        { deep: true },
+    );
 </script>
 
 <style lang="scss">

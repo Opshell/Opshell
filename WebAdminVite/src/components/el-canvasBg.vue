@@ -73,9 +73,7 @@
                         this.addedX = 0;
                         this.addedY = 0;
                         this.rad = 0;
-                        this.lightInputMultiplier =
-                            opts.baseLightInputMultiplier +
-                            opts.addedLightInputMultiplier * Math.random();
+                        this.lightInputMultiplier = opts.baseLightInputMultiplier + opts.addedLightInputMultiplier * Math.random();
 
                         this.color = opts.color.replace('hue', tick * opts.hueChange);
                         this.cumulativeTime = 0;
@@ -91,13 +89,7 @@
                         this.addedX = Math.cos(this.rad);
                         this.addedY = Math.sin(this.rad);
                         // 是否死亡 隨機到死亡或者 超出邊界?
-                        if (
-                            Math.random() < opts.dieChance ||
-                            this.x > dieX ||
-                            this.x < -dieX ||
-                            this.y > dieY ||
-                            this.y < -dieY
-                        ) {
+                        if (Math.random() < opts.dieChance || this.x > dieX || this.x < -dieX || this.y > dieY || this.y < -dieY) {
                             this.reset();
                         }
                     };
@@ -116,36 +108,11 @@
                             y = this.addedY * wave;
 
                         ctx.shadowBlur = prop * opts.shadowToTimePropMult; // 生成燒焦路徑
-                        ctx.fillStyle = ctx.shadowColor = this.color.replace(
-                            'light',
-                            opts.baseLight +
-                                opts.addedLight *
-                                    Math.sin(this.cumulativeTime * this.lightInputMultiplier),
-                        );
-                        ctx.fillRect(
-                            opts.cx + (this.x + x) * opts.len,
-                            opts.cy + (this.y + y) * opts.len,
-                            2,
-                            2,
-                        );
+                        ctx.fillStyle = ctx.shadowColor = this.color.replace('light', opts.baseLight + opts.addedLight * Math.sin(this.cumulativeTime * this.lightInputMultiplier));
+                        ctx.fillRect(opts.cx + (this.x + x) * opts.len, opts.cy + (this.y + y) * opts.len, 2, 2);
                         // 是否生成火花
                         if (Math.random() < opts.sparkChance) {
-                            ctx.fillRect(
-                                opts.cx +
-                                    (this.x + x) * opts.len +
-                                    Math.random() *
-                                        opts.sparkDist *
-                                        (Math.random() < 0.5 ? 1 : -1) -
-                                    opts.sparkSize / 2,
-                                opts.cy +
-                                    (this.y + y) * opts.len +
-                                    Math.random() *
-                                        opts.sparkDist *
-                                        (Math.random() < 0.5 ? 1 : -1) -
-                                    opts.sparkSize / 2,
-                                opts.sparkSize,
-                                opts.sparkSize,
-                            );
+                            ctx.fillRect(opts.cx + (this.x + x) * opts.len + Math.random() * opts.sparkDist * (Math.random() < 0.5 ? 1 : -1) - opts.sparkSize / 2, opts.cy + (this.y + y) * opts.len + Math.random() * opts.sparkDist * (Math.random() < 0.5 ? 1 : -1) - opts.sparkSize / 2, opts.sparkSize, opts.sparkSize);
                         }
                     };
 
@@ -174,6 +141,7 @@
 
 <style lang="scss">
     #canvas {
+        display: none;
         position: absolute;
         top: 0;
         left: 0;

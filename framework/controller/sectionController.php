@@ -7,9 +7,10 @@ use stdClass;
 class sectionController extends Controller
 {
     private $_path = 'section';
+    private $Service;
 
     public function __construct(){
-        $this->sysSectionService = sysSectionService::getInstance();
+        $this->Service = sysSectionService::getInstance();
     }
 
     public function index(){
@@ -24,13 +25,13 @@ class sectionController extends Controller
         $result = null;
 
         if($action == 'list') {
-            $result = $this->sysSectionService->getSideMenu($user['auth']);
+            $result = $this->Service->getSectionList($user['auth']);
         //     $getFeild = [
         //         'id', 'title', 'icon',
         //     ];
-        //     $result = $this->sysSectionService->getList(0, 10, $param[0], $param[1], $getFeild);
+        //     $result = $this->Service->getList(0, 10, $param[0], $param[1], $getFeild);
         } else if($action == 'info') {
-            $result = $this->sysSectionService->getInfo($param[0]);
+            $result = $this->Service->getInfo($param[0]);
         }
 
         // return $result->toJson();
