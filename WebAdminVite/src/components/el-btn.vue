@@ -1,29 +1,10 @@
 <template>
-    <router-link
-        v-if="href != ''"
-        :to="href"
-        class="Btn"
-        role="button"
-        :title="title"
-        :class="[{ icon: icon != '' }]"
-        @mouseenter="unfold"
-        @mouseleave="unfold"
-        :style="boxSize"
-    >
+    <router-link v-if="href != ''" :to="href" class="Btn" role="button" :title="title" :class="[{ icon: icon != '' }]" @mouseenter="unfold" @mouseleave="unfold" :style="boxSize">
         <elSvgIcon v-if="icon != ''" class="svgIcon" :name="icon" />
         <span class="text" :style="textSize">{{ text }}</span>
     </router-link>
 
-    <div
-        v-else
-        class="Btn"
-        role="button"
-        :title="title"
-        :class="[{ icon: icon != '' }]"
-        @mouseenter="unfold"
-        @mouseleave="unfold"
-        :style="boxSize"
-    >
+    <div v-else class="Btn" role="button" :title="title" :class="[{ icon: icon != '' }]" @mouseenter="unfold" @mouseleave="unfold" :style="boxSize">
         <elSvgIcon v-if="icon != ''" class="svgIcon" :name="icon" />
         <span class="text" :style="textSize">{{ text }}</span>
     </div>

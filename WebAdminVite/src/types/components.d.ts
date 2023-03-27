@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     DashboardPage: typeof import('./../views/DashboardPage.vue')['default']
     ElBtn: typeof import('./../components/el-btn.vue')['default']
     ElCanvasBg: typeof import('./../components/el-canvasBg.vue')['default']
+    ElCheck: typeof import('./../components/el-check.vue')['default']
     ElDetail: typeof import('./../components/el-detail.vue')['default']
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
     ElGridTable: typeof import('./../components/el-gridTable.vue')['default']
@@ -33,5 +34,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SectionInfo: typeof import('./../views/SectionInfo.vue')['default']
     SectionList: typeof import('./../views/SectionList.vue')['default']
+    UIUXSet: typeof import('./../views/UIUXSet.vue')['default']
   }
 }

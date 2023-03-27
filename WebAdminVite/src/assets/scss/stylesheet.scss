@@ -160,6 +160,11 @@ $rwd-320: 320px;
     //}
 }
 
+// 設定凹陷樣式
+@mixin setSunken(){
+    box-shadow: 1px 1px 2px -1px rgba(0, 0, 0, 0.35) inset,
+                -1px -1px 2px -1px rgba(255, 255, 255, 0.95) inset;
+}
 
 @import 'base';
 @import 'vueTransition';

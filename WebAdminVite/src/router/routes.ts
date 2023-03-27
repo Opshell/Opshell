@@ -34,6 +34,12 @@ const routes: iRoute[] = [
         meta: { requireAuth: true, title: 'Icon列表' },
     },
     {
+        name: 'UIUXSet',
+        path: '/UIUXSet',
+        component: () => import('@/views/UIUXSet.vue'),
+        meta: { requireAuth: true, title: 'UIUXSet' },
+    },
+    {
         name: 'SectionList',
         path: '/sectionList',
         component: () => import('@/views/SectionList.vue'),
