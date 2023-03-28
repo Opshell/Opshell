@@ -34,10 +34,11 @@
 <script lang="ts" setup>
     import { defineProps, ref } from 'vue';
 
+    // [+] 待優化 這裡有個any型別的問題
     interface iProps {
         type: string;
         list?: { text: string; value: string }[] | null;
-        modelValue: string | number | boolean | Array<string | number>;
+        modelValue: any; // string | number | boolean | Array<string | number>;
     }
 
     const props = defineProps<iProps>();
@@ -67,11 +68,13 @@
             flex-shrink: 0;
             position: relative;
             background: #eee;
+            border: 1px solid #eee;
             @include setSize(18px, 18px);
             border-radius: 3px;
 
             box-shadow: -1px -1px 1px 0 rgba($color: #eee, $alpha: 0.65), 1px 1px 1px 0 rgba($color: #000, $alpha: 0.25);
 
+            transition: 0.08s $cubic-FiSo;
             overflow: hidden;
             &::before {
                 content: '';
@@ -114,6 +117,12 @@
         }
         &:last-child {
             margin-right: 0;
+        }
+
+        &:hover {
+            .dot {
+                border-color: $colorSubs;
+            }
         }
     }
 

@@ -9,6 +9,7 @@ export interface State {
         route: iRouteState;
         user: iUserState;
     };
+    user: iUserState;
 }
 
 // 全部模組導入

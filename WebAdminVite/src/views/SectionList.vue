@@ -25,7 +25,7 @@
                 <div class="td link">{{ item.link }}</div>
                 <div class="td crud">
                     <elBtn class="tipsBtn" :href="'/sectionInfo/' + item.id" icon="edit" text="編輯" />
-                    <elBtn class="tipsBtn" icon="trash" text="刪除" @click="deleteSection(item.id)" />
+                    <elBtn class="tipsBtn" icon="trash" text="刪除" />
                 </div>
             </div>
         </template>

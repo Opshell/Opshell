@@ -3,12 +3,8 @@
         <h1 class="breadcrumbs">
             <!-- <transition-group name="verbatim"> -->
             <template v-for="(item, i) in breadcrumbs" :key="i">
-                <router-link v-if="item.href" class="breadcrumb" :to="item.href">
-                    <elSvgIcon v-if="i != 0" name="angle-small-right" />{{ item.title }}
-                </router-link>
-                <span v-else class="breadcrumb">
-                    <ElSvgIcon v-if="i != 0" name="angle-small-right" />{{ item.title }}
-                </span>
+                <router-link v-if="item.href" class="breadcrumb" :to="item.href"> <elSvgIcon v-if="i != 0" name="angle-small-right" />{{ item.title }} </router-link>
+                <span v-else class="breadcrumb"> <ElSvgIcon v-if="i != 0" name="angle-small-right" />{{ item.title }} </span>
             </template>
             <!-- </transition-group> -->
 
@@ -42,22 +38,27 @@
         href?: string;
     }
 
-    const breadcrumbs = function (): iBreadcrumb[] {
-        let breadcrumbs = store.state.route.to.fullPath.split('/');
-        breadcrumbs[0] = {
+    const setBreadcrumbs = () => {
+        let fullPath = store.state.route.to.fullPath.split('/');
+
+        let breadcrumbs: iBreadcrumb[] = [];
+
+        breadcrumbs.push({
             title: '總覽',
             href: '/dashboard',
-        };
-        breadcrumbs[1] = {
+        });
+        breadcrumbs.push({
             title: store.state.route.to.meta.title,
             href: store.state.route.to.path,
-        };
-        if (breadcrumbs[2]) {
-            breadcrumbs[2] = { title: 'ID：' + breadcrumbs[2] };
+        });
+        if (fullPath[2]) {
+            breadcrumbs.push({ title: 'ID：' + fullPath[2] });
         }
 
         return breadcrumbs;
     };
+
+    let breadcrumbs: iBreadcrumb[] = setBreadcrumbs();
 </script>
 
 <style lang="scss">

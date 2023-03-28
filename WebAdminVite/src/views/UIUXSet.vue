@@ -34,8 +34,8 @@
     import { Ref } from 'vue';
 
     const store = useStore();
-    const radioList: Ref<string[]> = ref([]);
-    const checkList: Ref<string[]> = ref([]);
+    const radioList: Ref<string | number> = ref('');
+    const checkList: Ref<Array<string | number>> = ref([]);
     const show: Ref<boolean> = ref(false);
 
     const list = [

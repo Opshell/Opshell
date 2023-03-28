@@ -1,10 +1,5 @@
 <template>
-    <label v-if="type == 'checkbox'" class="labInput">
-        <input class="input" type="checkbox" :checked="modelValue" @change="updateModelValue($event)" />
-        <span v-if="placeholder" class="text">{{ placeholder }}</span>
-    </label>
-
-    <input v-else class="input" :type="type" :placeholder="placeholder" :value="modelValue" @input="updateModelValue($event)" />
+    <input class="input" :type="type" :placeholder="placeholder" :value="modelValue" @input="updateModelValue($event)" />
 </template>
 
 <script setup lang="ts">

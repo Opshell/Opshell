@@ -4,7 +4,7 @@
 
         <header class="gridBar">
             <div class="td check">
-                <ElInput type="checkbox" v-model="allCheckStatus" @click="selectAll()" />
+                <ElCheckBox type="checkbox" v-model:checked="allCheckStatus" />
             </div>
             <div class="td parent">分類</div>
             <div class="td title">標題</div>
@@ -21,7 +21,7 @@
             <div class="td title">{{ item.title }}</div>
             <div class="td crud">
                 <elBtn class="tipsBtn" :href="'/articleInfo/' + item.id" icon="edit" text="編輯" />
-                <elBtn class="tipsBtn" icon="trash" text="刪除" @click="deleteSection(item.id)" />
+                <elBtn class="tipsBtn" icon="trash" text="刪除" />
             </div>
         </div>
 
@@ -33,10 +33,14 @@
     /* global Opshell */
     // [-] type import
     import { Ref } from 'vue';
+    import { iMenu } from '@/components/el-treeItem.vue';
 
     // [-] method import
     import { useStore } from '@/store';
     import { getData } from '@/hook/getData';
+
+    // 取得列表
+    const allCheckStatus = ref(false);
 
     const store = useStore();
     let aa: Opshell.iList = { title: '123', id: 1 };

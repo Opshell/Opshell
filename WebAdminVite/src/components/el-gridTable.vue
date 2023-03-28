@@ -23,7 +23,7 @@
         },
         data: function () {
             return {
-                header: [],
+                header: <string[]>[],
                 list: {},
             };
         },
@@ -31,7 +31,7 @@
             this.list = JSON.parse(JSON.stringify(this.value));
 
             // if (this.header.length == 0) {
-            for (const title in this.list[0]) {
+            for (const title in this.list) {
                 this.header.push(title); // title 生成
             }
             // }

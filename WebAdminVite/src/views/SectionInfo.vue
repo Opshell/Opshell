@@ -2,7 +2,7 @@
     <div class="NewsInfo">
         <h1>Here show the section's information.</h1>
 
-        <elDetail :url="url" :demand="demand" />
+        <!-- <elDetail :url="url" :demand="demand" /> -->
     </div>
 </template>
 
@@ -78,7 +78,6 @@
             };
         },
         components: { elDetail },
-        mounted: function () {},
         methods: {},
         computed: {
             ...mapState([
