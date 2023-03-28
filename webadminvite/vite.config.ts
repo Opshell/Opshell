@@ -61,6 +61,7 @@ export default defineConfig({
             customDomId: '__svg__icons__dom__', // 自訂 Dom ID
         }),
     ],
+    base: '/WebAdmin/', // 部署到非根目錄時使用
     // 代理伺服器
     server: {
         port: 8080,
