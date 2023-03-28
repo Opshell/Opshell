@@ -8,7 +8,7 @@ require_once(dirname(__FILE__) . '/core/startup.php');
 
 // 前後台路由導向
 $defPATH = 'public'; // 預設導向(前台)
-$appPATH = [ 'WebAdmin', 'api' ]; // 後台或更多其他可探索資料夾
+$appPATH = [ 'webadmin', 'api' ]; // 後台或更多其他可探索資料夾
 $indexFile = 'router.php';
 
 $route = [];

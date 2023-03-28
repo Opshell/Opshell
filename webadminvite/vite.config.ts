@@ -61,7 +61,12 @@ export default defineConfig({
             customDomId: '__svg__icons__dom__', // 自訂 Dom ID
         }),
     ],
-    base: '/WebAdmin/', // 部署到非根目錄時使用
+    // [+] 打包後被轉小寫了 的問題 再找時間研究
+    base: './', // 部署到非根目錄時使用
+    build: {
+        outDir: '../webadmin/', // 指定輸出位置(相對於project根目錄).
+        assetsDir: '.',
+    },
     // 代理伺服器
     server: {
         port: 8080,
@@ -86,8 +91,5 @@ export default defineConfig({
                 charset: false,
             },
         },
-    },
-    build: {
-        outDir: '../WebAdmin/', // 指定輸出位置(相對於project根目錄).
     },
 });
