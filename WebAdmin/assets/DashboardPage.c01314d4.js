@@ -1,1 +1,0 @@
-import{d as s,g as t,o,c as n,a as r,t as c,u,h as d}from"./index.1221ef5d.js";const m={class:"Dashboard"},h=s({__name:"DashboardPage",setup(_){const e=d(),a=e.state;return t(()=>{e.commit("route/endLoading")}),(i,l)=>(o(),n("div",m,[r("h1",null,"Welcome back "+c(u(a).user.userData.name),1)]))}});export{h as default};

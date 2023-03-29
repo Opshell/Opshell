@@ -8,16 +8,21 @@ require_once(dirname(__FILE__) . '/core/startup.php');
 
 // 前後台路由導向
 $defPATH = 'public'; // 預設導向(前台)
-$appPATH = [ 'webadmin', 'api' ]; // 後台或更多其他可探索資料夾
 $indexFile = 'router.php';
 
+$appPATH = [ // 其他可探索資料夾
+    'webadmin' => 'index.html', // 後台
+    'api' => 'router.php' // api
+];
+
 $route = [];
-foreach ($appPATH as $v) {
-    $dir = '/' . $v . '/';
-    if (stristr($_SERVER['REQUEST_URI'], $dir) && is_file(ROOT_PATH .'/'. $v . '/router.php')) { // 開放探索 && 檔案存在
+foreach ($appPATH as $dir => $entrance) {
+    $dirPart = '/'.$dir.'/';
+    // 開放探索 && 入口檔案存在
+    if (stristr($_SERVER['REQUEST_URI'], $dirPart) && is_file(ROOT_PATH .$dirPart.$entrance)) {
         $route = [
-            'path' => str_replace($dir, '/', $_SERVER['REQUEST_URI']),
-            'file' => $v . '/' . $indexFile
+            'path' => str_replace($dirPart, '/', $_SERVER['REQUEST_URI']),
+            'file' => $dir . '/' . $entrance
             // 'file' => $v . '/index.php'
         ];
         break;
@@ -50,7 +55,6 @@ if ($route['path'] != '/') {
     }
 }
 
-// 導入目標route
 require_once(ROOT_PATH .'/'. $route['file']);
 
 function include_path($Path){
