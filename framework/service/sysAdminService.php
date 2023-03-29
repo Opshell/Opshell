@@ -6,6 +6,8 @@ use Repository\sysGroupRepository;
 
 class sysAdminService extends Service {
     private static $_instance = null;
+    private $sysGroup = null;
+
     public static function getInstance():sysAdminService {
         if( self::$_instance === null ){
             self::$_instance = new self();

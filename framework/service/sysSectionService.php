@@ -37,7 +37,6 @@ class sysSectionService extends Service {
 
         return (object)$this->result;
     }
-
     /** Menu 遞迴
      * @param Int $auth
      * @param Int $pid

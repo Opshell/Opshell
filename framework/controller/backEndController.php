@@ -7,7 +7,8 @@ use Service\sysSectionService;
 class backEndController extends Controller
 {
     private $_path = '';
-
+    private $sysAdmin = null;
+    private $sysSection = null;
     public function __construct(){
         $this->sysAdmin = sysAdminService::getInstance();
         $this->sysSection = sysSectionService::getInstance();

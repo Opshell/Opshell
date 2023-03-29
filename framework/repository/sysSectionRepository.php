@@ -13,16 +13,16 @@ class sysSectionRepository extends Repository
         return self::$_instance;
     }
     public function construct(){
-        $this->builder = SysSection::query();
+        // $this->builder = SysSection::query();
         // $this->creatTableSQL();
     }
 
     public function getList($cid = 0, $curPage = 1, $pageSize = 10, $select = [],  $lang = 1){
         if(empty($select)){
-            $list = $this->builder->get();
+            $list = SysSection::get();
         } else {
             $select = implode(', ', $select);
-            $list = $this->builder->select($select)->get();
+            $list = SysSection::select($select)->get();
         }
 
         return $list;
