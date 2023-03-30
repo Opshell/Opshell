@@ -58,7 +58,6 @@ export default {
     },
     getters: {
         // 這邊順便被提醒state.user 不存在，把userData補上去。
-        isAuthenticated: (state: iUserState) =>
-            !!state.userData.user || !!sessionStorage.getItem('user'),
+        isAuthenticated: (state: iUserState) => !!state.userData.user || !!sessionStorage.getItem('user'),
     },
 };

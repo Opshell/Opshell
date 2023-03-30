@@ -9,14 +9,15 @@
         <div class="bar"><ElCheck type="radio" :list="list" v-model="radioList" /></div>
         <div class="bar"><ElCheck type="check" :list="list" v-model="checkList" /></div>
         <ElCheck type="switch" v-model="show" />
+        <ElInput placeholder="hk4" />
+        <ElInput type="number" />
+        <ElInput type="email" />
+        <ElInput type="tel" />
+        <ElInput type="password" />
+
         <!--
         <ElImg />
         <ElIcon />
-        <ElInput />
-        <ElInput type="number"/>
-        <ElInput type="email"/>
-        <ElInput type="mobile"/>
-        <ElInput type="password"/>
         <ElRadio />
         <ElSwitch />
         <ElSelect />

@@ -1,15 +1,21 @@
 <template>
-    <input class="input" :type="type" :placeholder="placeholder" :value="modelValue" @input="updateModelValue($event)" />
+    <!-- 一個可以依照:type 來變化 text pass number tel email search 幾種常用的input -->
+    <label class="inputBox">
+        <input class="input" :value="modelValue" :placeholder="placeholder" @input="updateModelValue($event)" />
+        <span class="placeholder" :class="[{ title: feild }]" v-text="placeholder"></span>
+        <span v-if="remark != ''" class="remark" v-text="remark"></span>
+    </label>
 </template>
 
 <script setup lang="ts">
     interface iProps {
-        modelValue?: string | number | boolean | null;
-        type?: string;
+        modelValue?: string | null;
+        feild?: boolean;
         placeholder?: string;
+        remark?: string;
     }
     const props = withDefaults(defineProps<iProps>(), {
-        type: 'text',
+        feild: true,
         placeholder: '',
     });
 
@@ -31,16 +37,21 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     input {
-        @include setSize(100%, 35px);
-        box-sizing: border-box;
-        @extend %baseFont;
+        background: rgba(255, 255, 255, 0.95);
+        @include setSize(100%, 38px);
+        max-width: 500px;
+        min-width: 150px;
+        padding: 5px 10px;
+        border: 2px solid #e5e5e5;
+        border-radius: 3px;
+        letter-spacing: 1.5px;
+        backdrop-filter: blur(5px);
         -webkit-autofill: unset;
-
         &:focus {
             outline: 0;
         }
         &::placeholder {
-            color: #ccc;
+            color: transparent;
         }
 
         &[type='text'],
@@ -48,13 +59,6 @@
             padding: 0px 5px;
             vertical-align: top;
             border: 1px solid rgba(216, 216, 216, 0.8);
-        }
-
-        &[type='radio'],
-        &[type='checkbox'] {
-            margin-right: 5px;
-            cursor: pointer;
-            vertical-align: middle;
         }
 
         &[type='number'] {
@@ -70,60 +74,48 @@
             -webkit-box-shadow: 0 0 0 30px #fcfcfc inset;
         }
     }
-
-    .labInput {
+    .inputBox {
         position: relative;
-        display: flex;
-        align-items: center;
-        margin: 0;
+        padding: 16px 0 0;
+        &:hover {
+            .input {
+                border-color: $colorMain;
+            }
+            .placeholder {
+                color: $colorMain;
+            }
+        }
+
         .input {
-            position: relative;
-            &[type='checkbox'] {
-                @include setSize(0, 0);
-                margin: 0;
-                &::before,
-                &::after {
-                    content: '';
-                    position: absolute;
-                    @include setSize(0, 0);
-                    box-sizing: border-box;
-                    background: transparent;
-                }
-                &::before {
-                    @include setSize(20px, 20px);
-                    border-radius: 3px;
-                    border: 3px solid #aaa;
-                    transform: translate3d(-50%, -50%, 0);
-                    transition: border-color 0.15s $cubic-FiSo, background-color 0.15s $cubic-FiSo 0.05s;
-                }
-                &::after {
-                    @include setSize(0, 0);
-                    border-top: none;
-                    border-right: none;
-                    border-width: 0;
-                    border-radius: 1px;
-                    transform: rotateZ(-45deg) translate3d(0, -120%, 0);
-                }
-
-                &:checked {
-                    &::before {
-                        border-color: #20ac33;
-                        background-color: #16a328;
-                    }
-                    &::after {
-                        @include setSize(20px, 10px);
-                        border: 3px solid #eee;
-                        border-top: none;
-                        border-right: none;
-                        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 1));
-                        transition: border-color 0.15s $cubic-FiSo, height 0.15s $cubic-FiSo, width 0.15s $cubic-FiSo 0.14s;
-                    }
-                }
-
-                + .text {
-                    margin: 0 0 0 12px;
+            &:not(:placeholder-shown) ~ .placeholder,
+            &:focus ~ .placeholder {
+                top: 16px;
+                left: 0;
+                padding: 1px 10px;
+                color: $colorMain;
+                font-size: 14px;
+                transform: translate3d(0, -100%, 0);
+            }
+            &:not(:placeholder-shown) {
+                background: rgba(230, 230, 230, 0.8);
+            }
+            &:focus {
+                border-color: $colorSubs;
+                & ~ .placeholder {
+                    color: $colorSubs;
                 }
             }
+        }
+        .placeholder {
+            position: absolute;
+            top: calc(50% + 8px);
+            left: 10px;
+            font-size: 15px;
+            color: #666;
+            line-height: 1.2;
+            text-align: left;
+            transform: translate3d(0, -50%, 0);
+            transition: 0.2s $cubic-FiSo;
         }
     }
 </style>

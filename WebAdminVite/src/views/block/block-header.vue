@@ -39,6 +39,7 @@
     }
 
     const setBreadcrumbs = () => {
+        console.log(store.state);
         let fullPath = store.state.route.to.fullPath.split('/');
 
         let breadcrumbs: iBreadcrumb[] = [];

@@ -1,6 +1,10 @@
 //@extend class
 
-
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
 html{
     overflow:-moz-scrollbars-vertical;
     @extend %pm0;
@@ -25,8 +29,7 @@ form{
     label{
         display: inline-flex;
         align-items: center;
-        margin-right: 12px;
-        cursor:pointer;
+        cursor: pointer;
     }
     input {
         &:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fcfcfc inset; }

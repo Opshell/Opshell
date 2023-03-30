@@ -5,11 +5,12 @@ import { iRouteState } from './modules/route'; // 路由相關
 import { iUserState } from './modules/user'; // 登入、使用者相關
 
 export interface State {
-    state: {
-        route: iRouteState;
-        user: iUserState;
-    };
+    // state: {
+    //     route: iRouteState;
+    //     user: iUserState;
+    // };
     user: iUserState;
+    route: iRouteState;
 }
 
 // 全部模組導入

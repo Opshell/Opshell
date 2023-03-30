@@ -6,10 +6,8 @@ export interface iPageData {
 export interface iRouteState {
     isLoading: boolean; // 是否處於Loading狀態
     redirect: string;
-    route: {
-        from: RouteLocationNormalized | null;
-        to: RouteLocationNormalized | null;
-    };
+    from: RouteLocationNormalized | null;
+    to: RouteLocationNormalized | null;
     pageData: iPageData;
 }
 
@@ -18,10 +16,8 @@ export default {
     state: {
         isLoading: false,
         redirect: '',
-        route: {
-            from: null,
-            to: null,
-        },
+        from: null,
+        to: null,
         pageData: {},
     },
     mutations: {
@@ -38,11 +34,11 @@ export default {
         },
         setRouteFrom(state: iRouteState, from: RouteLocationNormalized) {
             // 導向紀錄
-            state.route.from = from;
+            state.from = from;
         },
         setRouteTo(state: iRouteState, to: RouteLocationNormalized) {
             // 導向紀錄
-            state.route.to = to;
+            state.to = to;
         },
         setPage(state: iRouteState, pageData: iPageData) {
             state.pageData = pageData;

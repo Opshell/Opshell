@@ -7,7 +7,7 @@
             <h1 class="title">Opsehll 管理後台</h1>
         </section>
 
-        <form class="inputBox">
+        <form class="inputBlock">
             <ElInput v-model="loginForm.username" placeholder="Username" />
             <ElInput v-model="loginForm.password" type="password" placeholder="Password" />
             <ElInput v-model="loginForm.verification" placeholder="verification" :disabled="true" />
@@ -110,14 +110,11 @@
             }
         }
 
-        .inputBox {
+        .inputBlock {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            .input {
-                height: 40px;
-            }
+            gap: 5px;
         }
 
         .btnBox {
