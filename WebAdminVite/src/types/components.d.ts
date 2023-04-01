@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     ElCanvasBg: typeof import('./../components/el-canvasBg.vue')['default']
     ElCheck: typeof import('./../components/input/el-check.vue')['default']
     ElCheckBox: typeof import('./../components/el-checkBox.vue')['default']
+    ElCkeditor: typeof import('./../components/input/el-ckeditor.vue')['default']
     ElDetail: typeof import('./../components/el-detail.vue')['default']
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
     ElGridTable: typeof import('./../components/el-gridTable.vue')['default']

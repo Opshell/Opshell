@@ -7,12 +7,7 @@ export interface iResult {
     data: any;
 }
 
-export const getData = async function (
-    url: string,
-    method: Method = 'GET',
-    data: any = {},
-    headers: AxiosRequestHeaders = {},
-): Promise<iResult | false> {
+export const getData = async function (url: string, method: Method = 'GET', data: any = {}, headers: AxiosRequestHeaders = {}): Promise<iResult | false> {
     return await axios({
         url,
         method,

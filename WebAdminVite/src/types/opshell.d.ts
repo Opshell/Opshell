@@ -31,5 +31,8 @@ declare global {
 }
 
 window.Opshell = Opshell;
-
 // 這樣做會將 Opsehll 導出到全局範圍中，並將其添加到 Window 對象上，使其可以在任何地方使用。
+
+// 增加 CKEditor5 的型別
+// declare module '@ckeditor/ckeditor5-vue';
+// declare module 'ckeditor__ckeditor5-build-classic';
