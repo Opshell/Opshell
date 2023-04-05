@@ -36,3 +36,6 @@ window.Opshell = Opshell;
 // 增加 CKEditor5 的型別
 // declare module '@ckeditor/ckeditor5-vue';
 // declare module 'ckeditor__ckeditor5-build-classic';
+
+// 增加 Jodit 的型別
+declare module 'jodit-vue3';

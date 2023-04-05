@@ -23,6 +23,7 @@ declare module '@vue/runtime-core' {
     ElFormGroup: typeof import('./../components/el-formGroup.vue')['default']
     ElGridTable: typeof import('./../components/el-gridTable.vue')['default']
     ElInput: typeof import('./../components/input/el-input.vue')['default']
+    ElJodit: typeof import('./../components/input/el-jodit.vue')['default']
     ElSectionBar: typeof import('./../components/el-sectionBar.vue')['default']
     ElSvgIcon: typeof import('./../components/el-svgIcon.vue')['default']
     ElTr: typeof import('./../components/el-tr.vue')['default']

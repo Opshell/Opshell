@@ -1241,6 +1241,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+autobind-decorator@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/autobind-decorator/-/autobind-decorator-2.4.0.tgz#ea9e1c98708cf3b5b356f7cf9f10f265ff18239c"
+  integrity sha512-OGYhWUO72V6DafbF8PM8rm3EPbfuyMZcJhtm5/n26IDwO18pohE4eNazLoCGhPiXOCD0gEGmrbU3849QvM8bbw==
+
 axios@^0.27.2:
   version "0.27.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
@@ -1458,6 +1463,11 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==
+
+core-js@^3.28.0, core-js@^3.6.5:
+  version "3.30.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.30.0.tgz#64ac6f83bc7a49fd42807327051701d4b1478dea"
+  integrity sha512-hQotSSARoNh1mYPi9O2YaWeiq/cEB95kOrFb4NCrO4RIFt1qqNpKsaE+vy/L3oiqvND5cThqXzUU3r9F7Efztg==
 
 cors@^2.8.5:
   version "2.8.5"
@@ -2441,6 +2451,22 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg==
+
+jodit-vue3@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/jodit-vue3/-/jodit-vue3-1.0.5.tgz#8c6e57dc7c2ea9f2f5788d0629467ec8d3ccb816"
+  integrity sha512-wb46vHF4yNzdbM98ZPJjvb73FaNWtUbEXA4rTCLDu2LJEGddZFKIwR0+Ta4S7w4NS6u/0K6/iqlOREnoGJFMpw==
+  dependencies:
+    core-js "^3.6.5"
+    jodit "^3.7.2"
+
+jodit@^3.24.7, jodit@^3.7.2:
+  version "3.24.7"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.24.7.tgz#90cfcc6787d5cd7f11207c04382c33348b94873a"
+  integrity sha512-npX8S10uN55pr6ESAgaKML/pBSaM4AxdTYLpM/DWEQWqdG00YdgHY0i6KiyKA8SQL4bqbAY5HHhc9sxGVyL8bQ==
+  dependencies:
+    autobind-decorator "^2.4.0"
+    core-js "^3.28.0"
 
 js-base64@^2.1.9:
   version "2.6.4"

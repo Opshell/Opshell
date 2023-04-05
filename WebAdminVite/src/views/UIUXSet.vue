@@ -16,7 +16,7 @@
         <ElInput type="password" />
         <!-- <ckeditor :editor="editorStyle" v-model="description" /> -->
         <ElBtn @click="getContent" text="取得內容" />
-        <ElCkeditor ref="editor" />
+        <!-- <ElCkeditor ref="editor" /> -->
 
         <!--
         <ElImg />
