@@ -11,11 +11,7 @@
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(html|vue|ts|js|json|cjs)\""
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^36.0.1",
-        "@ckeditor/ckeditor5-vue": "^4.0.1",
-        "@types/ckeditor__ckeditor5-build-classic": "^29.0.1",
         "jodit": "^3.24.7",
-        "jodit-vue3": "^1.0.5",
         "vue": "^3.2.37"
     },
     "devDependencies": {
