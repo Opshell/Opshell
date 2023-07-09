@@ -45,17 +45,19 @@
 
     // 宣告 list 為類型iMenu 的Ref陣列
     const list = ref<iMenu[]>([]);
-    onMounted(() => {
-        const token = localStorage.getItem('token');
-        getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
-            if (result && result.status) {
-                list.value = result.data.data;
-                store.commit('route/endLoading');
-            }
-
+    // onMounted(() => {
+    console.log('SectionList onMounted');
+    const token = localStorage.getItem('token');
+    getData('/api/section/list', 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
+        if (result && result.status) {
+            list.value = result.data.data;
             console.log(list.value);
-        });
+            store.commit('route/endLoading');
+        }
+
+        console.log(list.value);
     });
+    // });
 
     // [+] 全選功能
     const selectAll = () => {
@@ -96,7 +98,7 @@
     );
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
     .gridBlock {
         display: flex;
         flex-direction: column;

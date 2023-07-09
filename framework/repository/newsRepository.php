@@ -17,6 +17,34 @@ class newsRepository extends Repository
         // $this->creatTable($this->createSQL());
     }
 
+     /** 取得列表
+     * @param Int $cid // 分類ID
+     * @param Int $curpage // 目前所在頁
+     * @param Int $pageSize // limit 尺寸
+     * @param Int $lang // 語系
+     * @return void
+     */
+    public function getList($cid = 0, $curPage = 1, $pageSize = 10, $select = [], $lang = 1) {
+        // where(function ($query) use($cid){
+        //     if(!empty($cid)){
+        //         $query->where('category_id', $cid);
+        //     }
+        // })
+        // ->
+
+        return News::where('enable', 1)
+            ->orderBy('sort')
+            ->orderBy('id', 'DESC')
+        // ->paginate($pageSize, ['*'], 'p', $curPage);
+        ->get();
+        // ->toArray();
+    }
+
+    public function getInfo($id, $lang = 1) {
+        return News::where('id', $id)
+            ->first();
+    }
+
     // 生成資料表
     public function createSQL(){
         $SQL = "CREATE TABLE IF NOT EXISTS `".$this->table."` (

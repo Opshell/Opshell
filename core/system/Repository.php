@@ -39,14 +39,9 @@ abstract class Repository
         // ->toArray();
     }
 
-    public function getInfo($id = '', $select = []) {
+    public function getInfo($id, $lang) {
         if(empty($select)){
             $info = $this->builder
-                ->where('id', $id)
-            ->first();
-        } else {
-            $info = $this->builder
-                ->select($select)
                 ->where('id', $id)
             ->first();
         }

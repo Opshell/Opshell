@@ -40,6 +40,10 @@
     const store = useStore();
 
     const states = store.state;
+
+    onMounted(() => {
+        console.log('App onMounted');
+    });
 </script>
 
 <style lang="scss">

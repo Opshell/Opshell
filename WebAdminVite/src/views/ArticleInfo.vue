@@ -1,52 +1,55 @@
 <template>
     <div class="NewsInfo">
-        <h1>Here show the news{{ newsId }}'s information .</h1>
+        <h1>Here show the news{{ id }}'s information .</h1>
     </div>
 </template>
 
-<script lang="ts">
-    import { mapState } from 'vuex';
-    import { getData } from '../hook/getData.js';
+<script setup lang="ts">
+    /* global Opshell */
+    // [-] type import
+    import { Ref } from 'vue';
 
-    import elTable from '../components/el-gridTable.vue';
+    // [-] method import
+    import { useStore } from '@/store';
+    import { getData } from '@/hook/getData';
 
-    export default {
-        data() {
-            return {
-                list: {},
-                number: [1, 2, 3],
-            };
-        },
-        components: {
-            elTable,
-        },
-        mounted() {
-            getData('/api/news/list').then((result) => {
-                console.log(result);
-            });
-            // fetch("/api/news/list") // /mapi/news/list/2
-            //     .then((res) => res.json())
-            //     .then((data) => {
-            //         if (data.status == "Success") {
-            //             console.log(data.data);
-            //             this.list = data.data;
-            //             console.log(this.list);
+    const store = useStore();
+    const route = useRoute();
 
-            //         }
-            //     });
-        },
-        methods: {},
-        computed: {
-            ...mapState([
-                // 批量載入vuex state
-                'userData',
-                'pageData',
-            ]),
-            newsId() {
-                return this.$route.params.newsId;
-            },
-        },
-    };
+    interface infoFace {
+        id: number;
+        title: string;
+        content: string;
+        category: string;
+        img: string;
+        created_at: string;
+        updated_at: string;
+    }
+
+    // onMounted(() => {
+    const info: Ref<infoFace> = ref({
+        id: 0,
+        title: '',
+        content: '',
+        category: '',
+        img: '',
+        created_at: '',
+        updated_at: '',
+    });
+    const id = route.params.id;
+
+    const token = localStorage.getItem('token');
+    getData(`/api/news/info/${id}`, 'GET', {}, { Authorization: `Bearer ${token}` }).then((result) => {
+        console.log(result);
+        if (result && result.status) {
+            console.log(result.data);
+            // result.data Json 轉 Array
+            info.value = JSON.parse(result.data);
+
+            store.commit('route/endLoading');
+        }
+    });
+    // });
 </script>
 
 <style scoped lang="scss"></style>

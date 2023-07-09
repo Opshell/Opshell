@@ -58,6 +58,7 @@
                 $result['message'] = 'Verified successfully.';
             }else{
                 $className = 'Controller\\' . $route . 'Controller';
+                // $className = $route . 'Controller';
 
                 // Controller 不存在回傳
                 $httpStatusCode = 404;

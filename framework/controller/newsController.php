@@ -6,9 +6,10 @@ use Service\newsService;
 class newsController extends Controller
 {
     private $_path = 'news';
+    private $Service;
 
     public function __construct(){
-        $this->newsService = newsService::getInstance();
+        $this->Service = newsService::getInstance();
     }
 
     public function index(){
@@ -19,16 +20,20 @@ class newsController extends Controller
         return $this->render();
     }
 
-    public function api($action, $inputData, $user){
+    /**
+     * @param Array $param = [id, cid]
+     */
+    public function api($action, $inputData, $user, $param){
         $result = null;
 
         if($action == 'list') {
-            $result = $this->newsService->getList();
+            $result = $this->Service->getList(0, 1, 10, '*', 1);
         } else if($action == 'info') {
-
+            $result = $this->Service->getInfo($param[0]);
         }
 
-        return $result->toJson();
+
+        return json_encode($result->toArray(), JSON_UNESCAPED_UNICODE);
     }
 }
 ?>

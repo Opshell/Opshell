@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent; // Eloquent Model (ORM) ä½¿ç
 
 class News extends Eloquent
 {
-    protected $table = '_web_news';
+    protected $table = '_web_article';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
