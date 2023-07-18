@@ -47,7 +47,7 @@ class newsRepository extends Repository
 
     // 生成資料表
     public function createSQL(){
-        $SQL = "CREATE TABLE IF NOT EXISTS `".$this->table."` (
+        $SQL = "CREATE TABLE IF NOT EXISTS `{$this->table}` (
                     `id` INT NOT NULL AUTO_INCREMENT ,
                     `unique_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '唯一碼' ,
                     `category_id` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '最新消息分類' ,
