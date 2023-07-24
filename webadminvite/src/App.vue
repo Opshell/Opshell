@@ -47,6 +47,9 @@
 </script>
 
 <style lang="scss">
+    //  載入基礎樣式
+    @import '@/assets/scss/base.scss';
+
     #app {
         display: flex;
         align-items: center;

@@ -97,7 +97,8 @@
                 }),
             },
         },
-        uploader: { // [+] 檔案上傳未完成
+        uploader: {
+            // [+] 檔案上傳未完成
             url: '/upload', // 上傳檔案存放目錄
             isSuccess(res) {
                 console.log('isSuccess', res);

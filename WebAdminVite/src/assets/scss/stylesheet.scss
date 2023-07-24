@@ -165,12 +165,3 @@ $rwd-320: 320px;
     box-shadow: 1px 1px 2px -1px rgba(0, 0, 0, 0.35) inset,
                 -1px -1px 2px -1px rgba(255, 255, 255, 0.95) inset;
 }
-
-@import 'base';
-@import 'vueTransition';
-
-.noJS > div,
-.noJS > ul{display:none;}
-.noJS > noscript{display:block;width:100%;line-height:10em;}
-
-// @import 'responsive';

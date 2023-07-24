@@ -32,7 +32,6 @@ class newsController extends Controller
             $result = $this->Service->getInfo($param[0]);
         }
 
-
         return json_encode($result->toArray(), JSON_UNESCAPED_UNICODE);
     }
 }

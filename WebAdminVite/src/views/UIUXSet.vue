@@ -6,6 +6,8 @@
 -->
 <template>
     <div class="uisBlock">
+        <MolecImgUpload :is-multiple="true"></MolecImgUpload>
+
         <div class="bar"><ElCheck type="radio" :list="list" v-model="radioList" /></div>
         <div class="bar"><ElCheck type="check" :list="list" v-model="checkList" /></div>
         <ElCheck type="switch" v-model="show" />

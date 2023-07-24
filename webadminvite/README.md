@@ -30,3 +30,23 @@ yarn add eslint-plugin-prettier -D
 4. .prettierrc 注意使用 json 格式
 
 ## 添加 unplugin-auto-import
+
+
+## Vue Components 的規劃概念
+> As Brad Frost said “Atomic design is like mental model to help us think of our user interfaces as
+> both a cohesive whole and a collection of parts at the same time.”
+
+> Atomic design is a methodology for creating a design systems based on chemistry, starts from very
+> basic and become more complex. There are 5 (five) distinct levels in atomic design:
+
+### 下面這三個放在 components 裡
+- Atom (chemistry-based naming)
+- Molecule (chemistry-based naming)
+- Organism (chemistry-based naming)
+
+### 下面兩個放在views 裡
+- Template (web-based naming) ->views/block 裡面的組件
+- Page (web-based naming)  -> views 下面的頁面
+
+> Atomic design can be implemented in many frontend frameworks. In this article, we will give the
+> examples of every component with Vue framework code.

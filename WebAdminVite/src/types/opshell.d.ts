@@ -20,6 +20,18 @@ namespace Opshell {
     export interface iList {
         id: number;
         title: string;
+        category?: string;
+        [key: string]: any;
+    }
+
+    export interface iInfo {
+        id: number;
+        title: string;
+        content: string;
+        category: string;
+        img: string;
+        created_at: string;
+        updated_at: string;
         [key: string]: any;
     }
 }

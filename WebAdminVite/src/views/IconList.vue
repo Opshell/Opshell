@@ -1,8 +1,8 @@
 <template>
     <div class="iconBlock">
-        <div v-for="(item, i) in iconList" class="iconBox" :key="i">
+        <div v-for="(item, i) in iconList" class="iconBox" :key="`icon${i}`">
             <div class="box" :title="item">
-                <ElSvgIcon :name="item" />
+                <ElSvgIcon :name="item" :title="item" @click.stop="copySvgName" />
             </div>
             <!-- <div class="name">{{item}}</div> -->
         </div>
@@ -28,6 +28,19 @@
             });
         }
     });
+
+    const copySvgName = (event: Event) => {
+        // 取得事件的目標元素。
+        const target = event.target as HTMLElement;
+        // 取得目標元素的父元素的 `title` 屬性。
+
+        const svgName = target.parentElement?.title;
+        // 如果 `title` 屬性不為空，則將其複製到剪貼板。
+        if (svgName != null) {
+            navigator.clipboard.writeText(svgName);
+            alert(`'${svgName}'已複製到剪貼簿`);
+        }
+    };
 
     store.commit('route/endLoading');
 </script>

@@ -205,3 +205,9 @@ h1,h2,h3,h4,h5,h6,p{margin: 0;}
     align-items: center;
     white-space: nowrap;
 }
+
+@import 'vueTransition';
+
+.noJS > div,
+.noJS > ul{display:none;}
+.noJS > noscript{display:block;width:100%;line-height:10em;}
